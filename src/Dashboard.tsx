@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
 import Stack from '@mui/material/Stack'
 import { ThemeProvider, alpha } from '@mui/material/styles'
+import * as React from 'react'
 import type {} from '@mui/x-charts/themeAugmentation'
 import type {} from '@mui/x-data-grid/themeAugmentation'
 import type {} from '@mui/x-date-pickers/themeAugmentation'
@@ -36,6 +37,12 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ disableCustomTheme }: DashboardProps) {
+  const [sidebarOpen, setSidebarOpen] = React.useState(true)
+  
+  const handleSidebarToggle = () => {
+    setSidebarOpen(!sidebarOpen)
+  }
+
   const theme = useAppTheme({
     disableCustomTheme,
     themeComponents: xThemeComponents,
@@ -45,14 +52,20 @@ export default function Dashboard({ disableCustomTheme }: DashboardProps) {
     <>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: 'flex' }}>
-        <SideMenu />
-        <AppNavbar />
+        <SideMenu open={sidebarOpen} />
+        <AppNavbar sidebarOpen={sidebarOpen} onSidebarToggle={handleSidebarToggle} />
         <Box
           component="main"
           sx={(theme) => ({
             flexGrow: 1,
             backgroundColor: alpha(theme.palette.background.default, 1),
             overflow: 'auto',
+            marginLeft: { xs: 0, md: sidebarOpen ? 0 : `-240px` },
+            marginTop: 'calc(var(--template-frame-height, 0px) + 64px)',
+            transition: theme.transitions.create('margin', {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.leavingScreen,
+            }),
           })}
         >
           <Stack
@@ -61,7 +74,7 @@ export default function Dashboard({ disableCustomTheme }: DashboardProps) {
               alignItems: 'center',
               mx: 3,
               pb: 10,
-              mt: { xs: 8, md: 0 },
+              pt: 2,
             }}
           >
             <Routes>

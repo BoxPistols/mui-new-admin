@@ -1,0 +1,46 @@
+
+import { Meta } from '@storybook/addon-docs';
+import { Button } from '@mui/material';
+
+<Meta title="Documentation/MUI & Tailwind CSS Integration" />
+
+# MUI と Tailwind CSS の連携
+
+このプロジェクトでは、MUIコンポーネントとTailwind CSSのユーティリティクラスを組み合わせて使用しています。
+これにより、MUIの堅牢なコンポーネントをベースに、Tailwindによる迅速なスタイリングが可能です。
+
+## 基本的な使い方
+
+MUIコンポーネントにTailwindのクラスを直接`className`プロパティとして渡すことができます。
+
+```tsx
+import { Button } from '@mui/material';
+
+const MyButton = () => (
+  <Button variant="contained" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    Tailwind Button
+  </Button>
+);
+```
+
+## サンプル
+
+以下は、MUIのButtonコンポーネントにTailwind CSSを適用した例です。
+
+<div className="flex space-x-4">
+  <Button variant="contained" className="bg-sky-500 hover:bg-sky-700">
+    Sky
+  </Button>
+  <Button variant="contained" className="bg-amber-500 hover:bg-amber-700">
+    Amber
+  </Button>
+  <Button variant="contained" className="bg-emerald-500 hover:bg-emerald-700">
+    Emerald
+  </Button>
+</div>
+
+## 注意点
+
+MUIのスタイルとTailwindのスタイルが競合する場合があります。
+その場合は、MUIの`sx`プロパティや、より詳細なCSSセレクタを使用するか、Tailwindの`!important`修飾子を利用して解決できます。
+しかし、`!important`の多用は避け、設計の見直しを検討することが推奨されます。

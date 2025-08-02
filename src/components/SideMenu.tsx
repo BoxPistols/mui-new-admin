@@ -23,10 +23,15 @@ const Drawer = styled(MuiDrawer)({
   },
 })
 
-export default function SideMenu() {
+interface SideMenuProps {
+  open?: boolean
+}
+
+export default function SideMenu({ open = true }: SideMenuProps) {
   return (
     <Drawer
-      variant="permanent"
+      variant="persistent"
+      open={open}
       sx={{
         display: { xs: 'none', md: 'block' },
         [`& .${drawerClasses.paper}`]: {

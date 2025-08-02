@@ -7,11 +7,11 @@ const preview: Preview = {
   decorators: [
     (Story) => {
       const theme = useAppTheme({})
-      return (
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Story />
-        </ThemeProvider>
+      return React.createElement(
+        ThemeProvider,
+        { theme },
+        React.createElement(CssBaseline),
+        React.createElement(Story)
       )
     },
   ],

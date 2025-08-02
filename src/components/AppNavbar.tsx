@@ -1,5 +1,6 @@
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded'
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
+import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
@@ -27,7 +28,12 @@ const Toolbar = styled(MuiToolbar)({
   },
 })
 
-export default function AppNavbar() {
+interface AppNavbarProps {
+  sidebarOpen?: boolean
+  onSidebarToggle?: () => void
+}
+
+export default function AppNavbar({ sidebarOpen, onSidebarToggle }: AppNavbarProps) {
   const [open, setOpen] = React.useState(false)
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -38,13 +44,14 @@ export default function AppNavbar() {
     <AppBar
       position="fixed"
       sx={{
-        display: { xs: 'auto', md: 'none' },
+        display: 'block',
         boxShadow: 0,
         bgcolor: 'background.paper',
         backgroundImage: 'none',
         borderBottom: '1px solid',
         borderColor: 'divider',
         top: 'var(--template-frame-height, 0px)',
+        zIndex: (theme) => theme.zIndex.drawer + 1,
       }}
     >
       <Toolbar variant="regular">
@@ -58,6 +65,11 @@ export default function AppNavbar() {
           }}
         >
           <Stack direction="row" spacing={1} sx={{ justifyContent: 'center' }}>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              <MenuButton aria-label="toggle sidebar" onClick={onSidebarToggle}>
+                {sidebarOpen ? <MenuOpenIcon /> : <MenuRoundedIcon />}
+              </MenuButton>
+            </Box>
             <CustomIcon />
             <Typography
               variant="h4"
@@ -67,9 +79,11 @@ export default function AppNavbar() {
               Dashboard
             </Typography>
           </Stack>
-          <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
-            <MenuRoundedIcon />
-          </MenuButton>
+          <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+            <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
+              <MenuRoundedIcon />
+            </MenuButton>
+          </Box>
           <SideMenuMobile open={open} toggleDrawer={toggleDrawer} />
         </Stack>
       </Toolbar>
