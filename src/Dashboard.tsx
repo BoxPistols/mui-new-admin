@@ -6,10 +6,16 @@ import type {} from '@mui/x-charts/themeAugmentation'
 import type {} from '@mui/x-data-grid/themeAugmentation'
 import type {} from '@mui/x-date-pickers/themeAugmentation'
 import type {} from '@mui/x-tree-view/themeAugmentation'
+import { Routes, Route } from 'react-router-dom'
 import AppNavbar from './components/AppNavbar'
-import Header from './components/Header'
-import MainGrid from './components/MainGrid'
 import SideMenu from './components/SideMenu'
+import HomePage from './pages/HomePage'
+import AnalyticsPage from './pages/AnalyticsPage'
+import ClientsPage from './pages/ClientsPage'
+import TasksPage from './pages/TasksPage'
+import SettingsPage from './pages/SettingsPage'
+import AboutPage from './pages/AboutPage'
+import FeedbackPage from './pages/FeedbackPage'
 import { useAppTheme } from './theme/AppTheme'
 import {
   chartsCustomizations,
@@ -58,8 +64,15 @@ export default function Dashboard({ disableCustomTheme }: DashboardProps) {
               mt: { xs: 8, md: 0 },
             }}
           >
-            <Header />
-            <MainGrid />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/analytics" element={<AnalyticsPage />} />
+              <Route path="/clients" element={<ClientsPage />} />
+              <Route path="/tasks" element={<TasksPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/feedback" element={<FeedbackPage />} />
+            </Routes>
           </Stack>
         </Box>
       </Box>

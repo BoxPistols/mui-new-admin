@@ -1,0 +1,217 @@
+import { Meta, Canvas, Story, ColorPalette, ColorItem } from '@storybook/blocks';
+import { brand, gray, green, orange, red } from '../../theme/themePrimitives';
+
+<Meta title="Design Tokens/カラーシステム" />
+
+# カラーシステム
+
+このプロジェクトのカラーシステムは、統一されたユーザーエクスペリエンスと視覚的な一貫性を提供するために設計されています。
+
+## 設計思想
+
+### ブランドアイデンティティ
+- **プライマリブルー**: 信頼性とプロフェッショナルさを表現
+- **アクセシビリティ重視**: WCAG 2.1 AA以上のコントラスト比を確保
+- **ダークモード対応**: ライト・ダークテーマ両方で最適化
+
+### カラーパレット
+
+#### ブランドカラー（Brand）
+メインブランドカラーとして使用される青系統の色。UIの主要なアクションやナビゲーション要素に適用されます。
+
+<ColorPalette>
+  <ColorItem
+    title="Brand 50"
+    subtitle="hsl(210, 100%, 95%)"
+    colors={[brand[50]]}
+  />
+  <ColorItem
+    title="Brand 100"
+    subtitle="hsl(210, 100%, 92%)"
+    colors={[brand[100]]}
+  />
+  <ColorItem
+    title="Brand 200"
+    subtitle="hsl(210, 100%, 80%)"
+    colors={[brand[200]]}
+  />
+  <ColorItem
+    title="Brand 300"
+    subtitle="hsl(210, 100%, 65%)"
+    colors={[brand[300]]}
+  />
+  <ColorItem
+    title="Brand 400 (Primary)"
+    subtitle="hsl(210, 98%, 48%)"
+    colors={[brand[400]]}
+  />
+  <ColorItem
+    title="Brand 500"
+    subtitle="hsl(210, 98%, 42%)"
+    colors={[brand[500]]}
+  />
+  <ColorItem
+    title="Brand 600"
+    subtitle="hsl(210, 98%, 55%)"
+    colors={[brand[600]]}
+  />
+  <ColorItem
+    title="Brand 700 (Primary Dark)"
+    subtitle="hsl(210, 100%, 35%)"
+    colors={[brand[700]]}
+  />
+  <ColorItem
+    title="Brand 800"
+    subtitle="hsl(210, 100%, 16%)"
+    colors={[brand[800]]}
+  />
+  <ColorItem
+    title="Brand 900"
+    subtitle="hsl(210, 100%, 21%)"
+    colors={[brand[900]]}
+  />
+</ColorPalette>
+
+#### グレースケール（Gray）
+テキスト、背景、境界線など、UIの基本構造に使用される無彩色系統。
+
+<ColorPalette>
+  <ColorItem
+    title="Gray 50"
+    subtitle="hsl(220, 35%, 97%)"
+    colors={[gray[50]]}
+  />
+  <ColorItem
+    title="Gray 100"
+    subtitle="hsl(220, 30%, 94%)"
+    colors={[gray[100]]}
+  />
+  <ColorItem
+    title="Gray 200"
+    subtitle="hsl(220, 20%, 88%)"
+    colors={[gray[200]]}
+  />
+  <ColorItem
+    title="Gray 300"
+    subtitle="hsl(220, 20%, 80%)"
+    colors={[gray[300]]}
+  />
+  <ColorItem
+    title="Gray 400"
+    subtitle="hsl(220, 20%, 65%)"
+    colors={[gray[400]]}
+  />
+  <ColorItem
+    title="Gray 500"
+    subtitle="hsl(220, 20%, 42%)"
+    colors={[gray[500]]}
+  />
+  <ColorItem
+    title="Gray 600"
+    subtitle="hsl(220, 20%, 35%)"
+    colors={[gray[600]]}
+  />
+  <ColorItem
+    title="Gray 700"
+    subtitle="hsl(220, 20%, 25%)"
+    colors={[gray[700]]}
+  />
+  <ColorItem
+    title="Gray 800"
+    subtitle="hsl(220, 30%, 18%)"
+    colors={[gray[800]]}
+  />
+  <ColorItem
+    title="Gray 900"
+    subtitle="hsl(220, 35%, 12%)"
+    colors={[gray[900]]}
+  />
+</ColorPalette>
+
+#### セマンティックカラー
+
+##### 成功（Success / Green）
+正常な状態、成功メッセージ、確認アクションなどに使用。
+
+<ColorPalette>
+  <ColorItem
+    title="Green 300 (Success Light)"
+    subtitle="hsl(120, 61%, 77%)"
+    colors={[green[300]]}
+  />
+  <ColorItem
+    title="Green 400 (Success Main)"
+    subtitle="hsl(120, 44%, 53%)"
+    colors={[green[400]]}
+  />
+  <ColorItem
+    title="Green 800 (Success Dark)"
+    subtitle="hsl(120, 84%, 10%)"
+    colors={[green[800]]}
+  />
+</ColorPalette>
+
+##### 警告（Warning / Orange）
+注意喚起、警告メッセージ、一時的な状態表示に使用。
+
+<ColorPalette>
+  <ColorItem
+    title="Orange 300 (Warning Light)"
+    subtitle="hsl(45, 90%, 65%)"
+    colors={[orange[300]]}
+  />
+  <ColorItem
+    title="Orange 400 (Warning Main)"
+    subtitle="hsl(45, 90%, 40%)"
+    colors={[orange[400]]}
+  />
+  <ColorItem
+    title="Orange 800 (Warning Dark)"
+    subtitle="hsl(45, 95%, 16%)"
+    colors={[orange[800]]}
+  />
+</ColorPalette>
+
+##### エラー（Error / Red）
+エラー状態、削除アクション、危険な操作に使用。
+
+<ColorPalette>
+  <ColorItem
+    title="Red 300 (Error Light)"
+    subtitle="hsl(0, 90%, 65%)"
+    colors={[red[300]]}
+  />
+  <ColorItem
+    title="Red 400 (Error Main)"
+    subtitle="hsl(0, 90%, 40%)"
+    colors={[red[400]]}
+  />
+  <ColorItem
+    title="Red 800 (Error Dark)"
+    subtitle="hsl(0, 95%, 12%)"
+    colors={[red[800]]}
+  />
+</ColorPalette>
+
+## 使用方法
+
+### 開発者向けガイドライン
+
+1. **プライマリアクション**: Brand 400を使用
+2. **セカンダリアクション**: Gray 600を使用
+3. **テキスト**: 
+   - プライマリテキスト: Gray 800 (Light) / White (Dark)
+   - セカンダリテキスト: Gray 600 (Light) / Gray 400 (Dark)
+4. **背景**: 
+   - メイン背景: hsl(0, 0%, 99%) (Light) / Gray 800 (Dark)
+   - カード背景: hsl(220, 35%, 97%) (Light) / hsl(220, 30%, 20%) (Dark)
+
+### アクセシビリティ
+
+- すべてのカラーコンビネーションはWCAG 2.1 AA基準を満たしています
+- テキストと背景のコントラスト比は4.5:1以上を確保
+- カラーブラインドネスへの配慮として、色のみに依存しない情報伝達を実装
+
+### テーマ対応
+
+このカラーシステムは Material-UI の CSS Variables に対応しており、動的なテーマ切り替えをサポートしています。

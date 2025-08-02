@@ -1,11 +1,11 @@
+import { BrowserRouter } from 'react-router-dom'
 import Dashboard from '@/Dashboard'
 
 function App() {
   return (
-    <>
-      <div>Hello</div>
+    <BrowserRouter>
       <Dashboard />
-    </>
+    </BrowserRouter>
   )
 }
 

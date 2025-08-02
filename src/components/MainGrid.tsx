@@ -56,7 +56,7 @@ export default function MainGrid() {
         container
         spacing={2}
         columns={12}
-        sx={{ mb: (theme) => theme.spacing(2) }}
+        sx={{ mb: 2 }}
       >
         {data.map((card) => (
           <Grid key={card.title} size={{ xs: 12, sm: 6, lg: 3 }}>

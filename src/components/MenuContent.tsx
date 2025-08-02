@@ -11,27 +11,38 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Stack from '@mui/material/Stack'
+import { Link, useLocation } from 'react-router-dom'
 
 const mainListItems = [
-  { text: 'Home', icon: <HomeRoundedIcon /> },
-  { text: 'Analytics', icon: <AnalyticsRoundedIcon /> },
-  { text: 'Clients', icon: <PeopleRoundedIcon /> },
-  { text: 'Tasks', icon: <AssignmentRoundedIcon /> },
+  { text: 'Home', icon: <HomeRoundedIcon />, path: '/' },
+  { text: 'Analytics', icon: <AnalyticsRoundedIcon />, path: '/analytics' },
+  { text: 'Clients', icon: <PeopleRoundedIcon />, path: '/clients' },
+  { text: 'Tasks', icon: <AssignmentRoundedIcon />, path: '/tasks' },
 ]
 
 const secondaryListItems = [
-  { text: 'Settings', icon: <SettingsRoundedIcon /> },
-  { text: 'About', icon: <InfoRoundedIcon /> },
-  { text: 'Feedback', icon: <HelpRoundedIcon /> },
+  { text: 'Settings', icon: <SettingsRoundedIcon />, path: '/settings' },
+  { text: 'About', icon: <InfoRoundedIcon />, path: '/about' },
+  { text: 'Feedback', icon: <HelpRoundedIcon />, path: '/feedback' },
 ]
 
 export default function MenuContent() {
+  const location = useLocation()
+
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
       <List dense>
-        {mainListItems.map((item, index) => (
+        {mainListItems.map((item) => (
           <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton selected={index === 0}>
+            <ListItemButton
+              component={Link}
+              to={item.path}
+              selected={location.pathname === item.path}
+              sx={{
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+            >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>
@@ -42,7 +53,15 @@ export default function MenuContent() {
       <List dense>
         {secondaryListItems.map((item) => (
           <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton>
+            <ListItemButton
+              component={Link}
+              to={item.path}
+              selected={location.pathname === item.path}
+              sx={{
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+            >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>
