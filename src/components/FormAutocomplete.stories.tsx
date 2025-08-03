@@ -1,21 +1,21 @@
-import type { Meta, StoryObj } from "@storybook/react"
-import { useState } from "react"
-import FormAutocomplete, { type AutocompleteOption } from "./FormAutocomplete"
-import { Box, Stack, Paper, Typography } from "@mui/material"
+import { Box, Paper, Stack, Typography } from '@mui/material'
+import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
+import FormAutocomplete, { type AutocompleteOption } from './FormAutocomplete'
 
 const meta: Meta<typeof FormAutocomplete> = {
-  title: "Forms/Autocomplete",
+  title: 'Forms/Autocomplete',
   component: FormAutocomplete,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     docs: {
       description: {
         component:
-          "オートコンプリートコンポーネント。検索機能付きの選択肢から選択に使用します。",
+          'オートコンプリートコンポーネント。検索機能付きの選択肢から選択に使用します。',
       },
     },
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -23,16 +23,16 @@ type Story = StoryObj<typeof FormAutocomplete>
 
 // 国・地域のオプション
 const countryOptions: AutocompleteOption[] = [
-  { label: "日本", value: "jp" },
-  { label: "アメリカ合衆国", value: "us" },
-  { label: "イギリス", value: "uk" },
-  { label: "ドイツ", value: "de" },
-  { label: "フランス", value: "fr" },
-  { label: "中国", value: "cn" },
-  { label: "韓国", value: "kr" },
-  { label: "カナダ", value: "ca" },
-  { label: "オーストラリア", value: "au" },
-  { label: "ブラジル", value: "br" },
+  { label: '日本', value: 'jp' },
+  { label: 'アメリカ合衆国', value: 'us' },
+  { label: 'イギリス', value: 'uk' },
+  { label: 'ドイツ', value: 'de' },
+  { label: 'フランス', value: 'fr' },
+  { label: '中国', value: 'cn' },
+  { label: '韓国', value: 'kr' },
+  { label: 'カナダ', value: 'ca' },
+  { label: 'オーストラリア', value: 'au' },
+  { label: 'ブラジル', value: 'br' },
 ]
 
 // 基本的な使用例
@@ -45,7 +45,9 @@ export const Default: Story = {
         label="国・地域"
         options={countryOptions}
         value={value}
-        onChange={(_, newValue) => setValue(newValue as AutocompleteOption | null)}
+        onChange={(_, newValue) =>
+          setValue(newValue as AutocompleteOption | null)
+        }
         placeholder="国・地域を選択してください"
       />
     )
@@ -73,7 +75,7 @@ export const Multiple: Story = {
 // 自由入力
 export const FreeSolo: Story = {
   render: () => {
-    const [value, setValue] = useState<string>("")
+    const [value, setValue] = useState<string>('')
 
     return (
       <FormAutocomplete
@@ -98,7 +100,9 @@ export const WithError: Story = {
         label="国・地域"
         options={countryOptions}
         value={value}
-        onChange={(_, newValue) => setValue(newValue as AutocompleteOption | null)}
+        onChange={(_, newValue) =>
+          setValue(newValue as AutocompleteOption | null)
+        }
         error
         required
         labelRequired
@@ -119,7 +123,9 @@ export const Loading: Story = {
         label="国・地域"
         options={[]}
         value={value}
-        onChange={(_, newValue) => setValue(newValue as AutocompleteOption | null)}
+        onChange={(_, newValue) =>
+          setValue(newValue as AutocompleteOption | null)
+        }
         loading
         loadingText="読み込み中..."
         placeholder="国・地域を選択してください"

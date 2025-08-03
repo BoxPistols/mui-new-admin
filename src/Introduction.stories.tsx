@@ -1,6 +1,5 @@
+import { Box, Card, CardContent, Chip, Stack, Typography } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { Box, Typography, Card, CardContent, Chip, Stack } from '@mui/material'
 
 // ダミーのコンポーネントを作成
 const DesignSystemOverview = () => {
@@ -9,9 +8,10 @@ const DesignSystemOverview = () => {
       <Typography variant="h3" component="h1" gutterBottom>
         MUI v6 Admin Dashboard デザインシステム
       </Typography>
-      
+
       <Typography variant="body1" sx={{ mb: 4 }}>
-        このプロジェクトは Material-UI v6 を基盤とした、モダンで拡張性の高い管理画面用デザインシステムです。
+        このプロジェクトは Material-UI v6
+        を基盤とした、モダンで拡張性の高い管理画面用デザインシステムです。
       </Typography>
 
       <Typography variant="h5" gutterBottom>
@@ -83,10 +83,10 @@ const meta: Meta<typeof DesignSystemOverview> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'MUI v6 を基盤とした管理画面用デザインシステムの概要'
-      }
-    }
-  }
+        component: 'MUI v6 を基盤とした管理画面用デザインシステムの概要',
+      },
+    },
+  },
 }
 
 export default meta

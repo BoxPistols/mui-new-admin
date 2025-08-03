@@ -2,8 +2,8 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
 import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
+import Typography from '@mui/material/Typography'
 import { LineChart } from '@mui/x-charts/LineChart'
 
 function AreaGradient({ color, id }: { color: string; id: string }) {

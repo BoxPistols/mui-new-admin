@@ -1,17 +1,17 @@
-import type React from "react";
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 import {
+  IconButton,
+  InputAdornment,
   TextField,
   type TextFieldProps,
-  InputAdornment,
-  IconButton,
-} from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+} from '@mui/material'
+import type React from 'react'
 
-export interface FormTextFieldProps extends Omit<TextFieldProps, "variant"> {
-  variant?: "outlined" | "filled" | "standard";
-  showPassword?: boolean;
-  onTogglePassword?: () => void;
-  labelRequired?: boolean;
+export interface FormTextFieldProps extends Omit<TextFieldProps, 'variant'> {
+  variant?: 'outlined' | 'filled' | 'standard'
+  showPassword?: boolean
+  onTogglePassword?: () => void
+  labelRequired?: boolean
 }
 
 const FormTextField: React.FC<FormTextFieldProps> = ({
@@ -24,8 +24,8 @@ const FormTextField: React.FC<FormTextFieldProps> = ({
   error,
   ...props
 }) => {
-  const isPasswordField = type === "password";
-  const actualType = isPasswordField && showPassword ? "text" : type;
+  const isPasswordField = type === 'password'
+  const actualType = isPasswordField && showPassword ? 'text' : type
 
   const endAdornment = isPasswordField ? (
     <InputAdornment position="end">
@@ -39,7 +39,7 @@ const FormTextField: React.FC<FormTextFieldProps> = ({
     </InputAdornment>
   ) : (
     props.InputProps?.endAdornment
-  );
+  )
 
   return (
     <TextField
@@ -47,7 +47,7 @@ const FormTextField: React.FC<FormTextFieldProps> = ({
       label={
         labelRequired && label ? (
           <>
-            {label} <span style={{ color: "red" }}>*</span>
+            {label} <span style={{ color: 'red' }}>*</span>
           </>
         ) : (
           label
@@ -61,7 +61,7 @@ const FormTextField: React.FC<FormTextFieldProps> = ({
       }}
       {...props}
     />
-  );
-};
+  )
+}
 
-export default FormTextField;
+export default FormTextField

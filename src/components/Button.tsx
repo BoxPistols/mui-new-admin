@@ -1,4 +1,6 @@
-import MuiButton, { type ButtonProps as MuiButtonProps } from '@mui/material/Button'
+import MuiButton, {
+  type ButtonProps as MuiButtonProps,
+} from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import { forwardRef } from 'react'
 
@@ -9,18 +11,21 @@ export interface ButtonProps extends MuiButtonProps {
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ 
-    loading = false, 
-    loadingText,
-    disabled, 
-    children, 
-    startIcon,
-    endIcon,
-    size = 'medium',
-    ...props 
-  }, ref) => {
+  (
+    {
+      loading = false,
+      loadingText,
+      disabled,
+      children,
+      startIcon,
+      endIcon,
+      size = 'medium',
+      ...props
+    },
+    ref,
+  ) => {
     const isDisabled = disabled || loading
-    
+
     const getLoadingSize = () => {
       switch (size) {
         case 'small':
@@ -33,12 +38,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const loadingIcon = loading ? (
-      <CircularProgress 
-        size={getLoadingSize()} 
-        sx={{ 
+      <CircularProgress
+        size={getLoadingSize()}
+        sx={{
           color: 'inherit',
-          mr: loadingText ? 1 : 0 
-        }} 
+          mr: loadingText ? 1 : 0,
+        }}
       />
     ) : null
 
@@ -56,7 +61,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {content}
       </MuiButton>
     )
-  }
+  },
 )
 
 Button.displayName = 'Button'

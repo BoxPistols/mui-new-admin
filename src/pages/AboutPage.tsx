@@ -1,9 +1,9 @@
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
 import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
 
 export default function AboutPage() {
   return (
@@ -17,9 +17,9 @@ export default function AboutPage() {
             MUI 6 Admin Dashboard
           </Typography>
           <Typography variant="body1" paragraph>
-            A modern admin dashboard built with Material-UI 6 and React. This application
-            provides a comprehensive suite of tools for data visualization, client management,
-            and task tracking.
+            A modern admin dashboard built with Material-UI 6 and React. This
+            application provides a comprehensive suite of tools for data
+            visualization, client management, and task tracking.
           </Typography>
           <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
             Technologies Used

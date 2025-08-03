@@ -1,22 +1,22 @@
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
 import Stack from '@mui/material/Stack'
-import { ThemeProvider, alpha } from '@mui/material/styles'
-import * as React from 'react'
+import { alpha, ThemeProvider } from '@mui/material/styles'
 import type {} from '@mui/x-charts/themeAugmentation'
 import type {} from '@mui/x-data-grid/themeAugmentation'
 import type {} from '@mui/x-date-pickers/themeAugmentation'
 import type {} from '@mui/x-tree-view/themeAugmentation'
-import { Routes, Route } from 'react-router-dom'
+import * as React from 'react'
+import { Route, Routes } from 'react-router-dom'
 import AppNavbar from './components/AppNavbar'
 import SideMenu from './components/SideMenu'
-import HomePage from './pages/HomePage'
+import AboutPage from './pages/AboutPage'
 import AnalyticsPage from './pages/AnalyticsPage'
 import ClientsPage from './pages/ClientsPage'
-import TasksPage from './pages/TasksPage'
-import SettingsPage from './pages/SettingsPage'
-import AboutPage from './pages/AboutPage'
 import FeedbackPage from './pages/FeedbackPage'
+import HomePage from './pages/HomePage'
+import SettingsPage from './pages/SettingsPage'
+import TasksPage from './pages/TasksPage'
 import { useAppTheme } from './theme/AppTheme'
 import {
   chartsCustomizations,
@@ -38,7 +38,7 @@ interface DashboardProps {
 
 export default function Dashboard({ disableCustomTheme }: DashboardProps) {
   const [sidebarOpen, setSidebarOpen] = React.useState(true)
-  
+
   const handleSidebarToggle = () => {
     setSidebarOpen(!sidebarOpen)
   }
@@ -53,7 +53,10 @@ export default function Dashboard({ disableCustomTheme }: DashboardProps) {
       <CssBaseline enableColorScheme />
       <Box sx={{ display: 'flex' }}>
         <SideMenu open={sidebarOpen} />
-        <AppNavbar sidebarOpen={sidebarOpen} onSidebarToggle={handleSidebarToggle} />
+        <AppNavbar
+          sidebarOpen={sidebarOpen}
+          onSidebarToggle={handleSidebarToggle}
+        />
         <Box
           component="main"
           sx={(theme) => ({

@@ -1,9 +1,9 @@
-import { type Theme, createTheme } from '@mui/material/styles'
 import type {
   PaletteColor,
   ThemeOptions,
   TypeBackground,
 } from '@mui/material/styles'
+import { createTheme, type Theme } from '@mui/material/styles'
 import { useMemo } from 'react'
 import { dataDisplayCustomizations } from './customizations/dataDisplay'
 import { feedbackCustomizations } from './customizations/feedback'

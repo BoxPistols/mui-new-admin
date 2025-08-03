@@ -133,9 +133,9 @@ const data: StatCardProps[] = [
 - **カラーコントラスト**: 十分な色の差による視認性
 - **テキストサイズ**: 拡大時の適切な表示
 - **動的コンテンツ**: 変更の明確な通知
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
 }
@@ -147,47 +147,51 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '完全なダッシュボードレイアウト。Overview（統計カードとチャート）とDetails（データグリッドとサイドパネル）の両セクションを含みます。'
-      }
-    }
-  }
+        story:
+          '完全なダッシュボードレイアウト。Overview（統計カードとチャート）とDetails（データグリッドとサイドパネル）の両セクションを含みます。',
+      },
+    },
+  },
 }
 
 export const MobileView: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'mobile1'
+      defaultViewport: 'mobile1',
     },
     docs: {
       description: {
-        story: 'モバイルデバイスでの表示。すべての要素が縦に積み重ねて表示され、タッチ操作に最適化されます。'
-      }
-    }
-  }
+        story:
+          'モバイルデバイスでの表示。すべての要素が縦に積み重ねて表示され、タッチ操作に最適化されます。',
+      },
+    },
+  },
 }
 
 export const TabletView: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'tablet'
+      defaultViewport: 'tablet',
     },
     docs: {
       description: {
-        story: 'タブレットデバイスでの表示。2カラムレイアウトで効率的なスペース活用を実現します。'
-      }
-    }
-  }
+        story:
+          'タブレットデバイスでの表示。2カラムレイアウトで効率的なスペース活用を実現します。',
+      },
+    },
+  },
 }
 
 export const DesktopView: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'desktop'
+      defaultViewport: 'desktop',
     },
     docs: {
       description: {
-        story: 'デスクトップでの表示。4カラムレイアウトによる最大限のデータ表示密度を実現します。'
-      }
-    }
-  }
+        story:
+          'デスクトップでの表示。4カラムレイアウトによる最大限のデータ表示密度を実現します。',
+      },
+    },
+  },
 }

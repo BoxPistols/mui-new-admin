@@ -1,50 +1,50 @@
-import { useState } from 'react'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import Chip from '@mui/material/Chip'
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
+import BlockIcon from '@mui/icons-material/Block'
+import DeleteIcon from '@mui/icons-material/Delete'
+import DownloadIcon from '@mui/icons-material/Download'
+import EditIcon from '@mui/icons-material/Edit'
+import EmailIcon from '@mui/icons-material/Email'
+import FilterListIcon from '@mui/icons-material/FilterList'
+import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import PhoneIcon from '@mui/icons-material/Phone'
+import SearchIcon from '@mui/icons-material/Search'
+
+import VerifiedIcon from '@mui/icons-material/Verified'
 import Avatar from '@mui/material/Avatar'
-import Stack from '@mui/material/Stack'
-import IconButton from '@mui/material/IconButton'
+import Badge from '@mui/material/Badge'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import Chip from '@mui/material/Chip'
 import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
-import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
 import FormControl from '@mui/material/FormControl'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
 import InputLabel from '@mui/material/InputLabel'
-import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
+import Paper from '@mui/material/Paper'
+import Select from '@mui/material/Select'
+import Stack from '@mui/material/Stack'
+import Switch from '@mui/material/Switch'
+import Tab from '@mui/material/Tab'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
 import TablePagination from '@mui/material/TablePagination'
-import Paper from '@mui/material/Paper'
-import Switch from '@mui/material/Switch'
-import FormControlLabel from '@mui/material/FormControlLabel'
+import TableRow from '@mui/material/TableRow'
 import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
-import Badge from '@mui/material/Badge'
+import TextField from '@mui/material/TextField'
 import Tooltip from '@mui/material/Tooltip'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
-import PersonAddIcon from '@mui/icons-material/PersonAdd'
-import SearchIcon from '@mui/icons-material/Search'
-import FilterListIcon from '@mui/icons-material/FilterList'
-import EmailIcon from '@mui/icons-material/Email'
-import PhoneIcon from '@mui/icons-material/Phone'
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
-import SecurityIcon from '@mui/icons-material/Security'
-import VerifiedIcon from '@mui/icons-material/Verified'
-import BlockIcon from '@mui/icons-material/Block'
-import DownloadIcon from '@mui/icons-material/Download'
+import Typography from '@mui/material/Typography'
+import { useState } from 'react'
 
 interface User {
   id: number
@@ -76,7 +76,7 @@ const mockUsers: User[] = [
     permissions: ['read', 'write', 'delete', 'admin'],
     isVerified: true,
     loginCount: 245,
-    department: 'IT'
+    department: 'IT',
   },
   {
     id: 2,
@@ -91,7 +91,7 @@ const mockUsers: User[] = [
     permissions: ['read', 'write', 'moderate'],
     isVerified: true,
     loginCount: 128,
-    department: 'Marketing'
+    department: 'Marketing',
   },
   {
     id: 3,
@@ -106,7 +106,7 @@ const mockUsers: User[] = [
     permissions: ['read'],
     isVerified: false,
     loginCount: 3,
-    department: 'Development'
+    department: 'Development',
   },
   {
     id: 4,
@@ -121,7 +121,7 @@ const mockUsers: User[] = [
     permissions: ['read'],
     isVerified: true,
     loginCount: 89,
-    department: 'Sales'
+    department: 'Sales',
   },
   {
     id: 5,
@@ -136,8 +136,8 @@ const mockUsers: User[] = [
     permissions: ['read', 'write', 'delete', 'admin'],
     isVerified: true,
     loginCount: 456,
-    department: 'Security'
-  }
+    department: 'Security',
+  },
 ]
 
 export default function UserManagementPage() {
@@ -173,23 +173,24 @@ export default function UserManagementPage() {
 
   const filterUsers = (search: string, role: string, status: string) => {
     let filtered = users
-    
+
     if (search) {
-      filtered = filtered.filter(user =>
-        user.name.toLowerCase().includes(search.toLowerCase()) ||
-        user.email.toLowerCase().includes(search.toLowerCase()) ||
-        user.department.toLowerCase().includes(search.toLowerCase())
+      filtered = filtered.filter(
+        (user) =>
+          user.name.toLowerCase().includes(search.toLowerCase()) ||
+          user.email.toLowerCase().includes(search.toLowerCase()) ||
+          user.department.toLowerCase().includes(search.toLowerCase()),
       )
     }
-    
+
     if (role !== 'All') {
-      filtered = filtered.filter(user => user.role === role)
+      filtered = filtered.filter((user) => user.role === role)
     }
-    
+
     if (status !== 'All') {
-      filtered = filtered.filter(user => user.status === status)
+      filtered = filtered.filter((user) => user.status === status)
     }
-    
+
     setFilteredUsers(filtered)
   }
 
@@ -204,60 +205,94 @@ export default function UserManagementPage() {
   }
 
   const handleDeleteUser = (userId: number) => {
-    setUsers(users.filter(u => u.id !== userId))
-    setFilteredUsers(filteredUsers.filter(u => u.id !== userId))
+    setUsers(users.filter((u) => u.id !== userId))
+    setFilteredUsers(filteredUsers.filter((u) => u.id !== userId))
   }
 
   const handleSuspendUser = (userId: number) => {
-    setUsers(users.map(u => 
-      u.id === userId 
-        ? { ...u, status: u.status === 'Suspended' ? 'Active' : 'Suspended' as const }
-        : u
-    ))
-    setFilteredUsers(filteredUsers.map(u => 
-      u.id === userId 
-        ? { ...u, status: u.status === 'Suspended' ? 'Active' : 'Suspended' as const }
-        : u
-    ))
+    setUsers(
+      users.map((u) =>
+        u.id === userId
+          ? {
+              ...u,
+              status:
+                u.status === 'Suspended' ? 'Active' : ('Suspended' as const),
+            }
+          : u,
+      ),
+    )
+    setFilteredUsers(
+      filteredUsers.map((u) =>
+        u.id === userId
+          ? {
+              ...u,
+              status:
+                u.status === 'Suspended' ? 'Active' : ('Suspended' as const),
+            }
+          : u,
+      ),
+    )
   }
 
   const getRoleColor = (role: string) => {
     switch (role) {
-      case 'Admin': return 'error'
-      case 'Moderator': return 'warning'
-      case 'User': return 'primary'
-      case 'Guest': return 'default'
-      default: return 'default'
+      case 'Admin':
+        return 'error'
+      case 'Moderator':
+        return 'warning'
+      case 'User':
+        return 'primary'
+      case 'Guest':
+        return 'default'
+      default:
+        return 'default'
     }
   }
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Active': return 'success'
-      case 'Pending': return 'warning'
-      case 'Inactive': return 'default'
-      case 'Suspended': return 'error'
-      default: return 'default'
+      case 'Active':
+        return 'success'
+      case 'Pending':
+        return 'warning'
+      case 'Inactive':
+        return 'default'
+      case 'Suspended':
+        return 'error'
+      default:
+        return 'default'
     }
   }
 
   const getRoleStats = () => {
-    const stats = users.reduce((acc, user) => {
-      acc[user.role] = (acc[user.role] || 0) + 1
-      return acc
-    }, {} as Record<string, number>)
+    const stats = users.reduce(
+      (acc, user) => {
+        acc[user.role] = (acc[user.role] || 0) + 1
+        return acc
+      },
+      {} as Record<string, number>,
+    )
     return stats
   }
 
   const getStatusStats = () => {
-    const stats = users.reduce((acc, user) => {
-      acc[user.status] = (acc[user.status] || 0) + 1
-      return acc
-    }, {} as Record<string, number>)
+    const stats = users.reduce(
+      (acc, user) => {
+        acc[user.status] = (acc[user.status] || 0) + 1
+        return acc
+      },
+      {} as Record<string, number>,
+    )
     return stats
   }
 
-  const TabPanel = ({ children, value, index }: any) => (
+  interface TabPanelProps {
+    children?: React.ReactNode
+    index: number
+    value: number
+  }
+
+  const TabPanel = ({ children, value, index }: TabPanelProps) => (
     <div hidden={value !== index}>
       {value === index && <Box sx={{ pt: 3 }}>{children}</Box>}
     </div>
@@ -268,15 +303,19 @@ export default function UserManagementPage() {
 
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 3,
+        }}
+      >
         <Typography component="h2" variant="h6">
           User Management ({filteredUsers.length})
         </Typography>
         <Stack direction="row" spacing={2}>
-          <Button
-            variant="outlined"
-            startIcon={<DownloadIcon />}
-          >
+          <Button variant="outlined" startIcon={<DownloadIcon />}>
             Export
           </Button>
           <Button
@@ -341,7 +380,11 @@ export default function UserManagementPage() {
       </Grid>
 
       <Box sx={{ mb: 3 }}>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems="center">
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={2}
+          alignItems="center"
+        >
           <Box>
             <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
               Search Users
@@ -351,7 +394,9 @@ export default function UserManagementPage() {
               value={searchTerm}
               onChange={(e) => handleSearch(e.target.value)}
               InputProps={{
-                startAdornment: <SearchIcon sx={{ mr: 1, color: 'text.secondary' }} />
+                startAdornment: (
+                  <SearchIcon sx={{ mr: 1, color: 'text.secondary' }} />
+                ),
               }}
               sx={{ minWidth: 300 }}
               variant="outlined"
@@ -403,7 +448,13 @@ export default function UserManagementPage() {
         <Grid container spacing={3}>
           {filteredUsers.map((user) => (
             <Grid key={user.id} size={{ xs: 12, sm: 6, md: 4 }}>
-              <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Card
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                     <Badge
@@ -411,7 +462,9 @@ export default function UserManagementPage() {
                       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                       badgeContent={
                         user.isVerified ? (
-                          <VerifiedIcon sx={{ fontSize: 16, color: 'success.main' }} />
+                          <VerifiedIcon
+                            sx={{ fontSize: 16, color: 'success.main' }}
+                          />
                         ) : null
                       }
                     >
@@ -430,30 +483,36 @@ export default function UserManagementPage() {
                     <Stack spacing={1}>
                       <Chip
                         label={user.role}
-                        color={getRoleColor(user.role) as any}
+                        color={getRoleColor(user.role)}
                         size="small"
-                        icon={user.role === 'Admin' ? <AdminPanelSettingsIcon /> : undefined}
+                        icon={
+                          user.role === 'Admin' ? (
+                            <AdminPanelSettingsIcon />
+                          ) : undefined
+                        }
                       />
                       <Chip
                         label={user.status}
-                        color={getStatusColor(user.status) as any}
+                        color={getStatusColor(user.status)}
                         size="small"
                       />
                     </Stack>
                   </Box>
-                  
+
                   <Stack spacing={1}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <EmailIcon sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }} />
+                      <EmailIcon
+                        sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }}
+                      />
                       <Typography variant="body2" noWrap>
                         {user.email}
                       </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <PhoneIcon sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }} />
-                      <Typography variant="body2">
-                        {user.phone}
-                      </Typography>
+                      <PhoneIcon
+                        sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }}
+                      />
+                      <Typography variant="body2">{user.phone}</Typography>
                     </Box>
                     <Typography variant="body2" color="text.secondary">
                       Last login: {user.lastLogin}
@@ -462,38 +521,56 @@ export default function UserManagementPage() {
                       Logins: {user.loginCount}
                     </Typography>
                   </Stack>
-                  
+
                   <Box sx={{ mt: 2 }}>
                     <Typography variant="caption" color="text.secondary">
                       Permissions:
                     </Typography>
-                    <Stack direction="row" spacing={0.5} flexWrap="wrap" sx={{ gap: 0.5, mt: 0.5 }}>
+                    <Stack
+                      direction="row"
+                      spacing={0.5}
+                      flexWrap="wrap"
+                      sx={{ gap: 0.5, mt: 0.5 }}
+                    >
                       {user.permissions.map((permission, index) => (
-                        <Chip key={index} label={permission} size="small" variant="outlined" />
+                        <Chip
+                          key={index}
+                          label={permission}
+                          size="small"
+                          variant="outlined"
+                        />
                       ))}
                     </Stack>
                   </Box>
                 </CardContent>
-                
+
                 <CardActions>
-                  <IconButton 
-                    size="small" 
+                  <IconButton
+                    size="small"
                     onClick={() => handleEditUser(user)}
                     color="primary"
                   >
                     <EditIcon />
                   </IconButton>
-                  <Tooltip title={user.status === 'Suspended' ? 'Activate User' : 'Suspend User'}>
-                    <IconButton 
-                      size="small" 
+                  <Tooltip
+                    title={
+                      user.status === 'Suspended'
+                        ? 'Activate User'
+                        : 'Suspend User'
+                    }
+                  >
+                    <IconButton
+                      size="small"
                       onClick={() => handleSuspendUser(user.id)}
-                      color={user.status === 'Suspended' ? 'success' : 'warning'}
+                      color={
+                        user.status === 'Suspended' ? 'success' : 'warning'
+                      }
                     >
                       <BlockIcon />
                     </IconButton>
                   </Tooltip>
-                  <IconButton 
-                    size="small" 
+                  <IconButton
+                    size="small"
                     onClick={() => handleDeleteUser(user.id)}
                     color="error"
                   >
@@ -528,75 +605,77 @@ export default function UserManagementPage() {
               {filteredUsers
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((user) => (
-                <TableRow key={user.id}>
-                  <TableCell>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <Avatar sx={{ mr: 2, width: 32, height: 32 }}>
-                        {user.avatar}
-                      </Avatar>
-                      <Box>
-                        <Typography variant="body2" fontWeight="medium">
-                          {user.name}
-                        </Typography>
-                        <Typography variant="caption" color="text.secondary">
-                          {user.email}
-                        </Typography>
+                  <TableRow key={user.id}>
+                    <TableCell>
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Avatar sx={{ mr: 2, width: 32, height: 32 }}>
+                          {user.avatar}
+                        </Avatar>
+                        <Box>
+                          <Typography variant="body2" fontWeight="medium">
+                            {user.name}
+                          </Typography>
+                          <Typography variant="caption" color="text.secondary">
+                            {user.email}
+                          </Typography>
+                        </Box>
                       </Box>
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    <Chip
-                      label={user.role}
-                      color={getRoleColor(user.role) as any}
-                      size="small"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Chip
-                      label={user.status}
-                      color={getStatusColor(user.status) as any}
-                      size="small"
-                    />
-                  </TableCell>
-                  <TableCell>{user.department}</TableCell>
-                  <TableCell>{user.lastLogin}</TableCell>
-                  <TableCell>{user.loginCount}</TableCell>
-                  <TableCell>
-                    {user.isVerified ? (
-                      <VerifiedIcon color="success" />
-                    ) : (
-                      <Typography variant="body2" color="text.secondary">
-                        No
-                      </Typography>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    <Stack direction="row" spacing={1}>
-                      <IconButton 
-                        size="small" 
-                        onClick={() => handleEditUser(user)}
-                        color="primary"
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton 
-                        size="small" 
-                        onClick={() => handleSuspendUser(user.id)}
-                        color={user.status === 'Suspended' ? 'success' : 'warning'}
-                      >
-                        <BlockIcon />
-                      </IconButton>
-                      <IconButton 
-                        size="small" 
-                        onClick={() => handleDeleteUser(user.id)}
-                        color="error"
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </Stack>
-                  </TableCell>
-                </TableRow>
-              ))}
+                    </TableCell>
+                    <TableCell>
+                      <Chip
+                        label={user.role}
+                        color={getRoleColor(user.role)}
+                        size="small"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Chip
+                        label={user.status}
+                        color={getStatusColor(user.status)}
+                        size="small"
+                      />
+                    </TableCell>
+                    <TableCell>{user.department}</TableCell>
+                    <TableCell>{user.lastLogin}</TableCell>
+                    <TableCell>{user.loginCount}</TableCell>
+                    <TableCell>
+                      {user.isVerified ? (
+                        <VerifiedIcon color="success" />
+                      ) : (
+                        <Typography variant="body2" color="text.secondary">
+                          No
+                        </Typography>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <Stack direction="row" spacing={1}>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleEditUser(user)}
+                          color="primary"
+                        >
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleSuspendUser(user.id)}
+                          color={
+                            user.status === 'Suspended' ? 'success' : 'warning'
+                          }
+                        >
+                          <BlockIcon />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleDeleteUser(user.id)}
+                          color="error"
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Stack>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
           <TablePagination
@@ -632,11 +711,17 @@ export default function UserManagementPage() {
                       label="Read Access"
                     />
                     <FormControlLabel
-                      control={<Switch checked={role !== 'Guest' && role !== 'User'} />}
+                      control={
+                        <Switch checked={role !== 'Guest' && role !== 'User'} />
+                      }
                       label="Write Access"
                     />
                     <FormControlLabel
-                      control={<Switch checked={role === 'Admin' || role === 'Moderator'} />}
+                      control={
+                        <Switch
+                          checked={role === 'Admin' || role === 'Moderator'}
+                        />
+                      }
                       label="Moderate Content"
                     />
                     <FormControlLabel
@@ -659,10 +744,13 @@ export default function UserManagementPage() {
         </Grid>
       </TabPanel>
 
-      <Dialog open={openDialog} onClose={() => setOpenDialog(false)} maxWidth="md" fullWidth>
-        <DialogTitle>
-          {editingUser ? 'Edit User' : 'Add New User'}
-        </DialogTitle>
+      <Dialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogTitle>{editingUser ? 'Edit User' : 'Add New User'}</DialogTitle>
         <DialogContent>
           <Grid container spacing={3} sx={{ mt: 1 }}>
             <Grid size={{ xs: 12, sm: 6 }}>
@@ -714,10 +802,7 @@ export default function UserManagementPage() {
               <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Role
               </Typography>
-              <Select
-                defaultValue={editingUser?.role || 'User'}
-                fullWidth
-              >
+              <Select defaultValue={editingUser?.role || 'User'} fullWidth>
                 <MenuItem value="Admin">Admin</MenuItem>
                 <MenuItem value="Moderator">Moderator</MenuItem>
                 <MenuItem value="User">User</MenuItem>
@@ -728,10 +813,7 @@ export default function UserManagementPage() {
               <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Status
               </Typography>
-              <Select
-                defaultValue={editingUser?.status || 'Pending'}
-                fullWidth
-              >
+              <Select defaultValue={editingUser?.status || 'Pending'} fullWidth>
                 <MenuItem value="Active">Active</MenuItem>
                 <MenuItem value="Pending">Pending</MenuItem>
                 <MenuItem value="Inactive">Inactive</MenuItem>
@@ -740,7 +822,9 @@ export default function UserManagementPage() {
             </Grid>
             <Grid size={{ xs: 12 }}>
               <FormControlLabel
-                control={<Switch defaultChecked={editingUser?.isVerified || false} />}
+                control={
+                  <Switch defaultChecked={editingUser?.isVerified || false} />
+                }
                 label="Email Verified"
               />
             </Grid>

@@ -1,7 +1,7 @@
+import { Box, Paper, Stack, Typography } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import FormRadioGroup from './FormRadioGroup';
-import { Box, Stack, Paper, Typography } from '@mui/material'
+import FormRadioGroup from './FormRadioGroup'
 
 const meta: Meta<typeof FormRadioGroup> = {
   title: 'Forms/RadioGroup',
@@ -10,7 +10,8 @@ const meta: Meta<typeof FormRadioGroup> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'ラジオボタングループコンポーネント。単一選択のフォーム項目に使用します。',
+        component:
+          'ラジオボタングループコンポーネント。単一選択のフォーム項目に使用します。',
       },
     },
   },
@@ -75,7 +76,7 @@ const paymentOptions = [
 export const Default: Story = {
   render: () => {
     const [value, setValue] = useState('')
-    
+
     return (
       <FormRadioGroup
         label="性別"
@@ -91,7 +92,7 @@ export const Default: Story = {
 export const Required: Story = {
   render: () => {
     const [value, setValue] = useState('')
-    
+
     return (
       <FormRadioGroup
         label="性別"
@@ -109,7 +110,7 @@ export const Required: Story = {
 export const Row: Story = {
   render: () => {
     const [value, setValue] = useState('')
-    
+
     return (
       <FormRadioGroup
         label="サイズ"
@@ -126,7 +127,7 @@ export const Row: Story = {
 export const WithError: Story = {
   render: () => {
     const [value, setValue] = useState('')
-    
+
     return (
       <FormRadioGroup
         label="優先度"
@@ -146,7 +147,7 @@ export const WithError: Story = {
 export const WithHelperText: Story = {
   render: () => {
     const [value, setValue] = useState('')
-    
+
     return (
       <FormRadioGroup
         label="お支払い方法"
@@ -177,7 +178,7 @@ export const Disabled: Story = {
 export const PartiallyDisabled: Story = {
   render: () => {
     const [value, setValue] = useState('')
-    
+
     return (
       <FormRadioGroup
         label="お支払い方法"
@@ -196,7 +197,7 @@ export const MultipleGroups: Story = {
     const [gender, setGender] = useState('')
     const [size, setSize] = useState('')
     const [priority, setPriority] = useState('')
-    
+
     return (
       <Stack spacing={4} sx={{ width: 400 }}>
         <FormRadioGroup
@@ -208,7 +209,7 @@ export const MultipleGroups: Story = {
           labelRequired
           row
         />
-        
+
         <FormRadioGroup
           label="サイズ"
           value={size}
@@ -217,7 +218,7 @@ export const MultipleGroups: Story = {
           helperText="普段着用されているサイズを選択してください"
           row
         />
-        
+
         <FormRadioGroup
           label="優先度"
           value={priority}
@@ -250,7 +251,7 @@ export const FormExample: Story = {
     ]
 
     const handleChange = (field: string) => (value: string) => {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         [field]: value,
       }))
@@ -262,7 +263,7 @@ export const FormExample: Story = {
           <Typography variant="h6" sx={{ mb: 3 }}>
             プロフィール設定
           </Typography>
-          
+
           <Stack spacing={4}>
             <FormRadioGroup
               label="性別"
@@ -273,7 +274,7 @@ export const FormExample: Story = {
               labelRequired
               row
             />
-            
+
             <FormRadioGroup
               label="サイズ"
               value={formData.size}
@@ -282,7 +283,7 @@ export const FormExample: Story = {
               helperText="普段着用されているサイズを選択してください"
               row
             />
-            
+
             <FormRadioGroup
               label="お支払い方法"
               value={formData.payment}
@@ -292,7 +293,7 @@ export const FormExample: Story = {
               labelRequired
               helperText="電子マネーは現在準備中です"
             />
-            
+
             <FormRadioGroup
               label="通知設定"
               value={formData.notification}
@@ -300,14 +301,18 @@ export const FormExample: Story = {
               onChange={handleChange('notification')}
               helperText="お知らせの受信方法を選択してください"
             />
-            
+
             <FormRadioGroup
               label="優先度"
               value={formData.priority}
               options={priorityOptions}
               onChange={handleChange('priority')}
               error={formData.priority === ''}
-              helperText={formData.priority === '' ? '優先度を選択してください' : undefined}
+              helperText={
+                formData.priority === ''
+                  ? '優先度を選択してください'
+                  : undefined
+              }
               required
               labelRequired
             />

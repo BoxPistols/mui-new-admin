@@ -1,29 +1,29 @@
-import { useState } from 'react'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import Chip from '@mui/material/Chip'
-import Avatar from '@mui/material/Avatar'
-import Stack from '@mui/material/Stack'
-import IconButton from '@mui/material/IconButton'
-import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
-import DialogContent from '@mui/material/DialogContent'
-import DialogActions from '@mui/material/DialogActions'
-import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
-import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 import EmailIcon from '@mui/icons-material/Email'
-import PhoneIcon from '@mui/icons-material/Phone'
-import PersonAddIcon from '@mui/icons-material/PersonAdd'
-import SearchIcon from '@mui/icons-material/Search'
 import FilterListIcon from '@mui/icons-material/FilterList'
+import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import PhoneIcon from '@mui/icons-material/Phone'
+import SearchIcon from '@mui/icons-material/Search'
+import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import Chip from '@mui/material/Chip'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import Stack from '@mui/material/Stack'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import { useState } from 'react'
 import CustomizedDataGrid from '../components/CustomizedDataGrid'
 
 interface Client {
@@ -111,7 +111,7 @@ export default function ClientsPage() {
         (client) =>
           client.name.toLowerCase().includes(search.toLowerCase()) ||
           client.email.toLowerCase().includes(search.toLowerCase()) ||
-          client.company.toLowerCase().includes(search.toLowerCase())
+          client.company.toLowerCase().includes(search.toLowerCase()),
       )
     }
 
@@ -160,11 +160,11 @@ export default function ClientsPage() {
           mb: 3,
         }}
       >
-        <Typography component='h2' variant='h6'>
+        <Typography component="h2" variant="h6">
           Clients Management ({filteredClients.length})
         </Typography>
         <Button
-          variant='contained'
+          variant="contained"
           startIcon={<PersonAddIcon />}
           onClick={handleAddClient}
         >
@@ -176,14 +176,14 @@ export default function ClientsPage() {
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
           spacing={2}
-          alignItems='center'
+          alignItems="center"
         >
           <Box>
-            <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+            <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
               Search Clients
             </Typography>
             <TextField
-              placeholder='Search clients...'
+              placeholder="Search clients..."
               value={searchTerm}
               onChange={(e) => handleSearch(e.target.value)}
               InputProps={{
@@ -192,11 +192,11 @@ export default function ClientsPage() {
                 ),
               }}
               sx={{ minWidth: 300 }}
-              variant='outlined'
+              variant="outlined"
             />
           </Box>
           <Box>
-            <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+            <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
               Filter by Status
             </Typography>
             <Select
@@ -205,10 +205,10 @@ export default function ClientsPage() {
               startAdornment={<FilterListIcon sx={{ mr: 1 }} />}
               sx={{ minWidth: 150 }}
             >
-              <MenuItem value='All'>All</MenuItem>
-              <MenuItem value='Active'>Active</MenuItem>
-              <MenuItem value='Pending'>Pending</MenuItem>
-              <MenuItem value='Inactive'>Inactive</MenuItem>
+              <MenuItem value="All">All</MenuItem>
+              <MenuItem value="Active">Active</MenuItem>
+              <MenuItem value="Pending">Pending</MenuItem>
+              <MenuItem value="Inactive">Inactive</MenuItem>
             </Select>
           </Box>
         </Stack>
@@ -226,17 +226,17 @@ export default function ClientsPage() {
                     {client.avatar}
                   </Avatar>
                   <Box sx={{ flexGrow: 1 }}>
-                    <Typography variant='h6' noWrap>
+                    <Typography variant="h6" noWrap>
                       {client.name}
                     </Typography>
-                    <Typography variant='body2' color='text.secondary' noWrap>
+                    <Typography variant="body2" color="text.secondary" noWrap>
                       {client.company}
                     </Typography>
                   </Box>
                   <Chip
                     label={client.status}
-                    color={getStatusColor(client.status) as any}
-                    size='small'
+                    color={getStatusColor(client.status)}
+                    size="small"
                   />
                 </Box>
 
@@ -245,7 +245,7 @@ export default function ClientsPage() {
                     <EmailIcon
                       sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }}
                     />
-                    <Typography variant='body2' noWrap>
+                    <Typography variant="body2" noWrap>
                       {client.email}
                     </Typography>
                   </Box>
@@ -253,12 +253,12 @@ export default function ClientsPage() {
                     <PhoneIcon
                       sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }}
                     />
-                    <Typography variant='body2'>{client.phone}</Typography>
+                    <Typography variant="body2">{client.phone}</Typography>
                   </Box>
-                  <Typography variant='body2' color='text.secondary'>
+                  <Typography variant="body2" color="text.secondary">
                     Last contact: {client.lastContact}
                   </Typography>
-                  <Typography variant='h6' color='primary'>
+                  <Typography variant="h6" color="primary">
                     ${client.revenue.toLocaleString()}
                   </Typography>
                 </Stack>
@@ -266,20 +266,20 @@ export default function ClientsPage() {
 
               <CardActions>
                 <IconButton
-                  size='small'
+                  size="small"
                   onClick={() => handleEditClient(client)}
-                  color='primary'
+                  color="primary"
                 >
                   <EditIcon />
                 </IconButton>
                 <IconButton
-                  size='small'
+                  size="small"
                   onClick={() => handleDeleteClient(client.id)}
-                  color='error'
+                  color="error"
                 >
                   <DeleteIcon />
                 </IconButton>
-                <Button size='small' href={`mailto:${client.email}`}>
+                <Button size="small" href={`mailto:${client.email}`}>
                   Contact
                 </Button>
               </CardActions>
@@ -288,7 +288,7 @@ export default function ClientsPage() {
         ))}
       </Grid>
 
-      <Typography variant='h6' sx={{ mb: 2 }}>
+      <Typography variant="h6" sx={{ mb: 2 }}>
         Detailed View
       </Typography>
       <CustomizedDataGrid />
@@ -296,7 +296,7 @@ export default function ClientsPage() {
       <Dialog
         open={openDialog}
         onClose={() => setOpenDialog(false)}
-        maxWidth='sm'
+        maxWidth="sm"
         fullWidth
       >
         <DialogTitle>
@@ -305,80 +305,80 @@ export default function ClientsPage() {
         <DialogContent>
           <Stack spacing={3} sx={{ mt: 2 }}>
             <Box>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Full Name
               </Typography>
               <TextField
-                placeholder='Enter full name'
+                placeholder="Enter full name"
                 defaultValue={editingClient?.name || ''}
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Box>
             <Box>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Email Address
               </Typography>
               <TextField
-                placeholder='Enter email address'
-                type='email'
+                placeholder="Enter email address"
+                type="email"
                 defaultValue={editingClient?.email || ''}
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Box>
             <Box>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Phone Number
               </Typography>
               <TextField
-                placeholder='Enter phone number'
+                placeholder="Enter phone number"
                 defaultValue={editingClient?.phone || ''}
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Box>
             <Box>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Company Name
               </Typography>
               <TextField
-                placeholder='Enter company name'
+                placeholder="Enter company name"
                 defaultValue={editingClient?.company || ''}
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Box>
             <Box>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Status
               </Typography>
               <Select
                 defaultValue={editingClient?.status || 'Pending'}
                 fullWidth
               >
-                <MenuItem value='Active'>Active</MenuItem>
-                <MenuItem value='Pending'>Pending</MenuItem>
-                <MenuItem value='Inactive'>Inactive</MenuItem>
+                <MenuItem value="Active">Active</MenuItem>
+                <MenuItem value="Pending">Pending</MenuItem>
+                <MenuItem value="Inactive">Inactive</MenuItem>
               </Select>
             </Box>
             <Box>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Expected Revenue ($)
               </Typography>
               <TextField
-                placeholder='Enter expected revenue'
-                type='number'
+                placeholder="Enter expected revenue"
+                type="number"
                 defaultValue={editingClient?.revenue || ''}
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Box>
           </Stack>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
-          <Button onClick={() => setOpenDialog(false)} variant='contained'>
+          <Button onClick={() => setOpenDialog(false)} variant="contained">
             {editingClient ? 'Update' : 'Add'}
           </Button>
         </DialogActions>

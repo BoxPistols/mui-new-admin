@@ -1,13 +1,13 @@
-import type React from 'react'
 import {
   FormControl,
+  FormControlLabel,
+  type FormControlProps,
+  FormGroup,
+  FormHelperText,
   FormLabel,
   Switch,
-  FormControlLabel,
-  FormHelperText,
-  FormGroup,
-  type FormControlProps,
 } from '@mui/material'
+import type React from 'react'
 
 export interface SwitchOption {
   name: string
@@ -25,7 +25,8 @@ export interface FormSwitchProps extends Omit<FormControlProps, 'onChange'> {
   labelRequired?: boolean
 }
 
-export interface FormSwitchGroupProps extends Omit<FormControlProps, 'onChange'> {
+export interface FormSwitchGroupProps
+  extends Omit<FormControlProps, 'onChange'> {
   label?: string
   switches: SwitchOption[]
   values?: Record<string, boolean>
@@ -52,7 +53,12 @@ const FormSwitch: React.FC<FormSwitchProps> = ({
   }
 
   return (
-    <FormControl error={error} required={required} disabled={disabled} {...props}>
+    <FormControl
+      error={error}
+      required={required}
+      disabled={disabled}
+      {...props}
+    >
       <FormControlLabel
         control={
           <Switch
@@ -90,12 +96,18 @@ const FormSwitchGroup: React.FC<FormSwitchGroupProps> = ({
   labelRequired,
   ...props
 }) => {
-  const handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(name, event.target.checked)
-  }
+  const handleChange =
+    (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      onChange?.(name, event.target.checked)
+    }
 
   return (
-    <FormControl error={error} required={required} disabled={disabled} {...props}>
+    <FormControl
+      error={error}
+      required={required}
+      disabled={disabled}
+      {...props}
+    >
       {label && (
         <FormLabel component="legend">
           {labelRequired && required ? (

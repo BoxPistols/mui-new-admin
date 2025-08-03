@@ -1,13 +1,13 @@
-import type React from 'react'
 import {
   FormControl,
-  FormLabel,
-  RadioGroup,
-  Radio,
   FormControlLabel,
-  FormHelperText,
   type FormControlProps,
-} from "@mui/material";
+  FormHelperText,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from '@mui/material'
+import type React from 'react'
 
 export interface RadioOption {
   value: string
@@ -15,7 +15,8 @@ export interface RadioOption {
   disabled?: boolean
 }
 
-export interface FormRadioGroupProps extends Omit<FormControlProps, 'onChange'> {
+export interface FormRadioGroupProps
+  extends Omit<FormControlProps, 'onChange'> {
   label?: string
   value?: string
   options: RadioOption[]
@@ -43,7 +44,12 @@ const FormRadioGroup: React.FC<FormRadioGroupProps> = ({
   }
 
   return (
-    <FormControl error={error} required={required} disabled={disabled} {...props}>
+    <FormControl
+      error={error}
+      required={required}
+      disabled={disabled}
+      {...props}
+    >
       {label && (
         <FormLabel component="legend">
           {labelRequired && required ? (

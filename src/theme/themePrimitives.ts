@@ -1,8 +1,8 @@
 import {
-  type PaletteMode,
-  type Shadows,
   alpha,
   createTheme,
+  type PaletteMode,
+  type Shadows,
 } from '@mui/material/styles'
 
 declare module '@mui/material/Paper' {
@@ -101,7 +101,7 @@ export const red = {
 }
 
 export const getDesignTokens = (mode: PaletteMode) => {
-  customShadows[1] = colorSchemes[mode].palette.baseShadow;
+  customShadows[1] = colorSchemes[mode].palette.baseShadow
 
   return {
     palette: {
@@ -109,7 +109,7 @@ export const getDesignTokens = (mode: PaletteMode) => {
       ...colorSchemes[mode].palette,
     },
     typography: {
-      fontFamily: ['"Inter", "sans-serif"'].join(","),
+      fontFamily: ['"Inter", "sans-serif"'].join(','),
       h1: {
         fontSize: defaultTheme.typography.pxToRem(48),
         fontWeight: 600,
@@ -161,7 +161,7 @@ export const getDesignTokens = (mode: PaletteMode) => {
       borderRadius: 8,
     },
     shadows: customShadows,
-  };
+  }
 }
 
 export const colorSchemes = {

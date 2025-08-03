@@ -1,48 +1,44 @@
-import { useState } from 'react'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import DevicesIcon from '@mui/icons-material/Devices'
+import DownloadIcon from '@mui/icons-material/Download'
+import LanguageIcon from '@mui/icons-material/Language'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
+import PeopleIcon from '@mui/icons-material/People'
+import RefreshIcon from '@mui/icons-material/Refresh'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import TrendingDownIcon from '@mui/icons-material/TrendingDown'
+import TrendingUpIcon from '@mui/icons-material/TrendingUp'
+import VisibilityIcon from '@mui/icons-material/Visibility'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
+import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
 import Chip from '@mui/material/Chip'
-import Stack from '@mui/material/Stack'
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
-import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
+
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+import LinearProgress from '@mui/material/LinearProgress'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
 import ListItemIcon from '@mui/material/ListItemIcon'
-import Paper from '@mui/material/Paper'
+import ListItemText from '@mui/material/ListItemText'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import Stack from '@mui/material/Stack'
+import Tab from '@mui/material/Tab'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import LinearProgress from '@mui/material/LinearProgress'
-import Tooltip from '@mui/material/Tooltip'
-import IconButton from '@mui/material/IconButton'
-import TrendingUpIcon from '@mui/icons-material/TrendingUp'
-import TrendingDownIcon from '@mui/icons-material/TrendingDown'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import PeopleIcon from '@mui/icons-material/People'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
-import DevicesIcon from '@mui/icons-material/Devices'
-import LanguageIcon from '@mui/icons-material/Language'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
-import RefreshIcon from '@mui/icons-material/Refresh'
-import DownloadIcon from '@mui/icons-material/Download'
+import Tabs from '@mui/material/Tabs'
+import Typography from '@mui/material/Typography'
+import { useState } from 'react'
+import ChartUserByCountry from '../components/ChartUserByCountry'
 import PageViewsBarChart from '../components/PageViewsBarChart'
 import SessionsChart from '../components/SessionsChart'
-import ChartUserByCountry from '../components/ChartUserByCountry'
 
 interface MetricCard {
   title: string
@@ -75,7 +71,7 @@ const metricsData: MetricCard[] = [
     change: 12.5,
     changeType: 'increase',
     icon: <VisibilityIcon />,
-    color: 'primary'
+    color: 'primary',
   },
   {
     title: 'Unique Visitors',
@@ -83,7 +79,7 @@ const metricsData: MetricCard[] = [
     change: 8.3,
     changeType: 'increase',
     icon: <PeopleIcon />,
-    color: 'success'
+    color: 'success',
   },
   {
     title: 'Avg Session Duration',
@@ -91,7 +87,7 @@ const metricsData: MetricCard[] = [
     change: -2.1,
     changeType: 'decrease',
     icon: <AccessTimeIcon />,
-    color: 'warning'
+    color: 'warning',
   },
   {
     title: 'Bounce Rate',
@@ -99,7 +95,7 @@ const metricsData: MetricCard[] = [
     change: -5.2,
     changeType: 'decrease',
     icon: <TrendingDownIcon />,
-    color: 'success'
+    color: 'success',
   },
   {
     title: 'Mobile Users',
@@ -107,7 +103,7 @@ const metricsData: MetricCard[] = [
     change: 15.7,
     changeType: 'increase',
     icon: <DevicesIcon />,
-    color: 'info'
+    color: 'info',
   },
   {
     title: 'Conversion Rate',
@@ -115,7 +111,7 @@ const metricsData: MetricCard[] = [
     change: 0.8,
     changeType: 'increase',
     icon: <ShoppingCartIcon />,
-    color: 'error'
+    color: 'error',
   },
   {
     title: 'Revenue',
@@ -123,7 +119,7 @@ const metricsData: MetricCard[] = [
     change: 22.1,
     changeType: 'increase',
     icon: <MonetizationOnIcon />,
-    color: 'success'
+    color: 'success',
   },
   {
     title: 'Countries',
@@ -131,24 +127,64 @@ const metricsData: MetricCard[] = [
     change: 3.0,
     changeType: 'increase',
     icon: <LanguageIcon />,
-    color: 'primary'
-  }
+    color: 'primary',
+  },
 ]
 
 const topPages: TopPage[] = [
-  { path: '/dashboard', views: 45230, uniqueViews: 32100, bounceRate: 28.5, avgTime: '5m 23s' },
-  { path: '/products', views: 38940, uniqueViews: 28650, bounceRate: 35.2, avgTime: '4m 12s' },
-  { path: '/analytics', views: 29760, uniqueViews: 21840, bounceRate: 31.8, avgTime: '6m 45s' },
-  { path: '/users', views: 25130, uniqueViews: 19230, bounceRate: 29.3, avgTime: '3m 58s' },
-  { path: '/settings', views: 18920, uniqueViews: 15670, bounceRate: 42.1, avgTime: '2m 34s' }
+  {
+    path: '/dashboard',
+    views: 45230,
+    uniqueViews: 32100,
+    bounceRate: 28.5,
+    avgTime: '5m 23s',
+  },
+  {
+    path: '/products',
+    views: 38940,
+    uniqueViews: 28650,
+    bounceRate: 35.2,
+    avgTime: '4m 12s',
+  },
+  {
+    path: '/analytics',
+    views: 29760,
+    uniqueViews: 21840,
+    bounceRate: 31.8,
+    avgTime: '6m 45s',
+  },
+  {
+    path: '/users',
+    views: 25130,
+    uniqueViews: 19230,
+    bounceRate: 29.3,
+    avgTime: '3m 58s',
+  },
+  {
+    path: '/settings',
+    views: 18920,
+    uniqueViews: 15670,
+    bounceRate: 42.1,
+    avgTime: '2m 34s',
+  },
 ]
 
 const trafficSources: TrafficSource[] = [
-  { source: 'Google Search', visitors: 28450, percentage: 45.2, conversionRate: 3.8 },
+  {
+    source: 'Google Search',
+    visitors: 28450,
+    percentage: 45.2,
+    conversionRate: 3.8,
+  },
   { source: 'Direct', visitors: 18920, percentage: 30.1, conversionRate: 4.2 },
-  { source: 'Social Media', visitors: 8760, percentage: 13.9, conversionRate: 2.1 },
+  {
+    source: 'Social Media',
+    visitors: 8760,
+    percentage: 13.9,
+    conversionRate: 2.1,
+  },
   { source: 'Email', visitors: 4230, percentage: 6.7, conversionRate: 5.6 },
-  { source: 'Referrals', visitors: 2590, percentage: 4.1, conversionRate: 2.9 }
+  { source: 'Referrals', visitors: 2590, percentage: 4.1, conversionRate: 2.9 },
 ]
 
 export default function AnalyticsPage() {
@@ -156,7 +192,7 @@ export default function AnalyticsPage() {
   const [dateRange, setDateRange] = useState('30')
   const [refreshing, setRefreshing] = useState(false)
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue)
   }
 
@@ -165,7 +201,13 @@ export default function AnalyticsPage() {
     setTimeout(() => setRefreshing(false), 2000)
   }
 
-  const TabPanel = ({ children, value, index }: any) => (
+  interface TabPanelProps {
+    children?: React.ReactNode
+    index: number
+    value: number
+  }
+
+  const TabPanel = ({ children, value, index }: TabPanelProps) => (
     <div hidden={value !== index}>
       {value === index && <Box sx={{ pt: 3 }}>{children}</Box>}
     </div>
@@ -173,7 +215,14 @@ export default function AnalyticsPage() {
 
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 3,
+        }}
+      >
         <Typography component="h2" variant="h6">
           Analytics Dashboard
         </Typography>
@@ -194,11 +243,7 @@ export default function AnalyticsPage() {
               <MenuItem value="365">Last year</MenuItem>
             </Select>
           </Box>
-          <Button
-            variant="outlined"
-            startIcon={<DownloadIcon />}
-            size="small"
-          >
+          <Button variant="outlined" startIcon={<DownloadIcon />} size="small">
             Export
           </Button>
           <IconButton
@@ -214,13 +259,23 @@ export default function AnalyticsPage() {
       {refreshing && <LinearProgress sx={{ mb: 2 }} />}
 
       <Grid container spacing={3} sx={{ mb: 3 }}>
-        {metricsData.map((metric, index) => (
-          <Grid key={index} size={{ xs: 12, sm: 6, md: 3 }}>
+        {metricsData.map((metric, _index) => (
+          <Grid key={metric.title} size={{ xs: 12, sm: 6, md: 3 }}>
             <Card>
               <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
                   <Box>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      gutterBottom
+                    >
                       {metric.title}
                     </Typography>
                     <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
@@ -228,17 +283,29 @@ export default function AnalyticsPage() {
                     </Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
                       {metric.changeType === 'increase' ? (
-                        <TrendingUpIcon sx={{ fontSize: 16, color: 'success.main', mr: 0.5 }} />
+                        <TrendingUpIcon
+                          sx={{ fontSize: 16, color: 'success.main', mr: 0.5 }}
+                        />
                       ) : (
-                        <TrendingDownIcon sx={{ fontSize: 16, color: 'error.main', mr: 0.5 }} />
+                        <TrendingDownIcon
+                          sx={{ fontSize: 16, color: 'error.main', mr: 0.5 }}
+                        />
                       )}
                       <Typography
                         variant="body2"
-                        color={metric.changeType === 'increase' ? 'success.main' : 'error.main'}
+                        color={
+                          metric.changeType === 'increase'
+                            ? 'success.main'
+                            : 'error.main'
+                        }
                       >
                         {Math.abs(metric.change)}%
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" sx={{ ml: 0.5 }}>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ ml: 0.5 }}
+                      >
                         vs last period
                       </Typography>
                     </Box>
@@ -294,11 +361,17 @@ export default function AnalyticsPage() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {trafficSources.map((source, index) => (
-                        <TableRow key={index}>
+                      {trafficSources.map((source, _index) => (
+                        <TableRow key={source.source}>
                           <TableCell>
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                              <LocationOnIcon sx={{ mr: 1, fontSize: 18, color: 'text.secondary' }} />
+                              <LocationOnIcon
+                                sx={{
+                                  mr: 1,
+                                  fontSize: 18,
+                                  color: 'text.secondary',
+                                }}
+                              />
                               {source.source}
                             </Box>
                           </TableCell>
@@ -306,7 +379,13 @@ export default function AnalyticsPage() {
                             {source.visitors.toLocaleString()}
                           </TableCell>
                           <TableCell align="right">
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'flex-end',
+                              }}
+                            >
                               <LinearProgress
                                 variant="determinate"
                                 value={source.percentage}
@@ -315,9 +394,13 @@ export default function AnalyticsPage() {
                               {source.percentage}%
                             </Box>
                           </TableCell>
-                          <TableCell align="right">{source.conversionRate}%</TableCell>
                           <TableCell align="right">
-                            <TrendingUpIcon sx={{ color: 'success.main', fontSize: 18 }} />
+                            {source.conversionRate}%
+                          </TableCell>
+                          <TableCell align="right">
+                            <TrendingUpIcon
+                              sx={{ color: 'success.main', fontSize: 18 }}
+                            />
                           </TableCell>
                         </TableRow>
                       ))}
@@ -345,8 +428,17 @@ export default function AnalyticsPage() {
                       New vs Returning
                     </Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-                      <Chip label="New 68%" color="primary" size="small" sx={{ mr: 1 }} />
-                      <Chip label="Returning 32%" color="secondary" size="small" />
+                      <Chip
+                        label="New 68%"
+                        color="primary"
+                        size="small"
+                        sx={{ mr: 1 }}
+                      />
+                      <Chip
+                        label="Returning 32%"
+                        color="secondary"
+                        size="small"
+                      />
                     </Box>
                   </Box>
                   <Box>
@@ -388,9 +480,12 @@ export default function AnalyticsPage() {
                 </TableHead>
                 <TableBody>
                   {topPages.map((page, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={page.path}>
                       <TableCell>
-                        <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
+                        <Typography
+                          variant="body2"
+                          sx={{ fontFamily: 'monospace' }}
+                        >
                           {page.path}
                         </Typography>
                       </TableCell>
@@ -403,7 +498,13 @@ export default function AnalyticsPage() {
                       <TableCell align="right">
                         <Chip
                           label={`${page.bounceRate}%`}
-                          color={page.bounceRate < 30 ? 'success' : page.bounceRate < 40 ? 'warning' : 'error'}
+                          color={
+                            page.bounceRate < 30
+                              ? 'success'
+                              : page.bounceRate < 40
+                                ? 'warning'
+                                : 'error'
+                          }
                           size="small"
                         />
                       </TableCell>
@@ -412,7 +513,13 @@ export default function AnalyticsPage() {
                         <LinearProgress
                           variant="determinate"
                           value={100 - page.bounceRate}
-                          color={page.bounceRate < 30 ? 'success' : page.bounceRate < 40 ? 'warning' : 'error'}
+                          color={
+                            page.bounceRate < 30
+                              ? 'success'
+                              : page.bounceRate < 40
+                                ? 'warning'
+                                : 'error'
+                          }
                           sx={{ width: 60 }}
                         />
                       </TableCell>
@@ -442,8 +549,14 @@ export default function AnalyticsPage() {
                       primary="Desktop"
                       secondary={
                         <Box>
-                          <LinearProgress variant="determinate" value={32.2} sx={{ mt: 1 }} />
-                          <Typography variant="body2" sx={{ mt: 1 }}>32.2% • 20,250 sessions</Typography>
+                          <LinearProgress
+                            variant="determinate"
+                            value={32.2}
+                            sx={{ mt: 1 }}
+                          />
+                          <Typography variant="body2" sx={{ mt: 1 }}>
+                            32.2% • 20,250 sessions
+                          </Typography>
                         </Box>
                       }
                     />
@@ -456,8 +569,15 @@ export default function AnalyticsPage() {
                       primary="Mobile"
                       secondary={
                         <Box>
-                          <LinearProgress variant="determinate" value={67.8} color="success" sx={{ mt: 1 }} />
-                          <Typography variant="body2" sx={{ mt: 1 }}>67.8% • 42,700 sessions</Typography>
+                          <LinearProgress
+                            variant="determinate"
+                            value={67.8}
+                            color="success"
+                            sx={{ mt: 1 }}
+                          />
+                          <Typography variant="body2" sx={{ mt: 1 }}>
+                            67.8% • 42,700 sessions
+                          </Typography>
                         </Box>
                       }
                     />
@@ -477,9 +597,9 @@ export default function AnalyticsPage() {
                     { name: 'Chrome', percentage: 68.4 },
                     { name: 'Safari', percentage: 18.2 },
                     { name: 'Firefox', percentage: 8.9 },
-                    { name: 'Edge', percentage: 4.5 }
+                    { name: 'Edge', percentage: 4.5 },
                   ].map((browser, index) => (
-                    <ListItem key={index}>
+                    <ListItem key={browser.name}>
                       <ListItemText
                         primary={browser.name}
                         secondary={

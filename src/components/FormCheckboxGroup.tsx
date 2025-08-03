@@ -1,13 +1,13 @@
-import type React from 'react'
 import {
-  FormControl,
-  FormLabel,
-  FormGroup,
-  FormControlLabel,
   Checkbox,
-  FormHelperText,
+  FormControl,
+  FormControlLabel,
   type FormControlProps,
+  FormGroup,
+  FormHelperText,
+  FormLabel,
 } from '@mui/material'
+import type React from 'react'
 
 export interface CheckboxOption {
   value: string
@@ -15,7 +15,8 @@ export interface CheckboxOption {
   disabled?: boolean
 }
 
-export interface FormCheckboxGroupProps extends Omit<FormControlProps, 'onChange'> {
+export interface FormCheckboxGroupProps
+  extends Omit<FormControlProps, 'onChange'> {
   label?: string
   value?: string[]
   options: CheckboxOption[]
@@ -38,16 +39,22 @@ const FormCheckboxGroup: React.FC<FormCheckboxGroupProps> = ({
   labelRequired,
   ...props
 }) => {
-  const handleChange = (optionValue: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      onChange?.([...value, optionValue])
-    } else {
-      onChange?.(value.filter(v => v !== optionValue))
+  const handleChange =
+    (optionValue: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.checked) {
+        onChange?.([...value, optionValue])
+      } else {
+        onChange?.(value.filter((v) => v !== optionValue))
+      }
     }
-  }
 
   return (
-    <FormControl error={error} required={required} disabled={disabled} {...props}>
+    <FormControl
+      error={error}
+      required={required}
+      disabled={disabled}
+      {...props}
+    >
       {label && (
         <FormLabel component="legend">
           {labelRequired && required ? (

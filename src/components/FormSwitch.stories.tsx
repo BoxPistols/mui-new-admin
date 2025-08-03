@@ -1,7 +1,7 @@
+import { Box, Divider, Paper, Stack, Typography } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { FormSwitch, FormSwitchGroup } from './FormSwitch'
-import { Box, Stack, Paper, Typography, Divider } from '@mui/material'
 
 const meta: Meta<typeof FormSwitch> = {
   title: 'Forms/Switch',
@@ -10,7 +10,8 @@ const meta: Meta<typeof FormSwitch> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'スイッチコンポーネント。ON/OFFの切り替えに使用します。単体使用とグループ使用が可能です。',
+        component:
+          'スイッチコンポーネント。ON/OFFの切り替えに使用します。単体使用とグループ使用が可能です。',
       },
     },
   },
@@ -47,7 +48,7 @@ type Story = StoryObj<typeof FormSwitch>
 export const Default: Story = {
   render: () => {
     const [checked, setChecked] = useState(false)
-    
+
     return (
       <FormSwitch
         label="メール通知を受け取る"
@@ -62,7 +63,7 @@ export const Default: Story = {
 export const Required: Story = {
   render: () => {
     const [checked, setChecked] = useState(false)
-    
+
     return (
       <FormSwitch
         label="利用規約に同意する"
@@ -79,7 +80,7 @@ export const Required: Story = {
 export const WithError: Story = {
   render: () => {
     const [checked, setChecked] = useState(false)
-    
+
     return (
       <FormSwitch
         label="利用規約に同意する"
@@ -98,7 +99,7 @@ export const WithError: Story = {
 export const WithHelperText: Story = {
   render: () => {
     const [checked, setChecked] = useState(true)
-    
+
     return (
       <FormSwitch
         label="プッシュ通知"
@@ -115,16 +116,8 @@ export const Disabled: Story = {
   render: () => {
     return (
       <Stack spacing={2}>
-        <FormSwitch
-          label="無効状態（OFF）"
-          checked={false}
-          disabled
-        />
-        <FormSwitch
-          label="無効状態（ON）"
-          checked={true}
-          disabled
-        />
+        <FormSwitch label="無効状態（OFF）" checked={false} disabled />
+        <FormSwitch label="無効状態（ON）" checked={true} disabled />
       </Stack>
     )
   },
@@ -134,7 +127,7 @@ export const Disabled: Story = {
 export const LabelPlacement: Story = {
   render: () => {
     const [checked, setChecked] = useState(true)
-    
+
     return (
       <Stack spacing={3} sx={{ width: 300 }}>
         <FormSwitch
@@ -184,7 +177,7 @@ export const SwitchGroup: Story = {
     ]
 
     const handleChange = (name: string, checked: boolean) => {
-      setValues(prev => ({
+      setValues((prev) => ({
         ...prev,
         [name]: checked,
       }))
@@ -220,7 +213,7 @@ export const PartiallyDisabledGroup: Story = {
     ]
 
     const handleChange = (name: string, checked: boolean) => {
-      setValues(prev => ({
+      setValues((prev) => ({
         ...prev,
         [name]: checked,
       }))
@@ -278,15 +271,15 @@ export const MultipleSwitches: Story = {
     ]
 
     const handleNotificationChange = (name: string, checked: boolean) => {
-      setNotifications(prev => ({ ...prev, [name]: checked }))
+      setNotifications((prev) => ({ ...prev, [name]: checked }))
     }
 
     const handlePrivacyChange = (name: string, checked: boolean) => {
-      setPrivacy(prev => ({ ...prev, [name]: checked }))
+      setPrivacy((prev) => ({ ...prev, [name]: checked }))
     }
 
     const handleFeatureChange = (name: string, checked: boolean) => {
-      setFeatures(prev => ({ ...prev, [name]: checked }))
+      setFeatures((prev) => ({ ...prev, [name]: checked }))
     }
 
     return (
@@ -351,21 +344,22 @@ export const FormExample: Story = {
     ]
 
     const handleSingleChange = (field: string) => (checked: boolean) => {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         [field]: checked,
       }))
     }
 
-    const handleGroupChange = (group: string) => (name: string, checked: boolean) => {
-      setFormData(prev => ({
-        ...prev,
-        [group]: {
-          ...prev[group as keyof typeof prev] as any,
-          [name]: checked,
-        },
-      }))
-    }
+    const handleGroupChange =
+      (group: string) => (name: string, checked: boolean) => {
+        setFormData((prev) => ({
+          ...prev,
+          [group]: {
+            ...(prev[group as keyof typeof prev] as Record<string, boolean>),
+            [name]: checked,
+          },
+        }))
+      }
 
     const hasErrors = {
       terms: !formData.agreeTerms,
@@ -378,7 +372,7 @@ export const FormExample: Story = {
           <Typography variant="h6" sx={{ mb: 3 }}>
             アカウント設定
           </Typography>
-          
+
           <Stack spacing={4}>
             {/* 必須の同意項目 */}
             <Box>
@@ -393,9 +387,11 @@ export const FormExample: Story = {
                   required
                   labelRequired
                   error={hasErrors.terms}
-                  helperText={hasErrors.terms ? '利用規約への同意が必要です' : undefined}
+                  helperText={
+                    hasErrors.terms ? '利用規約への同意が必要です' : undefined
+                  }
                 />
-                
+
                 <FormSwitch
                   label="プライバシーポリシーに同意する"
                   checked={formData.agreePrivacy}
@@ -403,9 +399,13 @@ export const FormExample: Story = {
                   required
                   labelRequired
                   error={hasErrors.privacy}
-                  helperText={hasErrors.privacy ? 'プライバシーポリシーへの同意が必要です' : undefined}
+                  helperText={
+                    hasErrors.privacy
+                      ? 'プライバシーポリシーへの同意が必要です'
+                      : undefined
+                  }
                 />
-                
+
                 <FormSwitch
                   label="マーケティング情報の受信に同意する（任意）"
                   checked={formData.agreeMarketing}
@@ -437,7 +437,7 @@ export const FormExample: Story = {
               helperText="アプリの動作を設定してください"
             />
           </Stack>
-          
+
           <Box sx={{ mt: 3, p: 2, bgcolor: 'grey.50', borderRadius: 1 }}>
             <Typography variant="subtitle2" sx={{ mb: 1 }}>
               設定内容:
@@ -446,7 +446,8 @@ export const FormExample: Story = {
               利用規約: {formData.agreeTerms ? '同意済み' : '未同意'}
             </Typography>
             <Typography variant="body2">
-              プライバシーポリシー: {formData.agreePrivacy ? '同意済み' : '未同意'}
+              プライバシーポリシー:{' '}
+              {formData.agreePrivacy ? '同意済み' : '未同意'}
             </Typography>
             <Typography variant="body2">
               マーケティング: {formData.agreeMarketing ? '同意済み' : '未同意'}

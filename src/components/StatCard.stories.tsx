@@ -96,32 +96,32 @@ const meta: Meta<typeof StatCard> = {
 - **フォーカス表示**: キーボードナビゲーション時の明確な表示
 - **スクリーンリーダー**: チャート情報の代替テキスト提供
 - **操作説明**: ツールチップでの詳細情報提供
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {
     title: {
       control: 'text',
-      description: '統計カードのタイトル（指標名）'
+      description: '統計カードのタイトル（指標名）',
     },
     value: {
       control: 'text',
-      description: '表示する主要な数値'
+      description: '表示する主要な数値',
     },
     interval: {
       control: 'text',
-      description: 'データの期間や範囲を示すテキスト'
+      description: 'データの期間や範囲を示すテキスト',
     },
     trend: {
       control: 'select',
       options: ['up', 'down', 'neutral'],
-      description: 'トレンドの方向性（上昇/下降/中立）'
+      description: 'トレンドの方向性（上昇/下降/中立）',
     },
     data: {
       control: 'object',
-      description: 'スパークラインチャート用の数値配列'
+      description: 'スパークラインチャート用の数値配列',
     },
   },
 }
@@ -143,10 +143,11 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '標準的な上昇トレンドの統計カード。ユーザー数の増加を緑色のチップとスパークラインで表現します。'
-      }
-    }
-  }
+        story:
+          '標準的な上昇トレンドの統計カード。ユーザー数の増加を緑色のチップとスパークラインで表現します。',
+      },
+    },
+  },
 }
 
 export const TrendDown: Story = {
@@ -164,10 +165,11 @@ export const TrendDown: Story = {
   parameters: {
     docs: {
       description: {
-        story: '下降トレンドの統計カード。コンバージョン数の減少を赤色のチップとスパークラインで表現します。'
-      }
-    }
-  }
+        story:
+          '下降トレンドの統計カード。コンバージョン数の減少を赤色のチップとスパークラインで表現します。',
+      },
+    },
+  },
 }
 
 export const TrendNeutral: Story = {
@@ -184,10 +186,11 @@ export const TrendNeutral: Story = {
   parameters: {
     docs: {
       description: {
-        story: '中立トレンドの統計カード。イベント数の安定を灰色のチップとスパークラインで表現します。'
-      }
-    }
-  }
+        story:
+          '中立トレンドの統計カード。イベント数の安定を灰色のチップとスパークラインで表現します。',
+      },
+    },
+  },
 }
 
 export const LargeNumbers: Story = {
@@ -197,16 +200,18 @@ export const LargeNumbers: Story = {
     interval: 'This quarter',
     trend: 'up',
     data: [
-      50000, 52000, 48000, 55000, 60000, 58000, 62000, 65000, 63000, 70000, 75000, 80000,
-      78000, 85000, 90000, 88000, 95000, 100000, 105000, 110000, 115000, 120000, 125000, 130000,
-      135000, 140000, 145000, 150000, 155000, 160000,
+      50000, 52000, 48000, 55000, 60000, 58000, 62000, 65000, 63000, 70000,
+      75000, 80000, 78000, 85000, 90000, 88000, 95000, 100000, 105000, 110000,
+      115000, 120000, 125000, 130000, 135000, 140000, 145000, 150000, 155000,
+      160000,
     ],
   },
   parameters: {
     docs: {
       description: {
-        story: '大きな数値の表示例。収益データで百万単位の数値を適切にフォーマットして表示します。'
-      }
-    }
-  }
+        story:
+          '大きな数値の表示例。収益データで百万単位の数値を適切にフォーマットして表示します。',
+      },
+    },
+  },
 }

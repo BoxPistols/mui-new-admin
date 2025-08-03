@@ -1,38 +1,39 @@
-import { useState } from 'react'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import Chip from '@mui/material/Chip'
-import Stack from '@mui/material/Stack'
-import IconButton from '@mui/material/IconButton'
-import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
-import DialogContent from '@mui/material/DialogContent'
-import DialogActions from '@mui/material/DialogActions'
-import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
-import LinearProgress from '@mui/material/LinearProgress'
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
-import Checkbox from '@mui/material/Checkbox'
-import Divider from '@mui/material/Divider'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import AddTaskIcon from '@mui/icons-material/AddTask'
 import AssignmentIcon from '@mui/icons-material/Assignment'
-import PriorityHighIcon from '@mui/icons-material/PriorityHigh'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 import PersonIcon from '@mui/icons-material/Person'
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import Checkbox from '@mui/material/Checkbox'
+import type { ChipProps } from '@mui/material/Chip'
+import Chip from '@mui/material/Chip'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import Divider from '@mui/material/Divider'
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+import LinearProgress from '@mui/material/LinearProgress'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
+import ListItemText from '@mui/material/ListItemText'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import Stack from '@mui/material/Stack'
+import Tab from '@mui/material/Tab'
+import Tabs from '@mui/material/Tabs'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import { useState } from 'react'
 import CustomizedTreeView from '../components/CustomizedTreeView'
 
 interface Task {
@@ -175,7 +176,7 @@ export default function TasksPage() {
     setFilteredTasks(filteredTasks.filter((t) => t.id !== taskId))
   }
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: Task['status']): ChipProps['color'] => {
     switch (status) {
       case 'Todo':
         return 'default'
@@ -190,7 +191,7 @@ export default function TasksPage() {
     }
   }
 
-  const getPriorityColor = (priority: string) => {
+  const getPriorityColor = (priority: Task['priority']): ChipProps['color'] => {
     switch (priority) {
       case 'Low':
         return 'success'
@@ -216,7 +217,13 @@ export default function TasksPage() {
     return tasks.filter((task) => task.status === status)
   }
 
-  const TabPanel = ({ children, value, index }: any) => (
+  interface TabPanelProps {
+    children?: React.ReactNode
+    index: number
+    value: number
+  }
+
+  const TabPanel = ({ children, value, index }: TabPanelProps) => (
     <div hidden={value !== index}>
       {value === index && <Box sx={{ pt: 3 }}>{children}</Box>}
     </div>
@@ -365,12 +372,12 @@ export default function TasksPage() {
                     <Stack direction='row' spacing={1}>
                       <Chip
                         label={task.status}
-                        color={getStatusColor(task.status) as any}
+                        color={getStatusColor(task.status)}
                         size='small'
                       />
                       <Chip
                         label={task.priority}
-                        color={getPriorityColor(task.priority) as any}
+                        color={getPriorityColor(task.priority)}
                         size='small'
                         icon={<PriorityHighIcon />}
                       />
@@ -419,7 +426,7 @@ export default function TasksPage() {
                     flexWrap='wrap'
                     sx={{ gap: 0.5 }}
                   >
-                    {task.tags.map((tag, index) => (
+                    {task.tags.map((tag, _index) => (
                       <Chip
                         key={tag}
                         label={tag}
@@ -481,12 +488,12 @@ export default function TasksPage() {
                         <Chip
                           label={task.status}
                           size='small'
-                          color={getStatusColor(task.status) as any}
+                          color={getStatusColor(task.status)}
                         />
                         <Chip
                           label={task.priority}
                           size='small'
-                          color={getPriorityColor(task.priority) as any}
+                          color={getPriorityColor(task.priority)}
                         />
                         <Typography variant='caption'>
                           {task.assignee} • Due: {task.dueDate}
@@ -535,8 +542,7 @@ export default function TasksPage() {
                       <Typography variant='body2' color='error'>
                         Overdue by{' '}
                         {Math.ceil(
-                          (new Date().getTime() -
-                            new Date(task.dueDate).getTime()) /
+                                                    (Date.now() - new Date(task.dueDate).getTime()) /
                             (1000 * 3600 * 24)
                         )}{' '}
                         days
@@ -544,7 +550,7 @@ export default function TasksPage() {
                       <Chip
                         label={task.priority}
                         size='small'
-                        color={getPriorityColor(task.priority) as any}
+                        color={getPriorityColor(task.priority)}
                       />
                     </Stack>
                   }

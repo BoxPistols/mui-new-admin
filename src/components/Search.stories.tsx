@@ -116,9 +116,9 @@ const meta: Meta<typeof Search> = {
 - **高コントラスト**: 十分な色の差による視認性
 - **サイズ調整**: ズーム時の適切な表示維持
 - **カラーブラインド**: 色に依存しない機能設計
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
 }
@@ -130,34 +130,37 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '標準的な検索フィールドの表示。プレースホルダーテキストと検索アイコンを含みます。'
-      }
-    }
-  }
+        story:
+          '標準的な検索フィールドの表示。プレースホルダーテキストと検索アイコンを含みます。',
+      },
+    },
+  },
 }
 
 export const MobileView: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'mobile1'
+      defaultViewport: 'mobile1',
     },
     docs: {
       description: {
-        story: 'モバイルビューでの表示。フル幅で表示されタッチ入力に最適化されます。'
-      }
-    }
-  }
+        story:
+          'モバイルビューでの表示。フル幅で表示されタッチ入力に最適化されます。',
+      },
+    },
+  },
 }
 
 export const DesktopView: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'desktop'
+      defaultViewport: 'desktop',
     },
     docs: {
       description: {
-        story: 'デスクトップビューでの表示。固定幅（25ch）でコンパクトに表示されます。'
-      }
-    }
-  }
+        story:
+          'デスクトップビューでの表示。固定幅（25ch）でコンパクトに表示されます。',
+      },
+    },
+  },
 }

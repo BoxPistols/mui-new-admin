@@ -1,4 +1,4 @@
-import { type Theme, alpha } from '@mui/material/styles'
+import { alpha, type Theme } from '@mui/material/styles'
 import type { TreeViewComponents } from '@mui/x-tree-view/themeAugmentation'
 import { brand, gray } from '../.././theme/themePrimitives'
 

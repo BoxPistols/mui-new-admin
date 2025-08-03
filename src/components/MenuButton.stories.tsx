@@ -1,9 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react'
-
-import MenuButton from './MenuButton'
-import NotificationsIcon from '@mui/icons-material/Notifications'
 import MenuIcon from '@mui/icons-material/Menu'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import NotificationsIcon from '@mui/icons-material/Notifications'
+import type { Meta, StoryObj } from '@storybook/react'
+import MenuButton from './MenuButton'
 
 const meta: Meta<typeof MenuButton> = {
   title: 'Components/Buttons/MenuButton',
@@ -12,15 +11,16 @@ const meta: Meta<typeof MenuButton> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'バッジ機能付きのアイコンボタンコンポーネント。通知、メニュー、アクションボタンに使用されます。'
-      }
-    }
+        component:
+          'バッジ機能付きのアイコンボタンコンポーネント。通知、メニュー、アクションボタンに使用されます。',
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {
     showBadge: {
       control: 'boolean',
-      description: 'バッジ（赤いドット）の表示/非表示を制御'
+      description: 'バッジ（赤いドット）の表示/非表示を制御',
     },
   },
 }

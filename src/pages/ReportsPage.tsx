@@ -1,52 +1,51 @@
-import { useState } from 'react'
+import AssessmentIcon from '@mui/icons-material/Assessment'
+import BarChartIcon from '@mui/icons-material/BarChart'
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import DateRangeIcon from '@mui/icons-material/DateRange'
+import DownloadIcon from '@mui/icons-material/Download'
+import FileDownloadIcon from '@mui/icons-material/FileDownload'
+import InsightsIcon from '@mui/icons-material/Insights'
+import PieChartIcon from '@mui/icons-material/PieChart'
+import RefreshIcon from '@mui/icons-material/Refresh'
+import ScheduleIcon from '@mui/icons-material/Schedule'
+import TableViewIcon from '@mui/icons-material/TableView'
+import TrendingDownIcon from '@mui/icons-material/TrendingDown'
+import TrendingUpIcon from '@mui/icons-material/TrendingUp'
+import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
 import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
-import Stack from '@mui/material/Stack'
-import IconButton from '@mui/material/IconButton'
 import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
-import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
-
-import Select from '@mui/material/Select'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import Divider from '@mui/material/Divider'
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+import LinearProgress from '@mui/material/LinearProgress'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
+import ListItemText from '@mui/material/ListItemText'
 import MenuItem from '@mui/material/MenuItem'
+import Paper from '@mui/material/Paper'
+import Select from '@mui/material/Select'
+import Stack from '@mui/material/Stack'
+import Tab from '@mui/material/Tab'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
-import Divider from '@mui/material/Divider'
-import LinearProgress from '@mui/material/LinearProgress'
 import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
-import Alert from '@mui/material/Alert'
-import DownloadIcon from '@mui/icons-material/Download'
-import AssessmentIcon from '@mui/icons-material/Assessment'
-import ScheduleIcon from '@mui/icons-material/Schedule'
-import FileDownloadIcon from '@mui/icons-material/FileDownload'
-import BarChartIcon from '@mui/icons-material/BarChart'
-import PieChartIcon from '@mui/icons-material/PieChart'
-import TableViewIcon from '@mui/icons-material/TableView'
-import DateRangeIcon from '@mui/icons-material/DateRange'
-import TrendingUpIcon from '@mui/icons-material/TrendingUp'
-import TrendingDownIcon from '@mui/icons-material/TrendingDown'
-import InsightsIcon from '@mui/icons-material/Insights'
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
-import RefreshIcon from '@mui/icons-material/Refresh'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import { useState } from 'react'
 
 interface Report {
   id: number
@@ -74,14 +73,15 @@ const mockReports: Report[] = [
   {
     id: 1,
     name: 'Monthly Analytics Report',
-    description: 'Comprehensive analytics including page views, user behavior, and conversion metrics',
+    description:
+      'Comprehensive analytics including page views, user behavior, and conversion metrics',
     type: 'Analytics',
     format: 'PDF',
     lastGenerated: '2024-02-01 09:30',
     status: 'Available',
     size: '2.4 MB',
     downloadCount: 15,
-    schedule: 'Monthly - 1st day'
+    schedule: 'Monthly - 1st day',
   },
   {
     id: 2,
@@ -93,18 +93,19 @@ const mockReports: Report[] = [
     status: 'Available',
     size: '1.8 MB',
     downloadCount: 23,
-    schedule: 'Daily - 2:00 PM'
+    schedule: 'Daily - 2:00 PM',
   },
   {
     id: 3,
     name: 'Financial Dashboard Export',
-    description: 'Revenue, expenses, and profit analysis with quarterly breakdown',
+    description:
+      'Revenue, expenses, and profit analysis with quarterly breakdown',
     type: 'Financial',
     format: 'CSV',
     lastGenerated: '2024-01-31 18:45',
     status: 'Available',
     size: '890 KB',
-    downloadCount: 8
+    downloadCount: 8,
   },
   {
     id: 4,
@@ -115,20 +116,21 @@ const mockReports: Report[] = [
     lastGenerated: '2024-02-01 16:15',
     status: 'Generating',
     size: '-',
-    downloadCount: 12
+    downloadCount: 12,
   },
   {
     id: 5,
     name: 'Sales Pipeline Report',
-    description: 'Lead conversion, deal progression, and sales team performance',
+    description:
+      'Lead conversion, deal progression, and sales team performance',
     type: 'Sales',
     format: 'PDF',
     lastGenerated: '2024-01-30 12:00',
     status: 'Failed',
     size: '-',
     downloadCount: 5,
-    schedule: 'Weekly - Monday'
-  }
+    schedule: 'Weekly - Monday',
+  },
 ]
 
 const reportTemplates: ReportTemplate[] = [
@@ -138,7 +140,7 @@ const reportTemplates: ReportTemplate[] = [
     description: 'Traffic, bounce rate, top pages, and user demographics',
     category: 'Analytics',
     estimatedTime: '5-10 minutes',
-    dataPoints: 15
+    dataPoints: 15,
   },
   {
     id: 2,
@@ -146,7 +148,7 @@ const reportTemplates: ReportTemplate[] = [
     description: 'Product performance, customer behavior, and revenue trends',
     category: 'Sales',
     estimatedTime: '10-15 minutes',
-    dataPoints: 25
+    dataPoints: 25,
   },
   {
     id: 3,
@@ -154,7 +156,7 @@ const reportTemplates: ReportTemplate[] = [
     description: 'Session data, feature usage, and retention analysis',
     category: 'User Activity',
     estimatedTime: '8-12 minutes',
-    dataPoints: 20
+    dataPoints: 20,
   },
   {
     id: 4,
@@ -162,7 +164,7 @@ const reportTemplates: ReportTemplate[] = [
     description: 'Server metrics, response times, and error rates',
     category: 'Performance',
     estimatedTime: '3-5 minutes',
-    dataPoints: 12
+    dataPoints: 12,
   },
   {
     id: 5,
@@ -170,7 +172,7 @@ const reportTemplates: ReportTemplate[] = [
     description: 'Income, expenses, profit margins, and budget analysis',
     category: 'Financial',
     estimatedTime: '15-20 minutes',
-    dataPoints: 30
+    dataPoints: 30,
   },
   {
     id: 6,
@@ -178,15 +180,16 @@ const reportTemplates: ReportTemplate[] = [
     description: 'Feedback scores, sentiment analysis, and improvement areas',
     category: 'Analytics',
     estimatedTime: '7-10 minutes',
-    dataPoints: 18
-  }
+    dataPoints: 18,
+  },
 ]
 
 export default function ReportsPage() {
   const [reports, setReports] = useState<Report[]>(mockReports)
   const [currentTab, setCurrentTab] = useState(0)
   const [openDialog, setOpenDialog] = useState(false)
-  const [selectedTemplate, setSelectedTemplate] = useState<ReportTemplate | null>(null)
+  const [selectedTemplate, setSelectedTemplate] =
+    useState<ReportTemplate | null>(null)
   const [generatingReports, setGeneratingReports] = useState<number[]>([])
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -202,21 +205,23 @@ export default function ReportsPage() {
     if (selectedTemplate) {
       setGeneratingReports([...generatingReports, selectedTemplate.id])
       setOpenDialog(false)
-      
+
       // Simulate report generation
       setTimeout(() => {
-        setGeneratingReports(generatingReports.filter(id => id !== selectedTemplate.id))
+        setGeneratingReports(
+          generatingReports.filter((id) => id !== selectedTemplate.id),
+        )
         // Add new report to list
         const newReport: Report = {
           id: Date.now(),
           name: selectedTemplate.name,
           description: selectedTemplate.description,
-          type: selectedTemplate.category as any,
+          type: selectedTemplate.category as Report['type'],
           format: 'PDF',
           lastGenerated: new Date().toLocaleString(),
           status: 'Available',
           size: `${Math.random() * 3 + 1}MB`,
-          downloadCount: 0
+          downloadCount: 0,
         }
         setReports([newReport, ...reports])
       }, 3000)
@@ -224,77 +229,117 @@ export default function ReportsPage() {
   }
 
   const handleDownloadReport = (reportId: number) => {
-    setReports(reports.map(r => 
-      r.id === reportId 
-        ? { ...r, downloadCount: r.downloadCount + 1 }
-        : r
-    ))
+    setReports(
+      reports.map((r) =>
+        r.id === reportId ? { ...r, downloadCount: r.downloadCount + 1 } : r,
+      ),
+    )
     // Simulate download
     console.log(`Downloading report ${reportId}`)
   }
 
   const handleRegenerateReport = (reportId: number) => {
-    setReports(reports.map(r => 
-      r.id === reportId 
-        ? { ...r, status: 'Generating' as const, lastGenerated: new Date().toLocaleString() }
-        : r
-    ))
-    
+    setReports(
+      reports.map((r) =>
+        r.id === reportId
+          ? {
+              ...r,
+              status: 'Generating' as const,
+              lastGenerated: new Date().toLocaleString(),
+            }
+          : r,
+      ),
+    )
+
     // Simulate regeneration
     setTimeout(() => {
-      setReports(reports.map(r => 
-        r.id === reportId 
-          ? { ...r, status: 'Available' as const }
-          : r
-      ))
+      setReports(
+        reports.map((r) =>
+          r.id === reportId ? { ...r, status: 'Available' as const } : r,
+        ),
+      )
     }, 3000)
   }
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Available': return 'success'
-      case 'Generating': return 'warning'
-      case 'Failed': return 'error'
-      case 'Scheduled': return 'info'
-      default: return 'default'
+      case 'Available':
+        return 'success'
+      case 'Generating':
+        return 'warning'
+      case 'Failed':
+        return 'error'
+      case 'Scheduled':
+        return 'info'
+      default:
+        return 'default'
     }
   }
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'Analytics': return 'primary'
-      case 'Financial': return 'success'
-      case 'User Activity': return 'info'
-      case 'Performance': return 'warning'
-      case 'Sales': return 'error'
-      default: return 'default'
+      case 'Analytics':
+        return 'primary'
+      case 'Financial':
+        return 'success'
+      case 'User Activity':
+        return 'info'
+      case 'Performance':
+        return 'warning'
+      case 'Sales':
+        return 'error'
+      default:
+        return 'default'
     }
   }
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'Analytics': return <BarChartIcon />
-      case 'Financial': return <TrendingUpIcon />
-      case 'User Activity': return <InsightsIcon />
-      case 'Performance': return <AssessmentIcon />
-      case 'Sales': return <TrendingDownIcon />
-      default: return <TableViewIcon />
+      case 'Analytics':
+        return <BarChartIcon />
+      case 'Financial':
+        return <TrendingUpIcon />
+      case 'User Activity':
+        return <InsightsIcon />
+      case 'Performance':
+        return <AssessmentIcon />
+      case 'Sales':
+        return <TrendingDownIcon />
+      default:
+        return <TableViewIcon />
     }
   }
 
-  const TabPanel = ({ children, value, index }: any) => (
+  interface TabPanelProps {
+    children?: React.ReactNode
+    index: number
+    value: number
+  }
+
+  const TabPanel = ({ children, value, index }: TabPanelProps) => (
     <div hidden={value !== index}>
       {value === index && <Box sx={{ pt: 3 }}>{children}</Box>}
     </div>
   )
 
   const recentReports = reports.slice(0, 3)
-  const availableReports = reports.filter(r => r.status === 'Available').length
-  const generatingCount = reports.filter(r => r.status === 'Generating').length + generatingReports.length
+  const availableReports = reports.filter(
+    (r) => r.status === 'Available',
+  ).length
+  const generatingCount =
+    reports.filter((r) => r.status === 'Generating').length +
+    generatingReports.length
 
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 3,
+        }}
+      >
         <Typography component="h2" variant="h6">
           Reports & Analytics
         </Typography>
@@ -311,7 +356,13 @@ export default function ReportsPage() {
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Card>
             <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
                 <Box>
                   <Typography variant="h6" color="primary">
                     {availableReports}
@@ -328,7 +379,13 @@ export default function ReportsPage() {
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Card>
             <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
                 <Box>
                   <Typography variant="h6" color="warning.main">
                     {generatingCount}
@@ -345,7 +402,13 @@ export default function ReportsPage() {
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Card>
             <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
                 <Box>
                   <Typography variant="h6" color="success.main">
                     {reportTemplates.length}
@@ -362,10 +425,16 @@ export default function ReportsPage() {
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Card>
             <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
                 <Box>
                   <Typography variant="h6" color="info.main">
-                    {reports.filter(r => r.schedule).length}
+                    {reports.filter((r) => r.schedule).length}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     Scheduled
@@ -392,33 +461,56 @@ export default function ReportsPage() {
         <Grid container spacing={3}>
           {recentReports.map((report) => (
             <Grid key={report.id} size={{ xs: 12, md: 6, lg: 4 }}>
-              <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Card
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start',
+                      mb: 2,
+                    }}
+                  >
                     <Typography variant="h6" sx={{ flexGrow: 1, mr: 2 }}>
                       {report.name}
                     </Typography>
                     <Stack direction="row" spacing={1}>
                       <Chip
                         label={report.type}
-                        color={getTypeColor(report.type) as any}
+                        color={getTypeColor(report.type)}
                         size="small"
                         icon={getTypeIcon(report.type)}
                       />
                       <Chip
                         label={report.status}
-                        color={getStatusColor(report.status) as any}
+                        color={getStatusColor(report.status)}
                         size="small"
                       />
                     </Stack>
                   </Box>
-                  
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ mb: 2 }}
+                  >
                     {report.description}
                   </Typography>
-                  
+
                   <Stack spacing={1}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                      }}
+                    >
                       <Typography variant="body2" color="text.secondary">
                         Format: {report.format}
                       </Typography>
@@ -437,19 +529,19 @@ export default function ReportsPage() {
                     )}
                   </Stack>
                 </CardContent>
-                
+
                 <CardActions>
                   {report.status === 'Available' && (
                     <>
-                      <Button 
-                        size="small" 
+                      <Button
+                        size="small"
                         startIcon={<DownloadIcon />}
                         onClick={() => handleDownloadReport(report.id)}
                       >
                         Download
                       </Button>
-                      <IconButton 
-                        size="small" 
+                      <IconButton
+                        size="small"
                         onClick={() => handleRegenerateReport(report.id)}
                         color="primary"
                       >
@@ -458,8 +550,8 @@ export default function ReportsPage() {
                     </>
                   )}
                   {report.status === 'Failed' && (
-                    <Button 
-                      size="small" 
+                    <Button
+                      size="small"
                       color="error"
                       onClick={() => handleRegenerateReport(report.id)}
                     >
@@ -480,50 +572,75 @@ export default function ReportsPage() {
         <Grid container spacing={3}>
           {reportTemplates.map((template) => (
             <Grid key={template.id} size={{ xs: 12, md: 6 }}>
-              <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Card
+                sx={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start',
+                      mb: 2,
+                    }}
+                  >
                     <Typography variant="h6" sx={{ flexGrow: 1, mr: 2 }}>
                       {template.name}
                     </Typography>
                     <Chip
                       label={template.category}
-                      color={getTypeColor(template.category) as any}
+                      color={getTypeColor(template.category)}
                       size="small"
                     />
                   </Box>
-                  
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ mb: 2 }}
+                  >
                     {template.description}
                   </Typography>
-                  
+
                   <Stack spacing={1}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <ScheduleIcon sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }} />
+                      <ScheduleIcon
+                        sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }}
+                      />
                       <Typography variant="body2" color="text.secondary">
                         Estimated time: {template.estimatedTime}
                       </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <DateRangeIcon sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }} />
+                      <DateRangeIcon
+                        sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }}
+                      />
                       <Typography variant="body2" color="text.secondary">
                         Data points: {template.dataPoints}
                       </Typography>
                     </Box>
                   </Stack>
-                  
+
                   {generatingReports.includes(template.id) && (
                     <Box sx={{ mt: 2 }}>
-                      <Typography variant="body2" color="primary" sx={{ mb: 1 }}>
+                      <Typography
+                        variant="body2"
+                        color="primary"
+                        sx={{ mb: 1 }}
+                      >
                         Generating report...
                       </Typography>
                       <LinearProgress />
                     </Box>
                   )}
                 </CardContent>
-                
+
                 <CardActions>
-                  <Button 
+                  <Button
                     variant="contained"
                     onClick={() => handleGenerateReport(template)}
                     disabled={generatingReports.includes(template.id)}
@@ -564,7 +681,7 @@ export default function ReportsPage() {
                   <TableCell>
                     <Chip
                       label={report.type}
-                      color={getTypeColor(report.type) as any}
+                      color={getTypeColor(report.type)}
                       size="small"
                     />
                   </TableCell>
@@ -572,7 +689,7 @@ export default function ReportsPage() {
                   <TableCell>
                     <Chip
                       label={report.status}
-                      color={getStatusColor(report.status) as any}
+                      color={getStatusColor(report.status)}
                       size="small"
                     />
                   </TableCell>
@@ -583,15 +700,15 @@ export default function ReportsPage() {
                     <Stack direction="row" spacing={1}>
                       {report.status === 'Available' && (
                         <>
-                          <IconButton 
-                            size="small" 
+                          <IconButton
+                            size="small"
                             onClick={() => handleDownloadReport(report.id)}
                             color="primary"
                           >
                             <DownloadIcon />
                           </IconButton>
-                          <IconButton 
-                            size="small" 
+                          <IconButton
+                            size="small"
                             onClick={() => handleRegenerateReport(report.id)}
                             color="primary"
                           >
@@ -600,8 +717,8 @@ export default function ReportsPage() {
                         </>
                       )}
                       {report.status === 'Failed' && (
-                        <Button 
-                          size="small" 
+                        <Button
+                          size="small"
                           color="error"
                           onClick={() => handleRegenerateReport(report.id)}
                         >
@@ -622,58 +739,74 @@ export default function ReportsPage() {
           Scheduled Reports
         </Typography>
         <List>
-          {reports.filter(report => report.schedule).map((report, index) => (
-            <Box key={report.id}>
-              <ListItem>
-                <ListItemIcon>
-                  <CalendarTodayIcon color="primary" />
-                </ListItemIcon>
-                <ListItemText
-                  primary={report.name}
-                  secondary={
-                    <Box>
-                      <Typography variant="body2" color="text.secondary">
-                        {report.description}
-                      </Typography>
-                      <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-                        <Chip label={report.schedule} size="small" color="info" />
-                        <Chip label={report.format} size="small" variant="outlined" />
-                      </Stack>
-                    </Box>
-                  }
-                />
-                <ListItemSecondaryAction>
-                  <Stack direction="row" spacing={1}>
-                    <Button size="small" variant="outlined">
-                      Edit Schedule
-                    </Button>
-                    <Button size="small" color="error">
-                      Remove
-                    </Button>
-                  </Stack>
-                </ListItemSecondaryAction>
-              </ListItem>
-              {index < reports.filter(r => r.schedule).length - 1 && <Divider />}
-            </Box>
-          ))}
+          {reports
+            .filter((report) => report.schedule)
+            .map((report, index) => (
+              <Box key={report.id}>
+                <ListItem>
+                  <ListItemIcon>
+                    <CalendarTodayIcon color="primary" />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={report.name}
+                    secondary={
+                      <Box>
+                        <Typography variant="body2" color="text.secondary">
+                          {report.description}
+                        </Typography>
+                        <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
+                          <Chip
+                            label={report.schedule}
+                            size="small"
+                            color="info"
+                          />
+                          <Chip
+                            label={report.format}
+                            size="small"
+                            variant="outlined"
+                          />
+                        </Stack>
+                      </Box>
+                    }
+                  />
+                  <ListItemSecondaryAction>
+                    <Stack direction="row" spacing={1}>
+                      <Button size="small" variant="outlined">
+                        Edit Schedule
+                      </Button>
+                      <Button size="small" color="error">
+                        Remove
+                      </Button>
+                    </Stack>
+                  </ListItemSecondaryAction>
+                </ListItem>
+                {index < reports.filter((r) => r.schedule).length - 1 && (
+                  <Divider />
+                )}
+              </Box>
+            ))}
         </List>
-        
-        {reports.filter(r => r.schedule).length === 0 && (
+
+        {reports.filter((r) => r.schedule).length === 0 && (
           <Alert severity="info">
-            No scheduled reports found. You can schedule reports to be generated automatically.
+            No scheduled reports found. You can schedule reports to be generated
+            automatically.
           </Alert>
         )}
       </TabPanel>
 
-      <Dialog open={openDialog} onClose={() => setOpenDialog(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>
-          Generate Report: {selectedTemplate?.name}
-        </DialogTitle>
+      <Dialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>Generate Report: {selectedTemplate?.name}</DialogTitle>
         <DialogContent>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
             {selectedTemplate?.description}
           </Typography>
-          
+
           <Grid container spacing={3}>
             <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>

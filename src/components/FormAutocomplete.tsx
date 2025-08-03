@@ -1,41 +1,41 @@
 import {
   Autocomplete,
-  TextField,
-  FormControl,
-  FormLabel,
-  FormHelperText,
   Chip,
-} from "@mui/material";
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  TextField,
+} from '@mui/material'
 
 export interface AutocompleteOption {
-  label: string;
-  value: string | number;
-  disabled?: boolean;
-  group?: string;
+  label: string
+  value: string | number
+  disabled?: boolean
+  group?: string
 }
 
 export interface FormAutocompleteProps<T extends AutocompleteOption> {
-  label?: string;
-  options: T[];
-  value?: any;
-  onChange?: (event: any, value: any) => void;
-  helperText?: string;
-  placeholder?: string;
-  variant?: "outlined" | "filled" | "standard";
-  size?: "small" | "medium";
-  labelRequired?: boolean;
-  error?: boolean;
-  required?: boolean;
-  fullWidth?: boolean;
-  loading?: boolean;
-  loadingText?: string;
-  noOptionsText?: string;
-  multiple?: boolean;
-  freeSolo?: boolean;
-  disabled?: boolean;
-  groupBy?: (option: T) => string;
-  getOptionLabel?: (option: T | string) => string;
-  isOptionEqualToValue?: (option: T, value: T) => boolean;
+  label?: string
+  options: T[]
+  value?: T | T[] | null
+  onChange?: (event: React.SyntheticEvent, value: T | T[] | null) => void
+  helperText?: string
+  placeholder?: string
+  variant?: 'outlined' | 'filled' | 'standard'
+  size?: 'small' | 'medium'
+  labelRequired?: boolean
+  error?: boolean
+  required?: boolean
+  fullWidth?: boolean
+  loading?: boolean
+  loadingText?: string
+  noOptionsText?: string
+  multiple?: boolean
+  freeSolo?: boolean
+  disabled?: boolean
+  groupBy?: (option: T) => string
+  getOptionLabel?: (option: T | string) => string
+  isOptionEqualToValue?: (option: T, value: T) => boolean
 }
 
 const FormAutocomplete = <T extends AutocompleteOption>({
@@ -45,15 +45,15 @@ const FormAutocomplete = <T extends AutocompleteOption>({
   onChange,
   helperText,
   placeholder,
-  variant = "outlined",
-  size = "medium",
+  variant = 'outlined',
+  size = 'medium',
   labelRequired,
   error,
   required,
   fullWidth = true,
   loading,
-  loadingText = "読み込み中...",
-  noOptionsText = "オプションがありません",
+  loadingText = '読み込み中...',
+  noOptionsText = 'オプションがありません',
   multiple,
   freeSolo,
   disabled,
@@ -62,11 +62,11 @@ const FormAutocomplete = <T extends AutocompleteOption>({
   isOptionEqualToValue,
 }: FormAutocompleteProps<T>) => {
   const defaultGetOptionLabel = (option: T | string) => {
-    if (typeof option === "string") return option;
-    return option.label;
-  };
+    if (typeof option === 'string') return option
+    return option.label
+  }
   const defaultIsOptionEqualToValue = (option: T, value: T) =>
-    option.value === value.value;
+    option.value === value.value
 
   return (
     <FormControl error={error} required={required} fullWidth={fullWidth}>
@@ -74,7 +74,7 @@ const FormAutocomplete = <T extends AutocompleteOption>({
         <FormLabel sx={{ mb: 1 }}>
           {labelRequired && required ? (
             <>
-              {label} <span style={{ color: "red" }}>*</span>
+              {label} <span style={{ color: 'red' }}>*</span>
             </>
           ) : (
             label
@@ -118,14 +118,14 @@ const FormAutocomplete = <T extends AutocompleteOption>({
               }
               size={size}
               {...getTagProps({ index })}
-              key={typeof option === "string" ? option : option.value}
+              key={typeof option === 'string' ? option : option.value}
             />
           ))
         }
       />
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>
-  );
-};
+  )
+}
 
-export default FormAutocomplete;
+export default FormAutocomplete

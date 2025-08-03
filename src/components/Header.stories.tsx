@@ -84,9 +84,9 @@ const meta: Meta<typeof Header> = {
 - **コントラスト**: WCAG 2.1 AA基準の遵守
 - **カラーブラインド対応**: 色以外での情報伝達
 - **テーマ対応**: ライト/ダークモード両方での視認性確保
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
 }
@@ -98,21 +98,23 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '標準的なHeaderの表示。パンくずナビゲーション、検索機能、日付選択、通知、テーマ切り替えの全ての要素を含みます。'
-      }
-    }
-  }
+        story:
+          '標準的なHeaderの表示。パンくずナビゲーション、検索機能、日付選択、通知、テーマ切り替えの全ての要素を含みます。',
+      },
+    },
+  },
 }
 
 export const DesktopView: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'desktop'
+      defaultViewport: 'desktop',
     },
     docs: {
       description: {
-        story: 'デスクトップビューポートでの表示。実際のデスクトップ画面での見た目を確認できます。'
-      }
-    }
-  }
+        story:
+          'デスクトップビューポートでの表示。実際のデスクトップ画面での見た目を確認できます。',
+      },
+    },
+  },
 }

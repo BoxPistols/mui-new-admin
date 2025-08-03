@@ -5,10 +5,10 @@ import LinearProgress, {
   linearProgressClasses,
 } from '@mui/material/LinearProgress'
 import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
-import { PieChart } from '@mui/x-charts/PieChart'
+import Typography from '@mui/material/Typography'
 import { useDrawingArea } from '@mui/x-charts/hooks'
+import { PieChart } from '@mui/x-charts/PieChart'
 import * as React from 'react'
 
 import {

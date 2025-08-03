@@ -1,8 +1,12 @@
+import { Box, Paper, Stack, Typography } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
-import { FormDatePicker, FormTimePicker, FormDateTimePicker } from './FormDateTimePicker'
-import { Box, Stack, Paper, Typography } from '@mui/material'
 import dayjs, { type Dayjs } from 'dayjs'
+import { useState } from 'react'
+import {
+  FormDatePicker,
+  FormDateTimePicker,
+  FormTimePicker,
+} from './FormDateTimePicker'
 
 const meta: Meta<typeof FormDatePicker> = {
   title: 'Forms/DateTimePicker',
@@ -11,7 +15,8 @@ const meta: Meta<typeof FormDatePicker> = {
     layout: 'centered',
     docs: {
       description: {
-        component: '日付・時刻ピッカーコンポーネント。日付のみ、時刻のみ、日時の選択に使用します。',
+        component:
+          '日付・時刻ピッカーコンポーネント。日付のみ、時刻のみ、日時の選択に使用します。',
       },
     },
   },
@@ -57,14 +62,8 @@ type Story = StoryObj<typeof FormDatePicker>
 export const DatePickerDefault: Story = {
   render: () => {
     const [value, setValue] = useState<Dayjs | null>(null)
-    
-    return (
-      <FormDatePicker
-        label="日付"
-        value={value}
-        onChange={setValue}
-      />
-    )
+
+    return <FormDatePicker label="日付" value={value} onChange={setValue} />
   },
 }
 
@@ -72,7 +71,7 @@ export const DatePickerDefault: Story = {
 export const DatePickerRequired: Story = {
   render: () => {
     const [value, setValue] = useState<Dayjs | null>(null)
-    
+
     return (
       <FormDatePicker
         label="生年月日"
@@ -90,7 +89,7 @@ export const DatePickerRequired: Story = {
 export const DatePickerWithError: Story = {
   render: () => {
     const [value, setValue] = useState<Dayjs | null>(null)
-    
+
     return (
       <FormDatePicker
         label="開始日"
@@ -109,7 +108,7 @@ export const DatePickerWithError: Story = {
 export const DatePickerWithConstraints: Story = {
   render: () => {
     const [value, setValue] = useState<Dayjs | null>(dayjs())
-    
+
     return (
       <Stack spacing={3} sx={{ width: 300 }}>
         <FormDatePicker
@@ -119,7 +118,7 @@ export const DatePickerWithConstraints: Story = {
           minDate={dayjs()}
           helperText="今日以降の日付を選択してください"
         />
-        
+
         <FormDatePicker
           label="過去の日付のみ"
           value={value}
@@ -127,7 +126,7 @@ export const DatePickerWithConstraints: Story = {
           maxDate={dayjs()}
           helperText="過去の日付を選択してください"
         />
-        
+
         <FormDatePicker
           label="今年内の日付"
           value={value}
@@ -145,14 +144,8 @@ export const DatePickerWithConstraints: Story = {
 export const TimePickerDefault: Story = {
   render: () => {
     const [value, setValue] = useState<Dayjs | null>(null)
-    
-    return (
-      <FormTimePicker
-        label="時刻"
-        value={value}
-        onChange={setValue}
-      />
-    )
+
+    return <FormTimePicker label="時刻" value={value} onChange={setValue} />
   },
 }
 
@@ -160,7 +153,7 @@ export const TimePickerDefault: Story = {
 export const TimePickerRequired: Story = {
   render: () => {
     const [value, setValue] = useState<Dayjs | null>(null)
-    
+
     return (
       <FormTimePicker
         label="開始時刻"
@@ -178,7 +171,7 @@ export const TimePickerRequired: Story = {
 export const TimePickerWithConstraints: Story = {
   render: () => {
     const [value, setValue] = useState<Dayjs | null>(null)
-    
+
     return (
       <Stack spacing={3} sx={{ width: 300 }}>
         <FormTimePicker
@@ -189,7 +182,7 @@ export const TimePickerWithConstraints: Story = {
           maxTime={dayjs().hour(18).minute(0)}
           helperText="営業時間は9:00〜18:00です"
         />
-        
+
         <FormTimePicker
           label="30分刻み"
           value={value}
@@ -206,14 +199,8 @@ export const TimePickerWithConstraints: Story = {
 export const DateTimePickerDefault: Story = {
   render: () => {
     const [value, setValue] = useState<Dayjs | null>(null)
-    
-    return (
-      <FormDateTimePicker
-        label="日時"
-        value={value}
-        onChange={setValue}
-      />
-    )
+
+    return <FormDateTimePicker label="日時" value={value} onChange={setValue} />
   },
 }
 
@@ -221,7 +208,7 @@ export const DateTimePickerDefault: Story = {
 export const DateTimePickerRequired: Story = {
   render: () => {
     const [value, setValue] = useState<Dayjs | null>(null)
-    
+
     return (
       <FormDateTimePicker
         label="予約日時"
@@ -240,23 +227,11 @@ export const Disabled: Story = {
   render: () => {
     return (
       <Stack spacing={3} sx={{ width: 300 }}>
-        <FormDatePicker
-          label="日付（無効）"
-          value={dayjs()}
-          disabled
-        />
-        
-        <FormTimePicker
-          label="時刻（無効）"
-          value={dayjs()}
-          disabled
-        />
-        
-        <FormDateTimePicker
-          label="日時（無効）"
-          value={dayjs()}
-          disabled
-        />
+        <FormDatePicker label="日付（無効）" value={dayjs()} disabled />
+
+        <FormTimePicker label="時刻（無効）" value={dayjs()} disabled />
+
+        <FormDateTimePicker label="日時（無効）" value={dayjs()} disabled />
       </Stack>
     )
   },
@@ -266,7 +241,7 @@ export const Disabled: Story = {
 export const Variants: Story = {
   render: () => {
     const [value, setValue] = useState<Dayjs | null>(dayjs())
-    
+
     return (
       <Stack spacing={3} sx={{ width: 300 }}>
         <FormDatePicker
@@ -275,14 +250,14 @@ export const Variants: Story = {
           value={value}
           onChange={setValue}
         />
-        
+
         <FormDatePicker
           label="Filled"
           variant="filled"
           value={value}
           onChange={setValue}
         />
-        
+
         <FormDatePicker
           label="Standard"
           variant="standard"
@@ -298,7 +273,7 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => {
     const [value, setValue] = useState<Dayjs | null>(dayjs())
-    
+
     return (
       <Stack spacing={3} sx={{ width: 300 }}>
         <FormDatePicker
@@ -307,7 +282,7 @@ export const Sizes: Story = {
           value={value}
           onChange={setValue}
         />
-        
+
         <FormDatePicker
           label="Medium"
           size="medium"
@@ -327,7 +302,7 @@ export const MultiplePickers: Story = {
     const [startTime, setStartTime] = useState<Dayjs | null>(null)
     const [endTime, setEndTime] = useState<Dayjs | null>(null)
     const [deadline, setDeadline] = useState<Dayjs | null>(null)
-    
+
     return (
       <Stack spacing={3} sx={{ width: 400 }}>
         <FormDatePicker
@@ -339,7 +314,7 @@ export const MultiplePickers: Story = {
           helperText="プロジェクト開始日を選択してください"
           minDate={dayjs()}
         />
-        
+
         <FormDatePicker
           label="終了日"
           value={endDate}
@@ -350,14 +325,14 @@ export const MultiplePickers: Story = {
           minDate={startDate || dayjs()}
           error={endDate && startDate && endDate.isBefore(startDate)}
         />
-        
+
         <FormTimePicker
           label="開始時刻"
           value={startTime}
           onChange={setStartTime}
           helperText="作業開始時刻を選択してください"
         />
-        
+
         <FormTimePicker
           label="終了時刻"
           value={endTime}
@@ -365,7 +340,7 @@ export const MultiplePickers: Story = {
           helperText="作業終了時刻を選択してください"
           minTime={startTime}
         />
-        
+
         <FormDateTimePicker
           label="締切日時"
           value={deadline}
@@ -392,7 +367,7 @@ export const FormExample: Story = {
     })
 
     const handleChange = (field: string) => (value: Dayjs | null) => {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         [field]: value,
       }))
@@ -401,8 +376,11 @@ export const FormExample: Story = {
     const hasErrors = {
       eventDate: !formData.eventDate,
       startTime: !formData.startTime,
-      endTime: !formData.endTime || 
-        (formData.startTime && formData.endTime && formData.endTime.isBefore(formData.startTime)),
+      endTime:
+        !formData.endTime ||
+        (formData.startTime &&
+          formData.endTime &&
+          formData.endTime.isBefore(formData.startTime)),
       deadline: !formData.deadline,
     }
 
@@ -412,7 +390,7 @@ export const FormExample: Story = {
           <Typography variant="h6" sx={{ mb: 3 }}>
             イベント登録フォーム
           </Typography>
-          
+
           <Stack spacing={3}>
             <FormDatePicker
               label="イベント日"
@@ -421,10 +399,14 @@ export const FormExample: Story = {
               required
               labelRequired
               error={hasErrors.eventDate}
-              helperText={hasErrors.eventDate ? 'イベント日を選択してください' : 'イベントを開催する日を選択してください'}
+              helperText={
+                hasErrors.eventDate
+                  ? 'イベント日を選択してください'
+                  : 'イベントを開催する日を選択してください'
+              }
               minDate={dayjs()}
             />
-            
+
             <FormTimePicker
               label="開始時刻"
               value={formData.startTime}
@@ -432,10 +414,14 @@ export const FormExample: Story = {
               required
               labelRequired
               error={hasErrors.startTime}
-              helperText={hasErrors.startTime ? '開始時刻を選択してください' : 'イベント開始時刻を選択してください'}
+              helperText={
+                hasErrors.startTime
+                  ? '開始時刻を選択してください'
+                  : 'イベント開始時刻を選択してください'
+              }
               minutesStep={15}
             />
-            
+
             <FormTimePicker
               label="終了時刻"
               value={formData.endTime}
@@ -445,7 +431,9 @@ export const FormExample: Story = {
               error={hasErrors.endTime}
               helperText={
                 hasErrors.endTime
-                  ? formData.startTime && formData.endTime && formData.endTime.isBefore(formData.startTime)
+                  ? formData.startTime &&
+                    formData.endTime &&
+                    formData.endTime.isBefore(formData.startTime)
                     ? '終了時刻は開始時刻より後に設定してください'
                     : '終了時刻を選択してください'
                   : 'イベント終了時刻を選択してください'
@@ -453,7 +441,7 @@ export const FormExample: Story = {
               minTime={formData.startTime}
               minutesStep={15}
             />
-            
+
             <FormDateTimePicker
               label="申込締切"
               value={formData.deadline}
@@ -461,11 +449,15 @@ export const FormExample: Story = {
               required
               labelRequired
               error={hasErrors.deadline}
-              helperText={hasErrors.deadline ? '申込締切を選択してください' : '参加申込の締切日時を選択してください'}
+              helperText={
+                hasErrors.deadline
+                  ? '申込締切を選択してください'
+                  : '参加申込の締切日時を選択してください'
+              }
               minDateTime={dayjs()}
               maxDateTime={formData.eventDate?.subtract(1, 'day')}
             />
-            
+
             <FormDatePicker
               label="生年月日（任意）"
               value={formData.birthday}
@@ -474,13 +466,14 @@ export const FormExample: Story = {
               maxDate={dayjs().subtract(13, 'year')}
             />
           </Stack>
-          
+
           <Box sx={{ mt: 3, p: 2, bgcolor: 'grey.50', borderRadius: 1 }}>
             <Typography variant="subtitle2" sx={{ mb: 1 }}>
               入力内容:
             </Typography>
             <Typography variant="body2">
-              イベント日: {formData.eventDate?.format('YYYY年MM月DD日') || '未選択'}
+              イベント日:{' '}
+              {formData.eventDate?.format('YYYY年MM月DD日') || '未選択'}
             </Typography>
             <Typography variant="body2">
               開始時刻: {formData.startTime?.format('HH:mm') || '未選択'}
@@ -489,10 +482,12 @@ export const FormExample: Story = {
               終了時刻: {formData.endTime?.format('HH:mm') || '未選択'}
             </Typography>
             <Typography variant="body2">
-              申込締切: {formData.deadline?.format('YYYY年MM月DD日 HH:mm') || '未選択'}
+              申込締切:{' '}
+              {formData.deadline?.format('YYYY年MM月DD日 HH:mm') || '未選択'}
             </Typography>
             <Typography variant="body2">
-              生年月日: {formData.birthday?.format('YYYY年MM月DD日') || '未入力'}
+              生年月日:{' '}
+              {formData.birthday?.format('YYYY年MM月DD日') || '未入力'}
             </Typography>
           </Box>
         </Paper>

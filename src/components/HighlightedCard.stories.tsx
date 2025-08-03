@@ -110,9 +110,9 @@ const meta: Meta<typeof HighlightedCard> = {
 - **高コントラスト**: テキストと背景の十分な色差
 - **サイズ調整**: テキスト拡大時の適切なレイアウト維持
 - **カラーブラインド対応**: 色以外での情報伝達
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
 }
@@ -124,34 +124,37 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '標準的なHighlightedCardの表示。データ分析機能への誘導を目的としたCTAカードです。'
-      }
-    }
-  }
+        story:
+          '標準的なHighlightedCardの表示。データ分析機能への誘導を目的としたCTAカードです。',
+      },
+    },
+  },
 }
 
 export const MobileView: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'mobile1'
+      defaultViewport: 'mobile1',
     },
     docs: {
       description: {
-        story: 'モバイルビューでの表示。ボタンがフルワイドになり、タッチ操作に最適化されます。'
-      }
-    }
-  }
+        story:
+          'モバイルビューでの表示。ボタンがフルワイドになり、タッチ操作に最適化されます。',
+      },
+    },
+  },
 }
 
 export const DesktopView: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'desktop'
+      defaultViewport: 'desktop',
     },
     docs: {
       description: {
-        story: 'デスクトップビューでの表示。コンパクトなボタンサイズでカード内に収まります。'
-      }
-    }
-  }
+        story:
+          'デスクトップビューでの表示。コンパクトなボタンサイズでカード内に収まります。',
+      },
+    },
+  },
 }

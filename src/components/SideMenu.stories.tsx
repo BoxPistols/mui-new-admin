@@ -82,9 +82,9 @@ const meta: Meta<typeof SideMenu> = {
 - **スクリーンリーダー対応**: 適切なセマンティック構造
 - **フォーカス管理**: 明確なフォーカス表示と論理的な移動順序
 - **カラーコントラスト**: WCAG 2.1 AA基準を満たすコントラスト比
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
 }
@@ -96,21 +96,23 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '標準的なSideMenuの表示。全ての構成要素（プロジェクト選択、メニュー、アラート、ユーザープロフィール）を含みます。'
-      }
-    }
-  }
+        story:
+          '標準的なSideMenuの表示。全ての構成要素（プロジェクト選択、メニュー、アラート、ユーザープロフィール）を含みます。',
+      },
+    },
+  },
 }
 
 export const DesktopView: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'desktop'
+      defaultViewport: 'desktop',
     },
     docs: {
       description: {
-        story: 'デスクトップビューポートでの表示。実際のデスクトップ画面での見た目を確認できます。'
-      }
-    }
-  }
+        story:
+          'デスクトップビューポートでの表示。実際のデスクトップ画面での見た目を確認できます。',
+      },
+    },
+  },
 }

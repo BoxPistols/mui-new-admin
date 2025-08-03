@@ -1,12 +1,12 @@
-import type React from 'react'
 import {
   FormControl,
-  Select,
-  MenuItem,
+  type FormControlProps,
   FormHelperText,
   InputLabel,
-  type FormControlProps,
+  MenuItem,
+  Select,
 } from '@mui/material'
+import type React from 'react'
 
 export interface SelectOption {
   value: string | number
@@ -46,7 +46,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
   fullWidth = true,
   ...props
 }) => {
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     onChange?.(event.target.value)
   }
 

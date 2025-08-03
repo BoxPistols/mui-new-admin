@@ -49,9 +49,9 @@ const meta: Meta<typeof AppNavbar> = {
 - **モバイルアプリケーション**: スマートフォンやタブレットでの主要ナビゲーション
 - **PWA（Progressive Web App）**: ネイティブアプリ風のエクスペリエンス
 - **レスポンシブWebアプリ**: 複数デバイス対応の管理画面
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
 }
@@ -63,21 +63,23 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '標準的なAppNavbarの表示。モバイルデバイスでのみ表示され、ブランドアイコンとメニューボタンを含みます。'
-      }
-    }
-  }
+        story:
+          '標準的なAppNavbarの表示。モバイルデバイスでのみ表示され、ブランドアイコンとメニューボタンを含みます。',
+      },
+    },
+  },
 }
 
 export const MobileView: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'mobile1'
+      defaultViewport: 'mobile1',
     },
     docs: {
       description: {
-        story: 'モバイルビューポートでの表示。実際のモバイルデバイスでの見た目を確認できます。'
-      }
-    }
-  }
+        story:
+          'モバイルビューポートでの表示。実際のモバイルデバイスでの見た目を確認できます。',
+      },
+    },
+  },
 }
