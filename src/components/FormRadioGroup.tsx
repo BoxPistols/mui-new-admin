@@ -6,9 +6,8 @@ import {
   Radio,
   FormControlLabel,
   FormHelperText,
-  Box,
   type FormControlProps,
-} from '@mui/material'
+} from "@mui/material";
 
 export interface RadioOption {
   value: string

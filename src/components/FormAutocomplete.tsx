@@ -1,14 +1,10 @@
-import React from "react";
 import {
   Autocomplete,
   TextField,
-  type AutocompleteProps,
-  type TextFieldProps,
   FormControl,
   FormLabel,
   FormHelperText,
   Chip,
-  Box,
 } from "@mui/material";
 
 export interface AutocompleteOption {
@@ -18,13 +14,11 @@ export interface AutocompleteOption {
   group?: string;
 }
 
-export interface FormAutocompleteProps<T extends AutocompleteOption>
-  extends Omit<
-    AutocompleteProps<T, boolean, boolean, boolean>,
-    "renderInput" | "options"
-  > {
+export interface FormAutocompleteProps<T extends AutocompleteOption> {
   label?: string;
   options: T[];
+  value?: any;
+  onChange?: (event: any, value: any) => void;
   helperText?: string;
   placeholder?: string;
   variant?: "outlined" | "filled" | "standard";
@@ -36,19 +30,19 @@ export interface FormAutocompleteProps<T extends AutocompleteOption>
   loading?: boolean;
   loadingText?: string;
   noOptionsText?: string;
-  renderOption?: AutocompleteProps<
-    T,
-    boolean,
-    boolean,
-    boolean
-  >["renderOption"];
-  getOptionLabel?: (option: T) => string;
+  multiple?: boolean;
+  freeSolo?: boolean;
+  disabled?: boolean;
+  groupBy?: (option: T) => string;
+  getOptionLabel?: (option: T | string) => string;
   isOptionEqualToValue?: (option: T, value: T) => boolean;
 }
 
 const FormAutocomplete = <T extends AutocompleteOption>({
   label,
   options,
+  value,
+  onChange,
   helperText,
   placeholder,
   variant = "outlined",
@@ -60,11 +54,17 @@ const FormAutocomplete = <T extends AutocompleteOption>({
   loading,
   loadingText = "読み込み中...",
   noOptionsText = "オプションがありません",
+  multiple,
+  freeSolo,
+  disabled,
+  groupBy,
   getOptionLabel,
   isOptionEqualToValue,
-  ...props
 }: FormAutocompleteProps<T>) => {
-  const defaultGetOptionLabel = (option: T) => option.label;
+  const defaultGetOptionLabel = (option: T | string) => {
+    if (typeof option === "string") return option;
+    return option.label;
+  };
   const defaultIsOptionEqualToValue = (option: T, value: T) =>
     option.value === value.value;
 
@@ -83,6 +83,8 @@ const FormAutocomplete = <T extends AutocompleteOption>({
       )}
       <Autocomplete
         options={options}
+        value={value}
+        onChange={onChange}
         getOptionLabel={getOptionLabel || defaultGetOptionLabel}
         isOptionEqualToValue={
           isOptionEqualToValue || defaultIsOptionEqualToValue
@@ -92,6 +94,10 @@ const FormAutocomplete = <T extends AutocompleteOption>({
         noOptionsText={noOptionsText}
         size={size}
         fullWidth={fullWidth}
+        multiple={multiple}
+        freeSolo={freeSolo}
+        disabled={disabled}
+        groupBy={groupBy}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -101,18 +107,21 @@ const FormAutocomplete = <T extends AutocompleteOption>({
             fullWidth={fullWidth}
           />
         )}
-        renderTags={(value, getTagProps) =>
-          value.map((option, index) => (
+        renderTags={(tagValue, getTagProps) =>
+          tagValue.map((option, index) => (
             <Chip
               variant="outlined"
-              label={getOptionLabel ? getOptionLabel(option) : option.label}
+              label={
+                getOptionLabel
+                  ? getOptionLabel(option)
+                  : defaultGetOptionLabel(option)
+              }
               size={size}
               {...getTagProps({ index })}
-              key={option.value}
+              key={typeof option === "string" ? option : option.value}
             />
           ))
         }
-        {...props}
       />
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>

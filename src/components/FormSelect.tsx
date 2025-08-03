@@ -1,12 +1,10 @@
 import React from 'react'
 import {
   FormControl,
-  FormLabel,
   Select,
   MenuItem,
   FormHelperText,
   InputLabel,
-  type SelectProps,
   type FormControlProps,
 } from '@mui/material'
 

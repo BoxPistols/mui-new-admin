@@ -1,203 +1,214 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import Button from './Button'
-import SaveIcon from '@mui/icons-material/Save'
-import DeleteIcon from '@mui/icons-material/Delete'
-import AddIcon from '@mui/icons-material/Add'
+import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
+import Button from "./Button";
+import SaveIcon from "@mui/icons-material/Save";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 
 const meta = {
-  title: 'Components/Button',
+  title: "Components/Button",
   component: Button,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['contained', 'outlined', 'text'],
+      control: "select",
+      options: ["contained", "outlined", "text"],
     },
     color: {
-      control: 'select',
-      options: ['primary', 'secondary', 'error', 'warning', 'info', 'success'],
+      control: "select",
+      options: ["primary", "secondary", "error", "warning", "info", "success"],
     },
     size: {
-      control: 'select',
-      options: ['small', 'medium', 'large'],
+      control: "select",
+      options: ["small", "medium", "large"],
     },
     loading: {
-      control: 'boolean',
+      control: "boolean",
     },
     loadingText: {
-      control: 'text',
+      control: "text",
     },
     disabled: {
-      control: 'boolean',
+      control: "boolean",
     },
     fullWidth: {
-      control: 'boolean',
+      control: "boolean",
     },
   },
-} satisfies Meta<typeof Button>
+} satisfies Meta<typeof Button>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    variant: 'contained',
-    children: 'Primary Button',
+    variant: "contained",
+    children: "Primary Button",
   },
-}
+};
 
 export const Secondary: Story = {
   args: {
-    variant: 'outlined',
-    children: 'Secondary Button',
+    variant: "outlined",
+    children: "Secondary Button",
   },
-}
+};
 
 export const Text: Story = {
   args: {
-    variant: 'text',
-    children: 'Text Button',
+    variant: "text",
+    children: "Text Button",
   },
-}
+};
 
 export const Loading: Story = {
   args: {
-    variant: 'contained',
+    variant: "contained",
     loading: true,
-    children: 'Save Changes',
+    children: "Save Changes",
   },
-}
+};
 
 export const LoadingWithCustomText: Story = {
   args: {
-    variant: 'contained',
+    variant: "contained",
     loading: true,
-    loadingText: 'Saving...',
-    children: 'Save Changes',
+    loadingText: "Saving...",
+    children: "Save Changes",
   },
-}
+};
 
 export const Disabled: Story = {
   args: {
-    variant: 'contained',
+    variant: "contained",
     disabled: true,
-    children: 'Disabled Button',
+    children: "Disabled Button",
   },
-}
+};
 
 export const WithIcon: Story = {
   args: {
-    variant: 'contained',
-    startIcon: SaveIcon({}),
-    children: 'Save',
+    variant: "contained",
+    startIcon: React.createElement(SaveIcon),
+    children: "Save",
   },
-}
+};
 
 export const Sizes: Story = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-      <Button variant="contained" size="small">
-        Small
-      </Button>
-      <Button variant="contained" size="medium">
-        Medium
-      </Button>
-      <Button variant="contained" size="large">
-        Large
-      </Button>
-    </div>
-  ),
-}
+  render: () =>
+    React.createElement(
+      "div",
+      { style: { display: "flex", gap: "16px", alignItems: "center" } },
+      React.createElement(
+        Button,
+        { variant: "contained", size: "small" },
+        "Small"
+      ),
+      React.createElement(
+        Button,
+        { variant: "contained", size: "medium" },
+        "Medium"
+      ),
+      React.createElement(
+        Button,
+        { variant: "contained", size: "large" },
+        "Large"
+      )
+    ),
+};
 
 export const Variants: Story = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-      <Button variant="contained">
-        Contained
-      </Button>
-      <Button variant="outlined">
-        Outlined
-      </Button>
-      <Button variant="text">
-        Text
-      </Button>
-    </div>
-  ),
-}
+  render: () =>
+    React.createElement(
+      "div",
+      { style: { display: "flex", gap: "16px", alignItems: "center" } },
+      React.createElement(Button, { variant: "contained" }, "Contained"),
+      React.createElement(Button, { variant: "outlined" }, "Outlined"),
+      React.createElement(Button, { variant: "text" }, "Text")
+    ),
+};
 
 export const Colors: Story = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-      <Button variant="contained" color="primary">
-        Primary
-      </Button>
-      <Button variant="contained" color="secondary">
-        Secondary
-      </Button>
-      <Button variant="contained" color="error">
-        Error
-      </Button>
-      <Button variant="contained" color="warning">
-        Warning
-      </Button>
-      <Button variant="contained" color="info">
-        Info
-      </Button>
-      <Button variant="contained" color="success">
-        Success
-      </Button>
-    </div>
-  ),
-}
+  render: () =>
+    React.createElement(
+      "div",
+      {
+        style: {
+          display: "flex",
+          gap: "16px",
+          alignItems: "center",
+          flexWrap: "wrap",
+        },
+      },
+      React.createElement(
+        Button,
+        { variant: "contained", color: "primary" },
+        "Primary"
+      ),
+      React.createElement(
+        Button,
+        { variant: "contained", color: "secondary" },
+        "Secondary"
+      ),
+      React.createElement(
+        Button,
+        { variant: "contained", color: "error" },
+        "Error"
+      ),
+      React.createElement(
+        Button,
+        { variant: "contained", color: "warning" },
+        "Warning"
+      ),
+      React.createElement(
+        Button,
+        { variant: "contained", color: "info" },
+        "Info"
+      ),
+      React.createElement(
+        Button,
+        { variant: "contained", color: "success" },
+        "Success"
+      )
+    ),
+};
 
 export const IconButtons: Story = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-      <Button variant="contained" startIcon={AddIcon({})}>
-        Add Item
-      </Button>
-      <Button variant="outlined" startIcon={SaveIcon({})}>
-        Save
-      </Button>
-      <Button variant="text" startIcon={DeleteIcon({})} color="error">
-        Delete
-      </Button>
-    </div>
-  ),
-}
-
-export const LoadingStates: Story = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexDirection: 'column' }}>
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <Button variant="contained" loading>
-          Default Loading
-        </Button>
-        <Button variant="contained" loading loadingText="Saving...">
-          Custom Loading Text
-        </Button>
-      </div>
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <Button variant="outlined" loading size="small">
-          Small Loading
-        </Button>
-        <Button variant="outlined" loading size="large">
-          Large Loading
-        </Button>
-      </div>
-    </div>
-  ),
-}
+  render: () =>
+    React.createElement(
+      "div",
+      { style: { display: "flex", gap: "16px", alignItems: "center" } },
+      React.createElement(
+        Button,
+        { variant: "contained", startIcon: React.createElement(AddIcon) },
+        "Add Item"
+      ),
+      React.createElement(
+        Button,
+        { variant: "outlined", startIcon: React.createElement(SaveIcon) },
+        "Save"
+      ),
+      React.createElement(
+        Button,
+        {
+          variant: "text",
+          startIcon: React.createElement(DeleteIcon),
+          color: "error",
+        },
+        "Delete"
+      )
+    ),
+};
 
 export const FullWidth: Story = {
   render: () => (
-    <div style={{ width: '300px' }}>
+    <div style={{ width: "300px" }}>
       <Button variant="contained" fullWidth>
         Full Width Button
       </Button>
     </div>
   ),
-}
+};
