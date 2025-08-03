@@ -27,10 +27,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import Divider from '@mui/material/Divider'
 import FormControlLabel from '@mui/material/FormControlLabel'
-// 型定義が見つからないため、Unstable_Grid2のimportを削除し、代わりにGridを通常の方法でimportします
-import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
-
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
@@ -52,7 +49,14 @@ import TableRow from '@mui/material/TableRow'
 import Tabs from '@mui/material/Tabs'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+// 型定義が見つからないため、Unstable_Grid2の型を明示的に定義
+// Unstable_Grid2の代わりにGrid2として型を定義してインポート
+import type { ComponentType } from 'react'
 import { useState } from 'react'
+
+// Unstable_Grid2の型がない場合の暫定対応
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Grid: ComponentType<Record<string, unknown>> = require('@mui/material/Unstable_Grid2').default
 
 interface APIKey {
   id: number
@@ -120,7 +124,7 @@ export default function SettingsPage() {
 
   const handleSettingChange = (
     setting: string,
-    value: boolean | number | string
+    value: boolean | number | string,
   ) => {
     setSettings((prev) => ({ ...prev, [setting]: value }))
   }
@@ -143,8 +147,8 @@ export default function SettingsPage() {
               status:
                 key.status === 'Active' ? 'Inactive' : ('Active' as const),
             }
-          : key
-      )
+          : key,
+      ),
     )
   }
 
@@ -170,11 +174,11 @@ export default function SettingsPage() {
           mb: 3,
         }}
       >
-        <Typography component='h2' variant='h6'>
+        <Typography component="h2" variant="h6">
           System Settings
         </Typography>
         <Button
-          variant='contained'
+          variant="contained"
           startIcon={<SaveIcon />}
           onClick={handleSaveSettings}
         >
@@ -183,163 +187,190 @@ export default function SettingsPage() {
       </Box>
 
       <Tabs value={currentTab} onChange={handleTabChange} sx={{ mb: 3 }}>
-        <Tab label='General' icon={<SettingsIcon />} />
-        <Tab label='Security' icon={<SecurityIcon />} />
-        <Tab label='Notifications' icon={<NotificationsIcon />} />
-        <Tab label='Storage' icon={<StorageIcon />} />
-        <Tab label='API Keys' icon={<ApiIcon />} />
-        <Tab label='Backup' icon={<BackupIcon />} />
+        <Tab label="General" icon={<SettingsIcon />} />
+        <Tab label="Security" icon={<SecurityIcon />} />
+        <Tab label="Notifications" icon={<NotificationsIcon />} />
+        <Tab label="Storage" icon={<StorageIcon />} />
+        <Tab label="API Keys" icon={<ApiIcon />} />
+        <Tab label="Backup" icon={<BackupIcon />} />
       </Tabs>
 
       <TabPanel value={currentTab} index={0}>
-        <Grid container spacing={3}>
-          <Grid xs={12} md={6}>
-            <Card>
-              <CardContent>
-                <Typography variant='h6' gutterBottom>
-                  Application Settings
-                </Typography>
-                <Stack spacing={2}>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={settings.notifications}
-                        onChange={(e) =>
-                          handleSettingChange('notifications', e.target.checked)
+          <Grid
+            component="div"
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 3,
+            }}
+          >
+            <Grid
+              component="div"
+              sx={{
+                flexBasis: '100%',
+                maxWidth: '100%',
+                '@media (min-width:900px)': {
+                  flexBasis: '50%',
+                  maxWidth: '50%',
+                },
+              }}
+            >
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>
+                    Application Settings
+                  </Typography>
+                  <Stack spacing={2}>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={settings.notifications}
+                          onChange={(e) =>
+                            handleSettingChange('notifications', e.target.checked)
+                          }
+                        />
+                      }
+                      label="Enable notifications"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={settings.darkMode}
+                          onChange={(e) =>
+                            handleSettingChange('darkMode', e.target.checked)
+                          }
+                        />
+                      }
+                      label="Dark mode"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={settings.autoSave}
+                          onChange={(e) =>
+                            handleSettingChange('autoSave', e.target.checked)
+                          }
+                        />
+                      }
+                      label="Auto-save"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={settings.debugMode}
+                          onChange={(e) =>
+                            handleSettingChange('debugMode', e.target.checked)
+                          }
+                        />
+                      }
+                      label="Debug mode"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={settings.analyticsTracking}
+                          onChange={(e) =>
+                            handleSettingChange(
+                              'analyticsTracking',
+                              e.target.checked,
+                            )
+                          }
+                        />
+                      }
+                      label="Analytics tracking"
+                    />
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid
+              component="div"
+              sx={{
+                flexBasis: '100%',
+                maxWidth: '100%',
+                '@media (min-width:900px)': {
+                  flexBasis: '50%',
+                  maxWidth: '50%',
+                },
+              }}
+            >
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>
+                    Session & Performance
+                  </Typography>
+                  <Stack spacing={3}>
+                    <Box>
+                      <Typography variant="body2" gutterBottom>
+                        Session Timeout (minutes)
+                      </Typography>
+                      <Slider
+                        value={settings.sessionTimeout}
+                        onChange={(_e, value) =>
+                          handleSettingChange('sessionTimeout', value)
                         }
+                        valueLabelDisplay="auto"
+                        min={5}
+                        max={120}
+                        marks={[
+                          { value: 5, label: '5m' },
+                          { value: 30, label: '30m' },
+                          { value: 60, label: '1h' },
+                          { value: 120, label: '2h' },
+                        ]}
                       />
-                    }
-                    label='Enable notifications'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={settings.darkMode}
-                        onChange={(e) =>
-                          handleSettingChange('darkMode', e.target.checked)
+                    </Box>
+                    <Box>
+                      <Typography variant="body2" gutterBottom>
+                        Max File Upload Size (MB)
+                      </Typography>
+                      <Slider
+                        value={settings.maxFileSize}
+                        onChange={(_e, value) =>
+                          handleSettingChange('maxFileSize', value)
                         }
+                        valueLabelDisplay="auto"
+                        min={1}
+                        max={100}
+                        marks={[
+                          { value: 1, label: '1MB' },
+                          { value: 10, label: '10MB' },
+                          { value: 50, label: '50MB' },
+                          { value: 100, label: '100MB' },
+                        ]}
                       />
-                    }
-                    label='Dark mode'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={settings.autoSave}
+                    </Box>
+                    <Box>
+                      <Typography
+                        variant="body2"
+                        sx={{ mb: 0.5, fontWeight: 500 }}
+                      >
+                        Allowed File Types
+                      </Typography>
+                      <TextField
+                        placeholder="Enter file extensions (e.g., jpg,png,pdf)"
+                        value={settings.allowedFileTypes}
                         onChange={(e) =>
-                          handleSettingChange('autoSave', e.target.checked)
+                          handleSettingChange('allowedFileTypes', e.target.value)
                         }
+                        helperText="Comma-separated file extensions"
+                        fullWidth
+                        variant="outlined"
                       />
-                    }
-                    label='Auto-save'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={settings.debugMode}
-                        onChange={(e) =>
-                          handleSettingChange('debugMode', e.target.checked)
-                        }
-                      />
-                    }
-                    label='Debug mode'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={settings.analyticsTracking}
-                        onChange={(e) =>
-                          handleSettingChange(
-                            'analyticsTracking',
-                            e.target.checked
-                          )
-                        }
-                      />
-                    }
-                    label='Analytics tracking'
-                  />
-                </Stack>
-              </CardContent>
-            </Card>
+                    </Box>
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Grid>
           </Grid>
-          <Grid xs={12} md={6}>
-            <Card>
-              <CardContent>
-                <Typography variant='h6' gutterBottom>
-                  Session & Performance
-                </Typography>
-                <Stack spacing={3}>
-                  <Box>
-                    <Typography variant='body2' gutterBottom>
-                      Session Timeout (minutes)
-                    </Typography>
-                    <Slider
-                      value={settings.sessionTimeout}
-                      onChange={(_e, value) =>
-                        handleSettingChange('sessionTimeout', value)
-                      }
-                      valueLabelDisplay='auto'
-                      min={5}
-                      max={120}
-                      marks={[
-                        { value: 5, label: '5m' },
-                        { value: 30, label: '30m' },
-                        { value: 60, label: '1h' },
-                        { value: 120, label: '2h' },
-                      ]}
-                    />
-                  </Box>
-                  <Box>
-                    <Typography variant='body2' gutterBottom>
-                      Max File Upload Size (MB)
-                    </Typography>
-                    <Slider
-                      value={settings.maxFileSize}
-                      onChange={(_e, value) =>
-                        handleSettingChange('maxFileSize', value)
-                      }
-                      valueLabelDisplay='auto'
-                      min={1}
-                      max={100}
-                      marks={[
-                        { value: 1, label: '1MB' },
-                        { value: 10, label: '10MB' },
-                        { value: 50, label: '50MB' },
-                        { value: 100, label: '100MB' },
-                      ]}
-                    />
-                  </Box>
-                  <Box>
-                    <Typography
-                      variant='body2'
-                      sx={{ mb: 0.5, fontWeight: 500 }}
-                    >
-                      Allowed File Types
-                    </Typography>
-                    <TextField
-                      placeholder='Enter file extensions (e.g., jpg,png,pdf)'
-                      value={settings.allowedFileTypes}
-                      onChange={(e) =>
-                        handleSettingChange('allowedFileTypes', e.target.value)
-                      }
-                      helperText='Comma-separated file extensions'
-                      fullWidth
-                      variant='outlined'
-                    />
-                  </Box>
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
       </TabPanel>
 
       <TabPanel value={currentTab} index={1}>
         <Grid container spacing={3}>
-          <Grid xs={12} md={6}>
+          <Grid item xs={12} md={6}>
             <Card>
               <CardContent>
-                <Typography variant='h6' gutterBottom>
+                <Typography variant="h6" gutterBottom>
                   Authentication & Access
                 </Typography>
                 <Stack spacing={2}>
@@ -352,7 +383,7 @@ export default function SettingsPage() {
                         }
                       />
                     }
-                    label='Two-factor authentication'
+                    label="Two-factor authentication"
                   />
                   <FormControlLabel
                     control={
@@ -361,15 +392,15 @@ export default function SettingsPage() {
                         onChange={(e) =>
                           handleSettingChange(
                             'encryptionEnabled',
-                            e.target.checked
+                            e.target.checked,
                           )
                         }
                       />
                     }
-                    label='Data encryption'
+                    label="Data encryption"
                   />
                   <Box>
-                    <Typography variant='body2' gutterBottom>
+                    <Typography variant="body2" gutterBottom>
                       Password Expiry (days)
                     </Typography>
                     <Slider
@@ -377,7 +408,7 @@ export default function SettingsPage() {
                       onChange={(_e, value) =>
                         handleSettingChange('passwordExpiry', value)
                       }
-                      valueLabelDisplay='auto'
+                      valueLabelDisplay="auto"
                       min={30}
                       max={365}
                       marks={[
@@ -389,7 +420,7 @@ export default function SettingsPage() {
                     />
                   </Box>
                   <Box>
-                    <Typography variant='body2' gutterBottom>
+                    <Typography variant="body2" gutterBottom>
                       Max Login Attempts
                     </Typography>
                     <Slider
@@ -397,7 +428,7 @@ export default function SettingsPage() {
                       onChange={(_e, value) =>
                         handleSettingChange('loginAttempts', value)
                       }
-                      valueLabelDisplay='auto'
+                      valueLabelDisplay="auto"
                       min={1}
                       max={10}
                       marks={[
@@ -412,13 +443,13 @@ export default function SettingsPage() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid xs={12} md={6}>
+          <Grid item xs={12} md={6}>
             <Card>
               <CardContent>
-                <Typography variant='h6' gutterBottom>
+                <Typography variant="h6" gutterBottom>
                   Security Policies
                 </Typography>
-                <Alert severity='info' sx={{ mb: 2 }}>
+                <Alert severity="info" sx={{ mb: 2 }}>
                   <AlertTitle>Security Status</AlertTitle>
                   Your system security is currently configured at:{' '}
                   <strong>High</strong>
@@ -426,38 +457,38 @@ export default function SettingsPage() {
                 <Stack spacing={3}>
                   <Box>
                     <Typography
-                      variant='body2'
+                      variant="body2"
                       sx={{ mb: 0.5, fontWeight: 500 }}
                     >
                       Security Level
                     </Typography>
-                    <Select defaultValue='high' fullWidth>
-                      <MenuItem value='low'>Low - Basic protection</MenuItem>
-                      <MenuItem value='medium'>
+                    <Select defaultValue="high" fullWidth>
+                      <MenuItem value="low">Low - Basic protection</MenuItem>
+                      <MenuItem value="medium">
                         Medium - Standard protection
                       </MenuItem>
-                      <MenuItem value='high'>
+                      <MenuItem value="high">
                         High - Enhanced protection
                       </MenuItem>
-                      <MenuItem value='strict'>
+                      <MenuItem value="strict">
                         Strict - Maximum protection
                       </MenuItem>
                     </Select>
                   </Box>
                   <Box>
                     <Typography
-                      variant='body2'
+                      variant="body2"
                       sx={{ mb: 0.5, fontWeight: 500 }}
                     >
                       IP Restriction
                     </Typography>
-                    <Select defaultValue='none' fullWidth>
-                      <MenuItem value='none'>No restrictions</MenuItem>
-                      <MenuItem value='whitelist'>Whitelist only</MenuItem>
-                      <MenuItem value='blacklist'>
+                    <Select defaultValue="none" fullWidth>
+                      <MenuItem value="none">No restrictions</MenuItem>
+                      <MenuItem value="whitelist">Whitelist only</MenuItem>
+                      <MenuItem value="blacklist">
                         Blacklist specific IPs
                       </MenuItem>
-                      <MenuItem value='geolocation'>Geolocation based</MenuItem>
+                      <MenuItem value="geolocation">Geolocation based</MenuItem>
                     </Select>
                   </Box>
                 </Stack>
@@ -469,10 +500,10 @@ export default function SettingsPage() {
 
       <TabPanel value={currentTab} index={2}>
         <Grid container spacing={3}>
-          <Grid xs={12} md={6}>
+          <Grid item xs={12} md={6}>
             <Card>
               <CardContent>
-                <Typography variant='h6' gutterBottom>
+                <Typography variant="h6" gutterBottom>
                   Notification Channels
                 </Typography>
                 <Stack spacing={2}>
@@ -483,7 +514,7 @@ export default function SettingsPage() {
                         onChange={(e) =>
                           handleSettingChange(
                             'emailNotifications',
-                            e.target.checked
+                            e.target.checked,
                           )
                         }
                       />
@@ -502,7 +533,7 @@ export default function SettingsPage() {
                         onChange={(e) =>
                           handleSettingChange(
                             'smsNotifications',
-                            e.target.checked
+                            e.target.checked,
                           )
                         }
                       />
@@ -516,13 +547,13 @@ export default function SettingsPage() {
                   />
                   <Box>
                     <Typography
-                      variant='body2'
+                      variant="body2"
                       sx={{ mb: 0.5, fontWeight: 500 }}
                     >
                       Webhook URL
                     </Typography>
                     <TextField
-                      placeholder='Enter webhook URL'
+                      placeholder="Enter webhook URL"
                       value={settings.webhookUrl}
                       onChange={(e) =>
                         handleSettingChange('webhookUrl', e.target.value)
@@ -535,17 +566,17 @@ export default function SettingsPage() {
                         ),
                       }}
                       fullWidth
-                      variant='outlined'
+                      variant="outlined"
                     />
                   </Box>
                 </Stack>
               </CardContent>
             </Card>
           </Grid>
-          <Grid xs={12} md={6}>
+          <Grid item xs={12} md={6}>
             <Card>
               <CardContent>
-                <Typography variant='h6' gutterBottom>
+                <Typography variant="h6" gutterBottom>
                   Notification Types
                 </Typography>
                 <List>
@@ -559,7 +590,7 @@ export default function SettingsPage() {
                   ].map((item, index) => (
                     <ListItem key={item}>
                       <ListItemIcon>
-                        <NotificationsIcon color='primary' />
+                        <NotificationsIcon color="primary" />
                       </ListItemIcon>
                       <ListItemText primary={item} />
                       <ListItemSecondaryAction>
@@ -576,15 +607,15 @@ export default function SettingsPage() {
 
       <TabPanel value={currentTab} index={3}>
         <Grid container spacing={3}>
-          <Grid xs={12} md={6}>
+          <Grid item xs={12} md={6}>
             <Card>
               <CardContent>
-                <Typography variant='h6' gutterBottom>
+                <Typography variant="h6" gutterBottom>
                   Data Retention
                 </Typography>
                 <Stack spacing={3}>
                   <Box>
-                    <Typography variant='body2' gutterBottom>
+                    <Typography variant="body2" gutterBottom>
                       Data Retention Period (days)
                     </Typography>
                     <Slider
@@ -592,7 +623,7 @@ export default function SettingsPage() {
                       onChange={(_e, value) =>
                         handleSettingChange('dataRetention', value)
                       }
-                      valueLabelDisplay='auto'
+                      valueLabelDisplay="auto"
                       min={30}
                       max={2555}
                       marks={[
@@ -605,18 +636,18 @@ export default function SettingsPage() {
                   </Box>
                   <Box>
                     <Typography
-                      variant='body2'
+                      variant="body2"
                       sx={{ mb: 0.5, fontWeight: 500 }}
                     >
                       Archive Location
                     </Typography>
-                    <Select defaultValue='cloud' fullWidth>
-                      <MenuItem value='local'>Local Storage</MenuItem>
-                      <MenuItem value='cloud'>Cloud Storage</MenuItem>
-                      <MenuItem value='hybrid'>Hybrid (Local + Cloud)</MenuItem>
+                    <Select defaultValue="cloud" fullWidth>
+                      <MenuItem value="local">Local Storage</MenuItem>
+                      <MenuItem value="cloud">Cloud Storage</MenuItem>
+                      <MenuItem value="hybrid">Hybrid (Local + Cloud)</MenuItem>
                     </Select>
                   </Box>
-                  <Alert severity='warning'>
+                  <Alert severity="warning">
                     Data older than the retention period will be automatically
                     purged.
                   </Alert>
@@ -624,28 +655,28 @@ export default function SettingsPage() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid xs={12} md={6}>
+          <Grid item xs={12} md={6}>
             <Card>
               <CardContent>
-                <Typography variant='h6' gutterBottom>
+                <Typography variant="h6" gutterBottom>
                   Storage Statistics
                 </Typography>
                 <Stack spacing={2}>
                   <Box>
-                    <Typography variant='body2' color='text.secondary'>
+                    <Typography variant="body2" color="text.secondary">
                       Total Storage Used
                     </Typography>
-                    <Typography variant='h5'>2.4 TB</Typography>
+                    <Typography variant="h5">2.4 TB</Typography>
                   </Box>
                   <Box>
-                    <Typography variant='body2' color='text.secondary'>
+                    <Typography variant="body2" color="text.secondary">
                       Available Space
                     </Typography>
-                    <Typography variant='h6'>1.6 TB</Typography>
+                    <Typography variant="h6">1.6 TB</Typography>
                   </Box>
                   <Divider />
                   <Box>
-                    <Typography variant='body2' gutterBottom>
+                    <Typography variant="body2" gutterBottom>
                       Storage Usage by Type
                     </Typography>
                     <Stack spacing={1}>
@@ -655,8 +686,8 @@ export default function SettingsPage() {
                           justifyContent: 'space-between',
                         }}
                       >
-                        <Typography variant='body2'>User Data</Typography>
-                        <Typography variant='body2'>1.2 TB</Typography>
+                        <Typography variant="body2">User Data</Typography>
+                        <Typography variant="body2">1.2 TB</Typography>
                       </Box>
                       <Box
                         sx={{
@@ -664,8 +695,8 @@ export default function SettingsPage() {
                           justifyContent: 'space-between',
                         }}
                       >
-                        <Typography variant='body2'>Analytics</Typography>
-                        <Typography variant='body2'>800 GB</Typography>
+                        <Typography variant="body2">Analytics</Typography>
+                        <Typography variant="body2">800 GB</Typography>
                       </Box>
                       <Box
                         sx={{
@@ -673,15 +704,15 @@ export default function SettingsPage() {
                           justifyContent: 'space-between',
                         }}
                       >
-                        <Typography variant='body2'>Backups</Typography>
-                        <Typography variant='body2'>400 GB</Typography>
+                        <Typography variant="body2">Backups</Typography>
+                        <Typography variant="body2">400 GB</Typography>
                       </Box>
                     </Stack>
                   </Box>
                 </Stack>
               </CardContent>
               <CardActions>
-                <Button size='small' startIcon={<StorageIcon />}>
+                <Button size="small" startIcon={<StorageIcon />}>
                   Optimize Storage
                 </Button>
               </CardActions>
@@ -699,9 +730,9 @@ export default function SettingsPage() {
             alignItems: 'center',
           }}
         >
-          <Typography variant='h6'>API Keys Management</Typography>
+          <Typography variant="h6">API Keys Management</Typography>
           <Button
-            variant='contained'
+            variant="contained"
             startIcon={<AddIcon />}
             onClick={() => setOpenApiDialog(true)}
           >
@@ -727,20 +758,20 @@ export default function SettingsPage() {
                   <TableCell>{apiKey.name}</TableCell>
                   <TableCell>
                     <Typography
-                      variant='body2'
+                      variant="body2"
                       sx={{ fontFamily: 'monospace' }}
                     >
                       {apiKey.key.substring(0, 20)}...
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Stack direction='row' spacing={0.5} flexWrap='wrap'>
+                    <Stack direction="row" spacing={0.5} flexWrap="wrap">
                       {apiKey.permissions.map((permission) => (
                         <Chip
                           key={permission}
                           label={permission}
-                          size='small'
-                          variant='outlined'
+                          size="small"
+                          variant="outlined"
                         />
                       ))}
                     </Stack>
@@ -750,13 +781,13 @@ export default function SettingsPage() {
                     <Chip
                       label={apiKey.status}
                       color={apiKey.status === 'Active' ? 'success' : 'default'}
-                      size='small'
+                      size="small"
                     />
                   </TableCell>
                   <TableCell>
-                    <Stack direction='row' spacing={1}>
+                    <Stack direction="row" spacing={1}>
                       <IconButton
-                        size='small'
+                        size="small"
                         onClick={() => handleToggleApiKey(apiKey.id)}
                         color={
                           apiKey.status === 'Active' ? 'warning' : 'success'
@@ -765,9 +796,9 @@ export default function SettingsPage() {
                         {apiKey.status === 'Active' ? 'Disable' : 'Enable'}
                       </IconButton>
                       <IconButton
-                        size='small'
+                        size="small"
                         onClick={() => handleDeleteApiKey(apiKey.id)}
-                        color='error'
+                        color="error"
                       >
                         <DeleteIcon />
                       </IconButton>
@@ -782,16 +813,16 @@ export default function SettingsPage() {
 
       <TabPanel value={currentTab} index={5}>
         <Grid container spacing={3}>
-          <Grid xs={12} md={6}>
+          <Grid item xs={12} md={6}>
             <Card>
               <CardContent>
-                <Typography variant='h6' gutterBottom>
+                <Typography variant="h6" gutterBottom>
                   Backup Configuration
                 </Typography>
                 <Stack spacing={3}>
                   <Box>
                     <Typography
-                      variant='body2'
+                      variant="body2"
                       sx={{ mb: 0.5, fontWeight: 500 }}
                     >
                       Backup Frequency
@@ -803,23 +834,23 @@ export default function SettingsPage() {
                       }
                       fullWidth
                     >
-                      <MenuItem value='hourly'>Hourly</MenuItem>
-                      <MenuItem value='daily'>Daily</MenuItem>
-                      <MenuItem value='weekly'>Weekly</MenuItem>
-                      <MenuItem value='monthly'>Monthly</MenuItem>
+                      <MenuItem value="hourly">Hourly</MenuItem>
+                      <MenuItem value="daily">Daily</MenuItem>
+                      <MenuItem value="weekly">Weekly</MenuItem>
+                      <MenuItem value="monthly">Monthly</MenuItem>
                     </Select>
                   </Box>
                   <Box>
                     <Typography
-                      variant='body2'
+                      variant="body2"
                       sx={{ mb: 0.5, fontWeight: 500 }}
                     >
                       Backup Location
                     </Typography>
-                    <Select defaultValue='cloud' fullWidth>
-                      <MenuItem value='local'>Local Storage</MenuItem>
-                      <MenuItem value='cloud'>Cloud Storage</MenuItem>
-                      <MenuItem value='external'>External Drive</MenuItem>
+                    <Select defaultValue="cloud" fullWidth>
+                      <MenuItem value="local">Local Storage</MenuItem>
+                      <MenuItem value="cloud">Cloud Storage</MenuItem>
+                      <MenuItem value="external">External Drive</MenuItem>
                     </Select>
                   </Box>
                   <FormControlLabel
@@ -829,27 +860,27 @@ export default function SettingsPage() {
                         onChange={(e) =>
                           handleSettingChange(
                             'encryptionEnabled',
-                            e.target.checked
+                            e.target.checked,
                           )
                         }
                       />
                     }
-                    label='Encrypt backups'
+                    label="Encrypt backups"
                   />
                 </Stack>
               </CardContent>
               <CardActions>
-                <Button startIcon={<BackupIcon />} variant='contained'>
+                <Button startIcon={<BackupIcon />} variant="contained">
                   Backup Now
                 </Button>
                 <Button startIcon={<RestoreIcon />}>Restore</Button>
               </CardActions>
             </Card>
           </Grid>
-          <Grid xs={12} md={6}>
+          <Grid item xs={12} md={6}>
             <Card>
               <CardContent>
-                <Typography variant='h6' gutterBottom>
+                <Typography variant="h6" gutterBottom>
                   Recent Backups
                 </Typography>
                 <List>
@@ -888,7 +919,7 @@ export default function SettingsPage() {
                         secondary={`${backup.xs} • ${backup.status}`}
                       />
                       <ListItemSecondaryAction>
-                        <IconButton edge='end'>
+                        <IconButton edge="end">
                           <DownloadIcon />
                         </IconButton>
                       </ListItemSecondaryAction>
@@ -904,44 +935,44 @@ export default function SettingsPage() {
       <Dialog
         open={openApiDialog}
         onClose={() => setOpenApiDialog(false)}
-        maxWidth='sm'
+        maxWidth="sm"
         fullWidth
       >
         <DialogTitle>Generate New API Key</DialogTitle>
         <DialogContent>
           <Stack spacing={3} sx={{ mt: 2 }}>
             <Box>
-              <Typography variant='body2' sx={{ mb: 0.5, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 0.5, fontWeight: 500 }}>
                 API Key Name
               </Typography>
               <TextField
-                placeholder='Enter API key name'
+                placeholder="Enter API key name"
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Box>
             <Box>
-              <Typography variant='body2' sx={{ mb: 0.5, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 0.5, fontWeight: 500 }}>
                 Permissions
               </Typography>
               <Select multiple defaultValue={['read']} fullWidth>
-                <MenuItem value='read'>Read</MenuItem>
-                <MenuItem value='write'>Write</MenuItem>
-                <MenuItem value='delete'>Delete</MenuItem>
-                <MenuItem value='admin'>Admin</MenuItem>
+                <MenuItem value="read">Read</MenuItem>
+                <MenuItem value="write">Write</MenuItem>
+                <MenuItem value="delete">Delete</MenuItem>
+                <MenuItem value="admin">Admin</MenuItem>
               </Select>
             </Box>
             <Box>
-              <Typography variant='body2' sx={{ mb: 0.5, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 0.5, fontWeight: 500 }}>
                 Expiration Date
               </Typography>
-              <TextField type='date' fullWidth variant='outlined' />
+              <TextField type="date" fullWidth variant="outlined" />
             </Box>
           </Stack>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenApiDialog(false)}>Cancel</Button>
-          <Button onClick={() => setOpenApiDialog(false)} variant='contained'>
+          <Button onClick={() => setOpenApiDialog(false)} variant="contained">
             Generate Key
           </Button>
         </DialogActions>
