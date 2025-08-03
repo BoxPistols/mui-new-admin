@@ -1,8 +1,28 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import Button from './Button'
+
+// MUIアイコンの型定義が見つからない場合、型エラーを回避するために一時的な型定義を追加
+// 本番環境では型定義パッケージ（@types/）の導入を推奨
+declare module '@mui/icons-material/Save' {
+  import type * as React from 'react'
+  const SaveIcon: React.FC<React.SVGProps<SVGSVGElement>>
+  export default SaveIcon
+}
+declare module '@mui/icons-material/Delete' {
+  import type * as React from 'react'
+  const DeleteIcon: React.FC<React.SVGProps<SVGSVGElement>>
+  export default DeleteIcon
+}
+declare module '@mui/icons-material/Add' {
+  import type * as React from 'react'
+  const AddIcon: React.FC<React.SVGProps<SVGSVGElement>>
+  export default AddIcon
+}
+
 import SaveIcon from '@mui/icons-material/Save'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
+
 
 const meta = {
   title: 'Components/Button',

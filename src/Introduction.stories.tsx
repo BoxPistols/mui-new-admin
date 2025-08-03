@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import React from 'react'
+
 import { Box, Typography, Card, CardContent, Chip, Stack } from '@mui/material'
 
 // ダミーのコンポーネントを作成

@@ -421,7 +421,7 @@ export default function TasksPage() {
                   >
                     {task.tags.map((tag, index) => (
                       <Chip
-                        key={index}
+                        key={tag}
                         label={tag}
                         size='small'
                         variant='outlined'

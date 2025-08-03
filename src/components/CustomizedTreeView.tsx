@@ -159,7 +159,7 @@ const CustomTreeItem = React.forwardRef(function CustomTreeItem(
     label,
     disabled,
     rootRef: ref,
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: This is a third-party type definition and cannot be easily changed.
   }) as UseTreeItem2ReturnValue<any, any>
 
   return (

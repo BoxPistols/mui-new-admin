@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 
-// biome-ignore lint/style/noNonNullAssertion: <explanation>
+// biome-ignore lint/style/noNonNullAssertion: The root element is guaranteed to exist in index.html
 ReactDOM.createRoot(document.querySelector('#root')!).render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
