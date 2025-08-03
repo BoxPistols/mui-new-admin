@@ -3,7 +3,7 @@ import ApiIcon from '@mui/icons-material/Api'
 import BackupIcon from '@mui/icons-material/Backup'
 import DeleteIcon from '@mui/icons-material/Delete'
 import DownloadIcon from '@mui/icons-material/Download'
-import EditIcon from '@mui/icons-material/Edit'
+
 import EmailIcon from '@mui/icons-material/Email'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import RestoreIcon from '@mui/icons-material/Restore'
@@ -13,7 +13,6 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import SmsIcon from '@mui/icons-material/Sms'
 import StorageIcon from '@mui/icons-material/Storage'
 import WebhookIcon from '@mui/icons-material/Webhook'
-import { Grid } from '@mui/material'
 import Alert from '@mui/material/Alert'
 import AlertTitle from '@mui/material/AlertTitle'
 import Box from '@mui/material/Box'
@@ -27,10 +26,11 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import Divider from '@mui/material/Divider'
-import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
+// 型定義が見つからないため、Unstable_Grid2のimportを削除し、代わりにGridを通常の方法でimportします
+import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
-import InputLabel from '@mui/material/InputLabel'
+
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
@@ -61,14 +61,6 @@ interface APIKey {
   permissions: string[]
   lastUsed: string
   status: 'Active' | 'Inactive'
-}
-
-interface BackupConfig {
-  frequency: string
-  retention: number
-  location: string
-  encryption: boolean
-  lastBackup: string
 }
 
 const mockAPIKeys: APIKey[] = [
@@ -122,11 +114,14 @@ export default function SettingsPage() {
     loginAttempts: 3,
   })
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue)
   }
 
-  const handleSettingChange = (setting: string, value: any) => {
+  const handleSettingChange = (
+    setting: string,
+    value: boolean | number | string
+  ) => {
     setSettings((prev) => ({ ...prev, [setting]: value }))
   }
 
@@ -198,7 +193,7 @@ export default function SettingsPage() {
 
       <TabPanel value={currentTab} index={0}>
         <Grid container spacing={3}>
-          <Grid xs={{ xs: 12, md: 6 }}>
+          <Grid xs={12} md={6}>
             <Card>
               <CardContent>
                 <Typography variant='h6' gutterBottom>
@@ -267,7 +262,7 @@ export default function SettingsPage() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid xs={{ xs: 12, md: 6 }}>
+          <Grid xs={12} md={6}>
             <Card>
               <CardContent>
                 <Typography variant='h6' gutterBottom>
@@ -280,7 +275,7 @@ export default function SettingsPage() {
                     </Typography>
                     <Slider
                       value={settings.sessionTimeout}
-                      onChange={(e, value) =>
+                      onChange={(_e, value) =>
                         handleSettingChange('sessionTimeout', value)
                       }
                       valueLabelDisplay='auto'
@@ -300,7 +295,7 @@ export default function SettingsPage() {
                     </Typography>
                     <Slider
                       value={settings.maxFileSize}
-                      onChange={(e, value) =>
+                      onChange={(_e, value) =>
                         handleSettingChange('maxFileSize', value)
                       }
                       valueLabelDisplay='auto'
@@ -341,7 +336,7 @@ export default function SettingsPage() {
 
       <TabPanel value={currentTab} index={1}>
         <Grid container spacing={3}>
-          <Grid xs={{ xs: 12, md: 6 }}>
+          <Grid xs={12} md={6}>
             <Card>
               <CardContent>
                 <Typography variant='h6' gutterBottom>
@@ -379,7 +374,7 @@ export default function SettingsPage() {
                     </Typography>
                     <Slider
                       value={settings.passwordExpiry}
-                      onChange={(e, value) =>
+                      onChange={(_e, value) =>
                         handleSettingChange('passwordExpiry', value)
                       }
                       valueLabelDisplay='auto'
@@ -399,7 +394,7 @@ export default function SettingsPage() {
                     </Typography>
                     <Slider
                       value={settings.loginAttempts}
-                      onChange={(e, value) =>
+                      onChange={(_e, value) =>
                         handleSettingChange('loginAttempts', value)
                       }
                       valueLabelDisplay='auto'
@@ -417,7 +412,7 @@ export default function SettingsPage() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid xs={{ xs: 12, md: 6 }}>
+          <Grid xs={12} md={6}>
             <Card>
               <CardContent>
                 <Typography variant='h6' gutterBottom>
@@ -474,7 +469,7 @@ export default function SettingsPage() {
 
       <TabPanel value={currentTab} index={2}>
         <Grid container spacing={3}>
-          <Grid xs={{ xs: 12, md: 6 }}>
+          <Grid xs={12} md={6}>
             <Card>
               <CardContent>
                 <Typography variant='h6' gutterBottom>
@@ -547,7 +542,7 @@ export default function SettingsPage() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid xs={{ xs: 12, md: 6 }}>
+          <Grid xs={12} md={6}>
             <Card>
               <CardContent>
                 <Typography variant='h6' gutterBottom>
@@ -562,7 +557,7 @@ export default function SettingsPage() {
                     'API rate limit warnings',
                     'Scheduled maintenance',
                   ].map((item, index) => (
-                    <ListItem key={index}>
+                    <ListItem key={item}>
                       <ListItemIcon>
                         <NotificationsIcon color='primary' />
                       </ListItemIcon>
@@ -581,7 +576,7 @@ export default function SettingsPage() {
 
       <TabPanel value={currentTab} index={3}>
         <Grid container spacing={3}>
-          <Grid xs={{ xs: 12, md: 6 }}>
+          <Grid xs={12} md={6}>
             <Card>
               <CardContent>
                 <Typography variant='h6' gutterBottom>
@@ -594,7 +589,7 @@ export default function SettingsPage() {
                     </Typography>
                     <Slider
                       value={settings.dataRetention}
-                      onChange={(e, value) =>
+                      onChange={(_e, value) =>
                         handleSettingChange('dataRetention', value)
                       }
                       valueLabelDisplay='auto'
@@ -629,7 +624,7 @@ export default function SettingsPage() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid xs={{ xs: 12, md: 6 }}>
+          <Grid xs={12} md={6}>
             <Card>
               <CardContent>
                 <Typography variant='h6' gutterBottom>
@@ -740,9 +735,9 @@ export default function SettingsPage() {
                   </TableCell>
                   <TableCell>
                     <Stack direction='row' spacing={0.5} flexWrap='wrap'>
-                      {apiKey.permissions.map((permission, index) => (
+                      {apiKey.permissions.map((permission) => (
                         <Chip
-                          key={index}
+                          key={permission}
                           label={permission}
                           size='small'
                           variant='outlined'
@@ -787,7 +782,7 @@ export default function SettingsPage() {
 
       <TabPanel value={currentTab} index={5}>
         <Grid container spacing={3}>
-          <Grid xs={{ xs: 12, md: 6 }}>
+          <Grid xs={12} md={6}>
             <Card>
               <CardContent>
                 <Typography variant='h6' gutterBottom>
@@ -851,7 +846,7 @@ export default function SettingsPage() {
               </CardActions>
             </Card>
           </Grid>
-          <Grid xs={{ xs: 12, md: 6 }}>
+          <Grid xs={12} md={6}>
             <Card>
               <CardContent>
                 <Typography variant='h6' gutterBottom>
@@ -879,8 +874,8 @@ export default function SettingsPage() {
                       xs: '1.8 GB',
                       status: 'Failed',
                     },
-                  ].map((backup, index) => (
-                    <ListItem key={index}>
+                  ].map((backup, _index) => (
+                    <ListItem key={backup.date}>
                       <ListItemIcon>
                         <BackupIcon
                           color={

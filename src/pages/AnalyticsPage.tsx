@@ -479,7 +479,7 @@ export default function AnalyticsPage() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {topPages.map((page, index) => (
+                  {topPages.map((page, _index) => (
                     <TableRow key={page.path}>
                       <TableCell>
                         <Typography
@@ -598,7 +598,7 @@ export default function AnalyticsPage() {
                     { name: 'Safari', percentage: 18.2 },
                     { name: 'Firefox', percentage: 8.9 },
                     { name: 'Edge', percentage: 4.5 },
-                  ].map((browser, index) => (
+                  ].map((browser, _index) => (
                     <ListItem key={browser.name}>
                       <ListItemText
                         primary={browser.name}

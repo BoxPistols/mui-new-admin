@@ -22,11 +22,11 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import FormControl from '@mui/material/FormControl'
+
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
-import InputLabel from '@mui/material/InputLabel'
+
 import MenuItem from '@mui/material/MenuItem'
 import Paper from '@mui/material/Paper'
 import Select from '@mui/material/Select'
@@ -152,7 +152,7 @@ export default function UserManagementPage() {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue)
   }
 
@@ -532,9 +532,9 @@ export default function UserManagementPage() {
                       flexWrap="wrap"
                       sx={{ gap: 0.5, mt: 0.5 }}
                     >
-                      {user.permissions.map((permission, index) => (
+                      {user.permissions.map((permission) => (
                         <Chip
-                          key={index}
+                          key={permission}
                           label={permission}
                           size="small"
                           variant="outlined"
@@ -684,7 +684,7 @@ export default function UserManagementPage() {
             count={filteredUsers.length}
             rowsPerPage={rowsPerPage}
             page={page}
-            onPageChange={(event, newPage) => setPage(newPage)}
+            onPageChange={(_event, newPage) => setPage(newPage)}
             onRowsPerPageChange={(event) => {
               setRowsPerPage(parseInt(event.target.value, 10))
               setPage(0)

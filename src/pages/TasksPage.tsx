@@ -209,7 +209,7 @@ export default function TasksPage() {
   const getOverdueTasks = () => {
     const today = new Date()
     return tasks.filter(
-      (task) => new Date(task.dueDate) < today && task.status !== 'Completed'
+      (task) => new Date(task.dueDate) < today && task.status !== 'Completed',
     )
   }
 
@@ -239,11 +239,11 @@ export default function TasksPage() {
           mb: 3,
         }}
       >
-        <Typography component='h2' variant='h6'>
+        <Typography component="h2" variant="h6">
           Tasks Management ({filteredTasks.length})
         </Typography>
         <Button
-          variant='contained'
+          variant="contained"
           startIcon={<AddTaskIcon />}
           onClick={handleAddTask}
         >
@@ -255,10 +255,10 @@ export default function TasksPage() {
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Card>
             <CardContent>
-              <Typography variant='h6' color='primary'>
+              <Typography variant="h6" color="primary">
                 {getTasksByStatus('Todo').length}
               </Typography>
-              <Typography variant='body2' color='text.secondary'>
+              <Typography variant="body2" color="text.secondary">
                 Todo
               </Typography>
             </CardContent>
@@ -267,10 +267,10 @@ export default function TasksPage() {
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Card>
             <CardContent>
-              <Typography variant='h6' color='info.main'>
+              <Typography variant="h6" color="info.main">
                 {getTasksByStatus('In Progress').length}
               </Typography>
-              <Typography variant='body2' color='text.secondary'>
+              <Typography variant="body2" color="text.secondary">
                 In Progress
               </Typography>
             </CardContent>
@@ -279,10 +279,10 @@ export default function TasksPage() {
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Card>
             <CardContent>
-              <Typography variant='h6' color='warning.main'>
+              <Typography variant="h6" color="warning.main">
                 {getTasksByStatus('Review').length}
               </Typography>
-              <Typography variant='body2' color='text.secondary'>
+              <Typography variant="body2" color="text.secondary">
                 In Review
               </Typography>
             </CardContent>
@@ -291,10 +291,10 @@ export default function TasksPage() {
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <Card>
             <CardContent>
-              <Typography variant='h6' color='success.main'>
+              <Typography variant="h6" color="success.main">
                 {getTasksByStatus('Completed').length}
               </Typography>
-              <Typography variant='body2' color='text.secondary'>
+              <Typography variant="body2" color="text.secondary">
                 Completed
               </Typography>
             </CardContent>
@@ -303,17 +303,17 @@ export default function TasksPage() {
       </Grid>
 
       <Tabs value={currentTab} onChange={handleTabChange} sx={{ mb: 3 }}>
-        <Tab label='Card View' />
-        <Tab label='List View' />
-        <Tab label='Tree View' />
-        <Tab label='Overdue Tasks' />
+        <Tab label="Card View" />
+        <Tab label="List View" />
+        <Tab label="Tree View" />
+        <Tab label="Overdue Tasks" />
       </Tabs>
 
       <TabPanel value={currentTab} index={0}>
         <Box sx={{ mb: 3 }}>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <Box>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Filter by Status
               </Typography>
               <Select
@@ -321,15 +321,15 @@ export default function TasksPage() {
                 onChange={(e) => handleStatusFilterChange(e.target.value)}
                 sx={{ minWidth: 150 }}
               >
-                <MenuItem value='All'>All</MenuItem>
-                <MenuItem value='Todo'>Todo</MenuItem>
-                <MenuItem value='In Progress'>In Progress</MenuItem>
-                <MenuItem value='Review'>Review</MenuItem>
-                <MenuItem value='Completed'>Completed</MenuItem>
+                <MenuItem value="All">All</MenuItem>
+                <MenuItem value="Todo">Todo</MenuItem>
+                <MenuItem value="In Progress">In Progress</MenuItem>
+                <MenuItem value="Review">Review</MenuItem>
+                <MenuItem value="Completed">Completed</MenuItem>
               </Select>
             </Box>
             <Box>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Filter by Priority
               </Typography>
               <Select
@@ -337,11 +337,11 @@ export default function TasksPage() {
                 onChange={(e) => handlePriorityFilterChange(e.target.value)}
                 sx={{ minWidth: 150 }}
               >
-                <MenuItem value='All'>All</MenuItem>
-                <MenuItem value='Low'>Low</MenuItem>
-                <MenuItem value='Medium'>Medium</MenuItem>
-                <MenuItem value='High'>High</MenuItem>
-                <MenuItem value='Critical'>Critical</MenuItem>
+                <MenuItem value="All">All</MenuItem>
+                <MenuItem value="Low">Low</MenuItem>
+                <MenuItem value="Medium">Medium</MenuItem>
+                <MenuItem value="High">High</MenuItem>
+                <MenuItem value="Critical">Critical</MenuItem>
               </Select>
             </Box>
           </Stack>
@@ -366,27 +366,27 @@ export default function TasksPage() {
                       mb: 2,
                     }}
                   >
-                    <Typography variant='h6' sx={{ flexGrow: 1, mr: 2 }}>
+                    <Typography variant="h6" sx={{ flexGrow: 1, mr: 2 }}>
                       {task.title}
                     </Typography>
-                    <Stack direction='row' spacing={1}>
+                    <Stack direction="row" spacing={1}>
                       <Chip
                         label={task.status}
                         color={getStatusColor(task.status)}
-                        size='small'
+                        size="small"
                       />
                       <Chip
                         label={task.priority}
                         color={getPriorityColor(task.priority)}
-                        size='small'
+                        size="small"
                         icon={<PriorityHighIcon />}
                       />
                     </Stack>
                   </Box>
 
                   <Typography
-                    variant='body2'
-                    color='text.secondary'
+                    variant="body2"
+                    color="text.secondary"
                     sx={{ mb: 2 }}
                   >
                     {task.description}
@@ -397,41 +397,41 @@ export default function TasksPage() {
                       <PersonIcon
                         sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }}
                       />
-                      <Typography variant='body2'>{task.assignee}</Typography>
+                      <Typography variant="body2">{task.assignee}</Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                       <AccessTimeIcon
                         sx={{ fontSize: 16, mr: 1, color: 'text.secondary' }}
                       />
-                      <Typography variant='body2'>
+                      <Typography variant="body2">
                         Due: {task.dueDate}
                       </Typography>
                     </Box>
                   </Stack>
 
                   <Box sx={{ mb: 2 }}>
-                    <Typography variant='body2' sx={{ mb: 1 }}>
+                    <Typography variant="body2" sx={{ mb: 1 }}>
                       Progress: {task.progress}%
                     </Typography>
                     <LinearProgress
-                      variant='determinate'
+                      variant="determinate"
                       value={task.progress}
                       sx={{ height: 8, borderRadius: 4 }}
                     />
                   </Box>
 
                   <Stack
-                    direction='row'
+                    direction="row"
                     spacing={1}
-                    flexWrap='wrap'
+                    flexWrap="wrap"
                     sx={{ gap: 0.5 }}
                   >
                     {task.tags.map((tag, _index) => (
                       <Chip
                         key={tag}
                         label={tag}
-                        size='small'
-                        variant='outlined'
+                        size="small"
+                        variant="outlined"
                       />
                     ))}
                   </Stack>
@@ -439,22 +439,22 @@ export default function TasksPage() {
 
                 <CardActions>
                   <IconButton
-                    size='small'
+                    size="small"
                     onClick={() => handleEditTask(task)}
-                    color='primary'
+                    color="primary"
                   >
                     <EditIcon />
                   </IconButton>
                   <IconButton
-                    size='small'
+                    size="small"
                     onClick={() => handleDeleteTask(task.id)}
-                    color='error'
+                    color="error"
                   >
                     <DeleteIcon />
                   </IconButton>
                   <Typography
-                    variant='caption'
-                    color='text.secondary'
+                    variant="caption"
+                    color="text.secondary"
                     sx={{ ml: 'auto' }}
                   >
                     {task.actualHours}h / {task.estimatedHours}h
@@ -481,21 +481,21 @@ export default function TasksPage() {
                   primary={task.title}
                   secondary={
                     <Box>
-                      <Typography variant='body2' color='text.secondary'>
+                      <Typography variant="body2" color="text.secondary">
                         {task.description}
                       </Typography>
-                      <Stack direction='row' spacing={1} sx={{ mt: 1 }}>
+                      <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
                         <Chip
                           label={task.status}
-                          size='small'
+                          size="small"
                           color={getStatusColor(task.status)}
                         />
                         <Chip
                           label={task.priority}
-                          size='small'
+                          size="small"
                           color={getPriorityColor(task.priority)}
                         />
-                        <Typography variant='caption'>
+                        <Typography variant="caption">
                           {task.assignee} • Due: {task.dueDate}
                         </Typography>
                       </Stack>
@@ -503,12 +503,12 @@ export default function TasksPage() {
                   }
                 />
                 <ListItemSecondaryAction>
-                  <IconButton onClick={() => handleEditTask(task)} size='small'>
+                  <IconButton onClick={() => handleEditTask(task)} size="small">
                     <EditIcon />
                   </IconButton>
                   <IconButton
                     onClick={() => handleDeleteTask(task.id)}
-                    size='small'
+                    size="small"
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -525,7 +525,7 @@ export default function TasksPage() {
       </TabPanel>
 
       <TabPanel value={currentTab} index={3}>
-        <Typography variant='h6' sx={{ mb: 2, color: 'error.main' }}>
+        <Typography variant="h6" sx={{ mb: 2, color: 'error.main' }}>
           Overdue Tasks ({getOverdueTasks().length})
         </Typography>
         <List>
@@ -533,30 +533,30 @@ export default function TasksPage() {
             <Box key={task.id}>
               <ListItem>
                 <ListItemIcon>
-                  <AssignmentIcon color='error' />
+                  <AssignmentIcon color="error" />
                 </ListItemIcon>
                 <ListItemText
                   primary={task.title}
                   secondary={
-                    <Stack direction='row' spacing={1} alignItems='center'>
-                      <Typography variant='body2' color='error'>
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      <Typography variant="body2" color="error">
                         Overdue by{' '}
                         {Math.ceil(
-                                                    (Date.now() - new Date(task.dueDate).getTime()) /
-                            (1000 * 3600 * 24)
+                          (Date.now() - new Date(task.dueDate).getTime()) /
+                            (1000 * 3600 * 24),
                         )}{' '}
                         days
                       </Typography>
                       <Chip
                         label={task.priority}
-                        size='small'
+                        size="small"
                         color={getPriorityColor(task.priority)}
                       />
                     </Stack>
                   }
                 />
                 <ListItemSecondaryAction>
-                  <IconButton onClick={() => handleEditTask(task)} size='small'>
+                  <IconButton onClick={() => handleEditTask(task)} size="small">
                     <EditIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -570,113 +570,113 @@ export default function TasksPage() {
       <Dialog
         open={openDialog}
         onClose={() => setOpenDialog(false)}
-        maxWidth='md'
+        maxWidth="md"
         fullWidth
       >
         <DialogTitle>{editingTask ? 'Edit Task' : 'Add New Task'}</DialogTitle>
         <DialogContent>
           <Grid container spacing={3} sx={{ mt: 1 }}>
             <Grid size={{ xs: 12 }}>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Task Title
               </Typography>
               <TextField
-                placeholder='Enter task title'
+                placeholder="Enter task title"
                 defaultValue={editingTask?.title || ''}
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Grid>
             <Grid size={{ xs: 12 }}>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Description
               </Typography>
               <TextField
-                placeholder='Enter task description'
+                placeholder="Enter task description"
                 multiline
                 rows={3}
                 defaultValue={editingTask?.description || ''}
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Status
               </Typography>
               <Select defaultValue={editingTask?.status || 'Todo'} fullWidth>
-                <MenuItem value='Todo'>Todo</MenuItem>
-                <MenuItem value='In Progress'>In Progress</MenuItem>
-                <MenuItem value='Review'>Review</MenuItem>
-                <MenuItem value='Completed'>Completed</MenuItem>
+                <MenuItem value="Todo">Todo</MenuItem>
+                <MenuItem value="In Progress">In Progress</MenuItem>
+                <MenuItem value="Review">Review</MenuItem>
+                <MenuItem value="Completed">Completed</MenuItem>
               </Select>
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Priority
               </Typography>
               <Select
                 defaultValue={editingTask?.priority || 'Medium'}
                 fullWidth
               >
-                <MenuItem value='Low'>Low</MenuItem>
-                <MenuItem value='Medium'>Medium</MenuItem>
-                <MenuItem value='High'>High</MenuItem>
-                <MenuItem value='Critical'>Critical</MenuItem>
+                <MenuItem value="Low">Low</MenuItem>
+                <MenuItem value="Medium">Medium</MenuItem>
+                <MenuItem value="High">High</MenuItem>
+                <MenuItem value="Critical">Critical</MenuItem>
               </Select>
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Assignee
               </Typography>
               <TextField
-                placeholder='Enter assignee name'
+                placeholder="Enter assignee name"
                 defaultValue={editingTask?.assignee || ''}
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Due Date
               </Typography>
               <TextField
-                type='date'
+                type="date"
                 defaultValue={editingTask?.dueDate || ''}
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Estimated Hours
               </Typography>
               <TextField
-                placeholder='Enter estimated hours'
-                type='number'
+                placeholder="Enter estimated hours"
+                type="number"
                 defaultValue={editingTask?.estimatedHours || ''}
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
-              <Typography variant='body2' sx={{ mb: 1, fontWeight: 500 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
                 Progress (%)
               </Typography>
               <TextField
-                placeholder='Enter progress percentage'
-                type='number'
+                placeholder="Enter progress percentage"
+                type="number"
                 inputProps={{ min: 0, max: 100 }}
                 defaultValue={editingTask?.progress || 0}
                 fullWidth
-                variant='outlined'
+                variant="outlined"
               />
             </Grid>
           </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
-          <Button onClick={() => setOpenDialog(false)} variant='contained'>
+          <Button onClick={() => setOpenDialog(false)} variant="contained">
             {editingTask ? 'Update' : 'Add'}
           </Button>
         </DialogActions>
