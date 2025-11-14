@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded'
 import Divider, { dividerClasses } from '@mui/material/Divider'
@@ -16,6 +17,7 @@ const MenuItem = styled(MuiMenuItem)({
 })
 
 export default function OptionsMenu() {
+  const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -24,6 +26,18 @@ export default function OptionsMenu() {
   const handleClose = () => {
     setAnchorEl(null)
   }
+
+  const handleNavigate = (path: string) => {
+    handleClose()
+    navigate(path)
+  }
+
+  const handleLogout = () => {
+    handleClose()
+    // TODO: Implement logout logic
+    console.log('Logout clicked')
+  }
+
   return (
     <React.Fragment>
       <MenuButton
@@ -38,7 +52,6 @@ export default function OptionsMenu() {
         id="menu"
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         sx={{
@@ -53,14 +66,14 @@ export default function OptionsMenu() {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={() => handleNavigate('/profile')}>Profile</MenuItem>
+        <MenuItem onClick={() => handleNavigate('/profile')}>My account</MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>Add another account</MenuItem>
-        <MenuItem onClick={handleClose}>Settings</MenuItem>
+        <MenuItem onClick={() => handleNavigate('/settings')}>Settings</MenuItem>
         <Divider />
         <MenuItem
-          onClick={handleClose}
+          onClick={handleLogout}
           sx={{
             [`& .${listItemIconClasses.root}`]: {
               ml: 'auto',
