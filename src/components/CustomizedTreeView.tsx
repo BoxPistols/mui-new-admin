@@ -18,7 +18,6 @@ import {
   type UseTreeItem2Parameters,
   unstable_useTreeItem2 as useTreeItem2,
 } from '@mui/x-tree-view/useTreeItem2'
-import type { UseTreeItem2ReturnValue } from '@mui/x-tree-view/useTreeItem2'
 import { animated, useSpring } from '@react-spring/web'
 import clsx from 'clsx'
 import * as React from 'react'
@@ -159,8 +158,7 @@ const CustomTreeItem = React.forwardRef(function CustomTreeItem(
     label,
     disabled,
     rootRef: ref,
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  }) as UseTreeItem2ReturnValue<any, any>
+  })
 
   return (
     <TreeItem2Root {...getRootProps({ ...other, itemId })}>
