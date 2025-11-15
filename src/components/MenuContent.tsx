@@ -7,6 +7,8 @@ import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
 import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded'
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded'
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded'
+import WidgetsRoundedIcon from '@mui/icons-material/WidgetsRounded'
+import ScienceRoundedIcon from '@mui/icons-material/ScienceRounded'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -20,6 +22,8 @@ const mainListItems = [
   { text: 'Analytics', icon: <AnalyticsRoundedIcon />, path: '/analytics' },
   { text: 'Clients', icon: <PeopleRoundedIcon />, path: '/clients' },
   { text: 'Tasks', icon: <AssignmentRoundedIcon />, path: '/tasks' },
+  { text: 'Components', icon: <WidgetsRoundedIcon />, path: '/components' },
+  { text: 'Playground', icon: <ScienceRoundedIcon />, path: '/playground' },
 ]
 
 const secondaryListItems = [

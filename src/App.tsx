@@ -21,6 +21,8 @@ import SettingsPage from '@/pages/SettingsPage'
 import AboutPage from '@/pages/AboutPage'
 import FeedbackPage from '@/pages/FeedbackPage'
 import ProfilePage from '@/pages/ProfilePage'
+import ComponentsPage from '@/pages/ComponentsPage'
+import PlaygroundPage from '@/pages/PlaygroundPage'
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -49,6 +51,8 @@ function App({ disableCustomTheme }: AppProps = {}) {
           <Route path="analytics" element={<AnalyticsPage />} />
           <Route path="clients" element={<ClientsPage />} />
           <Route path="tasks" element={<TasksPage />} />
+          <Route path="components" element={<ComponentsPage />} />
+          <Route path="playground" element={<PlaygroundPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="feedback" element={<FeedbackPage />} />

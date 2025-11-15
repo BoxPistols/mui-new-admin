@@ -23,6 +23,8 @@ const pathNameMap: Record<string, string> = {
   analytics: 'Analytics',
   clients: 'Clients',
   tasks: 'Tasks',
+  components: 'Components',
+  playground: 'Playground',
   settings: 'Settings',
   about: 'About',
   feedback: 'Feedback',
