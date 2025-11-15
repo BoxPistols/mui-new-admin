@@ -1,16 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { ThemeProvider } from '@mui/material/styles'
-import type {} from '@mui/x-charts/themeAugmentation'
-import type {} from '@mui/x-data-grid/themeAugmentation'
-import type {} from '@mui/x-date-pickers/themeAugmentation'
-import type {} from '@mui/x-tree-view/themeAugmentation'
-import { useAppTheme } from './theme/AppTheme'
-import {
-  chartsCustomizations,
-  dataGridCustomizations,
-  datePickersCustomizations,
-  treeViewCustomizations,
-} from './theme/customizations'
+import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider } from '@/contexts/ThemeContext'
 import Layout from '@/components/Layout'
 import DashboardPage from '@/pages/DashboardPage'
 import HomePage from '@/pages/HomePage'
@@ -23,50 +13,33 @@ import FeedbackPage from '@/pages/FeedbackPage'
 import ProfilePage from '@/pages/ProfilePage'
 import ComponentsPage from '@/pages/ComponentsPage'
 import PlaygroundPage from '@/pages/PlaygroundPage'
+import ThemeEditorPage from '@/pages/ThemeEditorPage'
 
-const xThemeComponents = {
-  ...chartsCustomizations,
-  ...dataGridCustomizations,
-  ...datePickersCustomizations,
-  ...treeViewCustomizations,
-}
-
-interface AppProps {
-  disableCustomTheme?: boolean
-}
-
-function App({ disableCustomTheme }: AppProps = {}) {
-  const theme = useAppTheme({
-    disableCustomTheme,
-    themeComponents: xThemeComponents,
-  })
-
-  const content = (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="/dashboard" replace />} />
-          <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="home" element={<HomePage />} />
-          <Route path="analytics" element={<AnalyticsPage />} />
-          <Route path="clients" element={<ClientsPage />} />
-          <Route path="tasks" element={<TasksPage />} />
-          <Route path="components" element={<ComponentsPage />} />
-          <Route path="playground" element={<PlaygroundPage />} />
-          <Route path="settings" element={<SettingsPage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="feedback" element={<FeedbackPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+function App() {
+  return (
+    <ThemeProvider>
+      <CssBaseline enableColorScheme />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Navigate to="/dashboard" replace />} />
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="home" element={<HomePage />} />
+            <Route path="analytics" element={<AnalyticsPage />} />
+            <Route path="clients" element={<ClientsPage />} />
+            <Route path="tasks" element={<TasksPage />} />
+            <Route path="components" element={<ComponentsPage />} />
+            <Route path="playground" element={<PlaygroundPage />} />
+            <Route path="theme-editor" element={<ThemeEditorPage />} />
+            <Route path="settings" element={<SettingsPage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="feedback" element={<FeedbackPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   )
-
-  if (disableCustomTheme) {
-    return content
-  }
-
-  return <ThemeProvider theme={theme}>{content}</ThemeProvider>
 }
 
 export default App

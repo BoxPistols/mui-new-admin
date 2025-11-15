@@ -1,8 +1,11 @@
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded'
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
+import Brightness4Icon from '@mui/icons-material/Brightness4'
+import Brightness7Icon from '@mui/icons-material/Brightness7'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
+import IconButton from '@mui/material/IconButton'
 import { tabsClasses } from '@mui/material/Tabs'
 import MuiToolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
@@ -10,6 +13,7 @@ import { styled } from '@mui/material/styles'
 import * as React from 'react'
 import MenuButton from './MenuButton'
 import SideMenuMobile from './SideMenuMobile'
+import { useThemeContext } from '@/contexts/ThemeContext'
 
 const Toolbar = styled(MuiToolbar)({
   width: '100%',
@@ -29,6 +33,7 @@ const Toolbar = styled(MuiToolbar)({
 
 export default function AppNavbar() {
   const [open, setOpen] = React.useState(false)
+  const { mode, toggleMode } = useThemeContext()
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen)
@@ -67,9 +72,14 @@ export default function AppNavbar() {
               Dashboard
             </Typography>
           </Stack>
-          <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
-            <MenuRoundedIcon />
-          </MenuButton>
+          <Stack direction="row" spacing={1}>
+            <IconButton onClick={toggleMode} color="inherit">
+              {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+            <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
+              <MenuRoundedIcon />
+            </MenuButton>
+          </Stack>
           <SideMenuMobile open={open} toggleDrawer={toggleDrawer} />
         </Stack>
       </Toolbar>

@@ -25,6 +25,7 @@ const pathNameMap: Record<string, string> = {
   tasks: 'Tasks',
   components: 'Components',
   playground: 'Playground',
+  'theme-editor': 'Theme Editor',
   settings: 'Settings',
   about: 'About',
   feedback: 'Feedback',
