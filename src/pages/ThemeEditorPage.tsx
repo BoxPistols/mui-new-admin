@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid2'
@@ -10,6 +10,8 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
+import Alert from '@mui/material/Alert'
+import Snackbar from '@mui/material/Snackbar'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import DownloadIcon from '@mui/icons-material/Download'
@@ -19,6 +21,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import Chip from '@mui/material/Chip'
 import { useThemeContext } from '@/contexts/ThemeContext'
 import { alpha } from '@mui/material/styles'
+import type { PaletteColorOptions, ThemeOptions } from '@mui/material/styles'
 
 interface ColorInputProps {
   label: string
@@ -61,48 +64,73 @@ function ColorInput({ label, value, onChange }: ColorInputProps) {
   )
 }
 
+// Type-safe helper functions
+const getPaletteMain = (color: PaletteColorOptions | undefined, fallback: string): string => {
+  if (!color) return fallback
+  if (typeof color === 'object' && 'main' in color && typeof color.main === 'string') {
+    return color.main
+  }
+  return fallback
+}
+
+const getTypographyValue = <T,>(theme: ThemeOptions | undefined, key: string, defaultValue: T): T => {
+  if (!theme?.typography || typeof theme.typography === 'function') return defaultValue
+  const val = (theme.typography as Record<string, unknown>)[key]
+  return (val as T) ?? defaultValue
+}
+
 export default function ThemeEditorPage() {
   const { mode, toggleMode, customTheme, updateTheme, resetTheme, exportTheme, importTheme } = useThemeContext()
 
-  const getPaletteMain = (color: any) => (typeof color === 'object' && color?.main ? color.main : '#1976d2')
-  const getTypographyValue = (value: any, defaultValue: any) => (typeof value === 'function' ? defaultValue : value || defaultValue)
+  // Notification state
+  const [notification, setNotification] = useState<{ message: string; severity: 'success' | 'error' | 'info' } | null>(null)
 
-  const [primaryColor, setPrimaryColor] = useState(getPaletteMain(customTheme.palette?.primary) || '#1976d2')
-  const [secondaryColor, setSecondaryColor] = useState(getPaletteMain(customTheme.palette?.secondary) || '#dc004e')
-  const [errorColor, setErrorColor] = useState(getPaletteMain(customTheme.palette?.error) || '#f44336')
-  const [warningColor, setWarningColor] = useState(getPaletteMain(customTheme.palette?.warning) || '#ff9800')
-  const [infoColor, setInfoColor] = useState(getPaletteMain(customTheme.palette?.info) || '#2196f3')
-  const [successColor, setSuccessColor] = useState(getPaletteMain(customTheme.palette?.success) || '#4caf50')
+  // Color states
+  const [primaryColor, setPrimaryColor] = useState(() => getPaletteMain(customTheme.palette?.primary, '#1976d2'))
+  const [secondaryColor, setSecondaryColor] = useState(() => getPaletteMain(customTheme.palette?.secondary, '#dc004e'))
+  const [errorColor, setErrorColor] = useState(() => getPaletteMain(customTheme.palette?.error, '#f44336'))
+  const [warningColor, setWarningColor] = useState(() => getPaletteMain(customTheme.palette?.warning, '#ff9800'))
+  const [infoColor, setInfoColor] = useState(() => getPaletteMain(customTheme.palette?.info, '#2196f3'))
+  const [successColor, setSuccessColor] = useState(() => getPaletteMain(customTheme.palette?.success, '#4caf50'))
 
-  const [fontFamily, setFontFamily] = useState(
-    getTypographyValue((customTheme.typography as any)?.fontFamily, '"Roboto", "Helvetica", "Arial", sans-serif')
+  // Typography states
+  const [fontFamily, setFontFamily] = useState(() =>
+    getTypographyValue(customTheme, 'fontFamily', '"Roboto", "Helvetica", "Arial", sans-serif')
   )
-  const [fontSize, setFontSize] = useState(getTypographyValue((customTheme.typography as any)?.fontSize, 14))
-  const [borderRadius, setBorderRadius] = useState(customTheme.shape?.borderRadius || 4)
-  const [spacing, setSpacing] = useState(typeof customTheme.spacing === 'number' ? customTheme.spacing : 8)
+  const [fontSize, setFontSize] = useState(() => getTypographyValue(customTheme, 'fontSize', 14))
 
-  const applyTheme = () => {
-    updateTheme({
-      palette: {
-        primary: { main: primaryColor },
-        secondary: { main: secondaryColor },
-        error: { main: errorColor },
-        warning: { main: warningColor },
-        info: { main: infoColor },
-        success: { main: successColor },
-      },
-      typography: {
-        fontFamily,
-        fontSize,
-      },
-      shape: {
-        borderRadius,
-      },
-      spacing,
-    })
-  }
+  // Layout states
+  const [borderRadius, setBorderRadius] = useState(() => customTheme.shape?.borderRadius ?? 4)
+  const [spacing, setSpacing] = useState(() => (typeof customTheme.spacing === 'number' ? customTheme.spacing : 8))
 
-  const handleReset = () => {
+  // Memoized handlers with useCallback for performance
+  const applyTheme = useCallback(() => {
+    try {
+      updateTheme({
+        palette: {
+          primary: { main: primaryColor },
+          secondary: { main: secondaryColor },
+          error: { main: errorColor },
+          warning: { main: warningColor },
+          info: { main: infoColor },
+          success: { main: successColor },
+        },
+        typography: {
+          fontFamily,
+          fontSize,
+        },
+        shape: {
+          borderRadius,
+        },
+        spacing,
+      })
+      setNotification({ message: 'Theme applied successfully!', severity: 'success' })
+    } catch (error) {
+      setNotification({ message: 'Failed to apply theme', severity: 'error' })
+    }
+  }, [primaryColor, secondaryColor, errorColor, warningColor, infoColor, successColor, fontFamily, fontSize, borderRadius, spacing, updateTheme])
+
+  const handleReset = useCallback(() => {
     resetTheme()
     setPrimaryColor('#1976d2')
     setSecondaryColor('#dc004e')
@@ -114,34 +142,62 @@ export default function ThemeEditorPage() {
     setFontSize(14)
     setBorderRadius(4)
     setSpacing(8)
-  }
+    setNotification({ message: 'Theme reset to defaults', severity: 'info' })
+  }, [resetTheme])
 
-  const handleExport = () => {
-    const themeJson = exportTheme()
-    const blob = new Blob([themeJson], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'theme-config.json'
-    a.click()
-    URL.revokeObjectURL(url)
-  }
+  const handleExport = useCallback(() => {
+    try {
+      const themeJson = exportTheme()
+      const blob = new Blob([themeJson], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `theme-config-${Date.now()}.json`
+      a.click()
+      URL.revokeObjectURL(url)
+      setNotification({ message: 'Theme exported successfully!', severity: 'success' })
+    } catch (error) {
+      setNotification({ message: 'Failed to export theme', severity: 'error' })
+    }
+  }, [exportTheme])
 
-  const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImport = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
+    if (!file) return
+
+    if (!file.name.endsWith('.json')) {
+      setNotification({ message: 'Please select a JSON file', severity: 'error' })
+      return
+    }
+
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      try {
         const content = e.target?.result as string
         importTheme(content)
+        setNotification({ message: 'Theme imported successfully!', severity: 'success' })
+      } catch (error) {
+        setNotification({ message: 'Invalid theme file format', severity: 'error' })
       }
-      reader.readAsText(file)
     }
-  }
+    reader.onerror = () => {
+      setNotification({ message: 'Failed to read file', severity: 'error' })
+    }
+    reader.readAsText(file)
+  }, [importTheme])
 
-  const handleCopyJson = () => {
-    navigator.clipboard.writeText(exportTheme())
-  }
+  const handleCopyJson = useCallback(() => {
+    try {
+      navigator.clipboard.writeText(exportTheme())
+      setNotification({ message: 'Copied to clipboard!', severity: 'success' })
+    } catch (error) {
+      setNotification({ message: 'Failed to copy to clipboard', severity: 'error' })
+    }
+  }, [exportTheme])
+
+  const handleCloseNotification = useCallback(() => {
+    setNotification(null)
+  }, [])
 
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
@@ -362,6 +418,20 @@ export default function ThemeEditorPage() {
           </Stack>
         </Grid>
       </Grid>
+
+      {/* Notification Snackbar */}
+      {notification && (
+        <Snackbar
+          open={notification !== null}
+          autoHideDuration={4000}
+          onClose={handleCloseNotification}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        >
+          <Alert onClose={handleCloseNotification} severity={notification.severity} sx={{ width: '100%' }}>
+            {notification.message}
+          </Alert>
+        </Snackbar>
+      )}
     </Box>
   )
 }

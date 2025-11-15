@@ -1,6 +1,17 @@
-import { createContext, useContext, useState, useEffect, useMemo, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, useMemo, useCallback, ReactNode } from 'react'
 import { ThemeProvider as MuiThemeProvider, createTheme, type PaletteMode } from '@mui/material/styles'
 import type { ThemeOptions } from '@mui/material/styles'
+
+// Validation helpers
+const isValidPaletteMode = (mode: string): mode is PaletteMode => {
+  return mode === 'light' || mode === 'dark'
+}
+
+const isValidTheme = (theme: unknown): theme is ThemeOptions => {
+  if (!theme || typeof theme !== 'object') return false
+  // Basic validation - can be extended
+  return true
+}
 
 interface ThemeContextType {
   mode: PaletteMode
@@ -58,21 +69,46 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [mode, setModeState] = useState<PaletteMode>(() => {
-    const saved = localStorage.getItem('theme-mode')
-    return (saved as PaletteMode) || 'light'
+    try {
+      const saved = localStorage.getItem('theme-mode')
+      if (saved && isValidPaletteMode(saved)) {
+        return saved
+      }
+    } catch (error) {
+      console.error('Failed to load theme mode from localStorage:', error)
+    }
+    return 'light'
   })
 
   const [customTheme, setCustomTheme] = useState<ThemeOptions>(() => {
-    const saved = localStorage.getItem('custom-theme')
-    return saved ? JSON.parse(saved) : defaultTheme
+    try {
+      const saved = localStorage.getItem('custom-theme')
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (isValidTheme(parsed)) {
+          return parsed
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load custom theme from localStorage:', error)
+    }
+    return defaultTheme
   })
 
   useEffect(() => {
-    localStorage.setItem('theme-mode', mode)
+    try {
+      localStorage.setItem('theme-mode', mode)
+    } catch (error) {
+      console.error('Failed to save theme mode to localStorage:', error)
+    }
   }, [mode])
 
   useEffect(() => {
-    localStorage.setItem('custom-theme', JSON.stringify(customTheme))
+    try {
+      localStorage.setItem('custom-theme', JSON.stringify(customTheme))
+    } catch (error) {
+      console.error('Failed to save custom theme to localStorage:', error)
+    }
   }, [customTheme])
 
   const theme = useMemo(() => {
@@ -85,15 +121,17 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     })
   }, [mode, customTheme])
 
-  const toggleMode = () => {
+  const toggleMode = useCallback(() => {
     setModeState((prev) => (prev === 'light' ? 'dark' : 'light'))
-  }
+  }, [])
 
-  const setMode = (newMode: PaletteMode) => {
-    setModeState(newMode)
-  }
+  const setMode = useCallback((newMode: PaletteMode) => {
+    if (isValidPaletteMode(newMode)) {
+      setModeState(newMode)
+    }
+  }, [])
 
-  const updateTheme = (themeUpdate: Partial<ThemeOptions>) => {
+  const updateTheme = useCallback((themeUpdate: Partial<ThemeOptions>) => {
     setCustomTheme((prev) => ({
       ...prev,
       ...themeUpdate,
@@ -106,37 +144,51 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
         ...themeUpdate.typography,
       },
     }))
-  }
+  }, [])
 
-  const resetTheme = () => {
+  const resetTheme = useCallback(() => {
     setCustomTheme(defaultTheme)
     setModeState('light')
-  }
+  }, [])
 
-  const exportTheme = () => {
+  const exportTheme = useCallback(() => {
     return JSON.stringify({ mode, customTheme }, null, 2)
-  }
+  }, [mode, customTheme])
 
-  const importTheme = (themeJson: string) => {
+  const importTheme = useCallback((themeJson: string) => {
     try {
       const parsed = JSON.parse(themeJson)
-      if (parsed.mode) setModeState(parsed.mode)
-      if (parsed.customTheme) setCustomTheme(parsed.customTheme)
+
+      // Validate and import mode
+      if (parsed.mode && isValidPaletteMode(parsed.mode)) {
+        setModeState(parsed.mode)
+      }
+
+      // Validate and import custom theme
+      if (parsed.customTheme && isValidTheme(parsed.customTheme)) {
+        setCustomTheme(parsed.customTheme)
+      } else {
+        throw new Error('Invalid theme structure')
+      }
     } catch (error) {
       console.error('Failed to import theme:', error)
+      throw error // Re-throw for caller to handle
     }
-  }
+  }, [])
 
-  const value: ThemeContextType = {
-    mode,
-    toggleMode,
-    setMode,
-    customTheme,
-    updateTheme,
-    resetTheme,
-    exportTheme,
-    importTheme,
-  }
+  const value: ThemeContextType = useMemo(
+    () => ({
+      mode,
+      toggleMode,
+      setMode,
+      customTheme,
+      updateTheme,
+      resetTheme,
+      exportTheme,
+      importTheme,
+    }),
+    [mode, toggleMode, setMode, customTheme, updateTheme, resetTheme, exportTheme, importTheme]
+  )
 
   return (
     <ThemeContext.Provider value={value}>
