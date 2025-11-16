@@ -1,8 +1,11 @@
 import DarkModeIcon from '@mui/icons-material/DarkModeOutlined'
 import LightModeIcon from '@mui/icons-material/LightModeOutlined'
+import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightnessOutlined'
 import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
 import * as React from 'react'
 import { useThemeContext } from '@/contexts/ThemeContext'
 
@@ -19,7 +22,7 @@ export default function ColorModeIconDropdown() {
     setAnchorEl(null)
   }
 
-  const handleMode = (targetMode: 'light' | 'dark') => () => {
+  const handleMode = (targetMode: 'light' | 'dark' | 'system') => () => {
     setMode(targetMode)
     handleClose()
   }
@@ -27,6 +30,7 @@ export default function ColorModeIconDropdown() {
   const icon = {
     light: <LightModeIcon />,
     dark: <DarkModeIcon />,
+    system: <SettingsBrightnessIcon />,
   }[mode]
 
   return (
@@ -44,7 +48,7 @@ export default function ColorModeIconDropdown() {
       </IconButton>
       <Menu
         anchorEl={anchorEl}
-        id="account-menu"
+        id="color-scheme-menu"
         open={open}
         onClose={handleClose}
         onClick={handleClose}
@@ -53,6 +57,7 @@ export default function ColorModeIconDropdown() {
             variant: 'outlined',
             sx: {
               my: '4px',
+              minWidth: 160,
             },
           },
         }}
@@ -60,10 +65,22 @@ export default function ColorModeIconDropdown() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem selected={mode === 'light'} onClick={handleMode('light')}>
-          Light
+          <ListItemIcon>
+            <LightModeIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>Light</ListItemText>
         </MenuItem>
         <MenuItem selected={mode === 'dark'} onClick={handleMode('dark')}>
-          Dark
+          <ListItemIcon>
+            <DarkModeIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>Dark</ListItemText>
+        </MenuItem>
+        <MenuItem selected={mode === 'system'} onClick={handleMode('system')}>
+          <ListItemIcon>
+            <SettingsBrightnessIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>System</ListItemText>
         </MenuItem>
       </Menu>
     </React.Fragment>
