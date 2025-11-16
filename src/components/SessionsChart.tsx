@@ -5,32 +5,8 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 import { LineChart } from '@mui/x-charts/LineChart'
-
-function AreaGradient({ color, id }: { color: string; id: string }) {
-  return (
-    <defs>
-      <linearGradient id={id} x1="50%" y1="0%" x2="50%" y2="100%">
-        <stop offset="0%" stopColor={color} stopOpacity={0.5} />
-        <stop offset="100%" stopColor={color} stopOpacity={0} />
-      </linearGradient>
-    </defs>
-  )
-}
-
-function getDaysInMonth(month: number, year: number) {
-  const date = new Date(year, month, 0)
-  const monthName = date.toLocaleDateString('en-US', {
-    month: 'short',
-  })
-  const daysInMonth = date.getDate()
-  const days = []
-  let i = 1
-  while (days.length < daysInMonth) {
-    days.push(`${monthName} ${i}`)
-    i += 1
-  }
-  return days
-}
+import { getDaysInMonth } from '@/utils/dateUtils'
+import AreaGradient from './AreaGradient'
 
 export default function SessionsChart() {
   const theme = useTheme()
