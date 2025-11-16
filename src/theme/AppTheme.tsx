@@ -33,14 +33,14 @@ type ThemeValueType =
 
 type ThemePropertyPath = (string | number)[]
 
-interface ThemeWithVars extends Theme {
+export interface ThemeWithVars extends Theme {
   vars?: {
     palette: Theme['palette']
     shape: Theme['shape']
   }
 }
 
-function isThemeWithVars(theme: Theme): theme is ThemeWithVars {
+export function isThemeWithVars(theme: Theme): theme is ThemeWithVars {
   return 'vars' in theme
 }
 

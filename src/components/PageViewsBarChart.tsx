@@ -3,20 +3,16 @@ import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import { type Theme, useTheme } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 import { BarChart } from '@mui/x-charts/BarChart'
 import * as React from 'react'
-
-// Type guard function
-function isThemeWithVars(theme: Theme): theme is Theme & { vars: Theme } {
-  return 'vars' in theme
-}
+import { isThemeWithVars } from '@/theme/AppTheme'
 
 export default function PageViewsBarChart() {
   const theme = useTheme()
 
   const colorPalette = React.useMemo(() => {
-    if (isThemeWithVars(theme)) {
+    if (isThemeWithVars(theme) && theme.vars) {
       return [
         theme.vars.palette.primary.dark,
         theme.vars.palette.primary.main,
