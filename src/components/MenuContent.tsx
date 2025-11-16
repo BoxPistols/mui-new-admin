@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import AnalyticsRoundedIcon from '@mui/icons-material/AnalyticsRounded'
 import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded'
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded'
@@ -35,8 +35,6 @@ const secondaryListItems = [
 ]
 
 export default function MenuContent() {
-  const location = useLocation()
-
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
       <List dense>
@@ -45,7 +43,6 @@ export default function MenuContent() {
             <ListItemButton
               component={NavLink}
               to={item.path}
-              selected={location.pathname === item.path}
               sx={{
                 '&.active': {
                   backgroundColor: 'action.selected',
@@ -65,7 +62,6 @@ export default function MenuContent() {
             <ListItemButton
               component={NavLink}
               to={item.path}
-              selected={location.pathname === item.path}
               sx={{
                 '&.active': {
                   backgroundColor: 'action.selected',
